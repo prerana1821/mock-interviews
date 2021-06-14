@@ -1,26 +1,18 @@
 import { useState } from "react";
+import { useAuth } from "../../context";
 
 const SignIn = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
 
+  const { signInUser } = useAuth();
+
   const SignInUser = async (e) => {
     e.preventDefault();
 
     console.log({ username, password, email });
-
-    const response = await fetch("/api/auth/signin", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ username, password, email }),
-    });
-
-    const data = await response.json();
-
-    console.log({ data });
+    signInUser({ username, password, email });
   };
 
   return (

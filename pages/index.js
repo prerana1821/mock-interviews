@@ -1,8 +1,6 @@
 import { Banner } from "../components/Banner";
 import { useAuth } from "../context";
 import styles from "../styles/Home.module.css";
-import { Header } from "./../components/Header";
-import { Footer } from "./../components/Footer";
 
 export default function Home() {
   const { user, token } = useAuth();
@@ -11,9 +9,7 @@ export default function Home() {
 
   return (
     <div className={styles.container}>
-      <Header />
       <Banner />
-      <Footer />
     </div>
   );
 }

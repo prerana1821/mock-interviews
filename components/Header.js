@@ -5,7 +5,11 @@ export const Header = () => {
   return (
     <nav className={headerStyles.nav}>
       <div>
-        <h1>Logo1</h1>
+        <Link href='/'>
+          <h1>
+            <a>Logo</a>
+          </h1>
+        </Link>
       </div>
       <ul className={headerStyles.navLinks}>
         <Link href='/'>

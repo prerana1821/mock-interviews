@@ -1,15 +1,19 @@
 import mongoose, { Schema } from "mongoose";
 
-const InterviewSlotSchema = new Schema({
-  _id: { type: Schema.Types.ObjectId, ref: "UserDetail" },
-  gotAPartner: {
-    type: Boolean,
-    default: false,
+const SlotSchema = new Schema({
+  partner: {
+    type: Schema.Types.ObjectId,
+    ref: "UserCredential",
   },
   slot: {
     type: Date,
     required: true,
   },
+});
+
+const InterviewSlotSchema = new Schema({
+  userId: { type: Schema.Types.ObjectId, ref: "UserCredential" },
+  slots: [SlotSchema],
 });
 
 export default mongoose.models.InterviewSlot ||

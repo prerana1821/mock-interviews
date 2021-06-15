@@ -1,0 +1,12 @@
+.banner {
+  display: flex;
+  align-items: center;
+  margin: 1rem 2rem;
+  justify-content: space-around;
+}
+
+.title {
+  font-size: 4rem;
+  font-weight: 700;
+  width: 600px;
+}

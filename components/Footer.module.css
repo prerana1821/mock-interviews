@@ -1,0 +1,33 @@
+.mainFooter {
+  display: flex;
+  justify-content: space-around;
+  padding: 4rem 1rem 0rem;
+  border-radius: 1rem 1rem 0 0;
+  font-size: x-large;
+}
+
+.footerList {
+  display: flex;
+  gap: 1rem;
+}
+
+.footerList > li > a {
+  color: #7c3aed;
+}
+
+.blueTxt {
+  color: #7c3aed;
+}
+
+.blueTxt:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+@media only screen and (max-width: 768px) {
+  .mainFooter {
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+  }
+}

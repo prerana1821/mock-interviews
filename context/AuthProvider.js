@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import { createContext, useContext, useState } from "react";
 
 export const AuthContext = createContext();
@@ -19,6 +20,7 @@ export const setUserAuth = ({
 };
 
 export const AuthProvider = ({ children }) => {
+  const router = useRouter();
   const [token, setToken] = useState("");
   const [user, setUser] = useState({
     _id: "",
@@ -52,6 +54,7 @@ export const AuthProvider = ({ children }) => {
         email,
         token: data.user.token,
       });
+      router.push(`/${data.user._id}`);
     }
   };
 
@@ -76,6 +79,7 @@ export const AuthProvider = ({ children }) => {
         email: data.user.email,
         token: data.user.token,
       });
+      router.push(`/${data.user._id}`);
     }
   };
 

@@ -1,0 +1,25 @@
+.custom404 {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.custom404Title {
+  font-size: 3.3rem;
+  margin: 0.5rem 0;
+}
+
+.custom404Description {
+  font-size: x-large;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+
+.custom404HomeLink {
+  padding: 0.5rem 1rem;
+  background-color: #7c3aed;
+  margin: 1rem 0;
+  border-radius: 1.5rem;
+  font-size: 1.5rem;
+  color: #fff;
+}

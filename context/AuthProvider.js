@@ -54,7 +54,7 @@ export const AuthProvider = ({ children }) => {
         email,
         token: data.user.token,
       });
-      router.push(`/${data.user._id}`);
+      router.push(`/profile/${data.user._id}`);
     }
   };
 
@@ -79,13 +79,30 @@ export const AuthProvider = ({ children }) => {
         email: data.user.email,
         token: data.user.token,
       });
-      router.push(`/${data.user._id}`);
+      router.push(`/profile/${data.user._id}`);
     }
+  };
+
+  const logoutUser = () => {
+    setToken("");
+    setStatus({ loading: "", success: "", error: "" });
+    setUser({});
+    localStorage?.removeItem("token");
+    localStorage?.removeItem("user");
+    router.replace("/");
   };
 
   return (
     <AuthContext.Provider
-      value={{ token, user, status, signInUser, loginUser }}
+      value={{
+        token,
+        user,
+        status,
+        signInUser,
+        loginUser,
+        setUser,
+        logoutUser,
+      }}
     >
       {children}
     </AuthContext.Provider>

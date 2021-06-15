@@ -6,7 +6,7 @@
 
 .form {
   width: max-content;
-  padding: 2rem;
+  padding: 2rem 4rem;
   border-radius: 1rem;
   display: flex;
   flex-direction: column;
@@ -50,11 +50,13 @@
 .btnLogin {
   border: none;
   padding: 0.8rem 1.7rem;
+  outline: none;
   border-radius: 2rem;
   font-size: large;
   background-color: var(--primary-color);
   color: #fff;
   margin: 1rem;
+  cursor: pointer;
 }
 
 .secondaryTxt {

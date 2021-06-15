@@ -1,19 +1,54 @@
+import { useState } from "react";
 import PrivateRoute from "../../components/PrivateRoute";
 import dbConnect from "../../middlewares/db.connect";
-import UserCredential from "../models/UserCredential";
+import UserCredential from "../../models/UserCredential";
+import profileStyles from "../../styles/Profile.module.css";
+import { EditProfile } from "../../components/EditProfile";
+import Image from "next/image";
+import { useAuth } from "../../context";
 
 const UserProfile = ({ userDetail }) => {
+  const [editProfile, setEditProfile] = useState(false);
+  const { logoutUser } = useAuth();
+  console.log({ editProfile });
   console.log({ userDetail });
   return (
-    <div>
-      <h2>UserDetail</h2>
-    </div>
+    <>
+      <div className={profileStyles.profileCard}>
+        {editProfile && (
+          <EditProfile
+            setEditProfile={setEditProfile}
+            userDetail={userDetail}
+          />
+        )}
+        <button
+          onClick={() => setEditProfile(!editProfile)}
+          className={profileStyles.iconBtn}
+        >
+          <Image src='/images/edit.png' width='34px' height='34px' />
+        </button>
+        <h1>Profile</h1>
+        <h3>
+          Name: {userDetail.fullName ? userDetail.fullName : "You Full Name"}
+        </h3>
+        <p>Discord: {userDetail.username}</p>
+        <p>Email: {userDetail.email}</p>
+        <p>
+          Portfolio:{" "}
+          {userDetail.portfolio ? userDetail.portfolio : "Your Portfolio Link"}
+        </p>
+        <p>Interviews Done: {userDetail.interviewDone}</p>
+
+        <button
+          onClick={() => logoutUser()}
+          className={profileStyles.btnSecondary}
+        >
+          Logout
+        </button>
+      </div>
+    </>
   );
 };
-
-// export const getStaticProps = async () => {
-
-// }
 
 export async function getServerSideProps({ params }) {
   await dbConnect();

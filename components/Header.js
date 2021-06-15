@@ -1,7 +1,12 @@
 import headerStyles from "./Header.module.css";
 import Link from "next/link";
+import { useAuth } from "../context";
 
 export const Header = () => {
+  const { token, user } = useAuth();
+
+  console.log({ token, user });
+
   return (
     <nav className={headerStyles.nav}>
       <div>
@@ -22,9 +27,9 @@ export const Header = () => {
             <a>Interviews</a>
           </li>
         </Link>
-        <Link href='/auth/login'>
+        <Link href={token ? `profile/${user._id}` : "/auth/login"}>
           <li>
-            <a>Login</a>
+            <a>{token ? "Account" : "Login"}</a>
           </li>
         </Link>
       </ul>

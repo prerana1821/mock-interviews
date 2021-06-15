@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useAuth } from "../../context";
-import loginStyles from "../../styles/Login.module.css";
+import loginStyles from "../../styles/Auth.module.css";
 import Link from "next/link";
 
 const SignIn = () => {
@@ -11,11 +11,14 @@ const SignIn = () => {
   });
   const { loginUser } = useAuth();
 
-  const signInUser = async (e) => {
+  const signInUserWithCredentials = async (e) => {
     e.preventDefault();
     if (userCredentials.username && userCredentials.password) {
-      console.log({ username, password });
-      loginUser({ username, password });
+      console.log({ userCredentials });
+      loginUser({
+        username: userCredentials.username,
+        password: userCredentials.password,
+      });
     } else {
       setUserCredentials((state) => ({
         ...state,
@@ -26,7 +29,7 @@ const SignIn = () => {
 
   return (
     <div className={loginStyles.login}>
-      <form onSubmit={signInUser} className={loginStyles.form}>
+      <form onSubmit={signInUserWithCredentials} className={loginStyles.form}>
         <h1>Login</h1>
         <div className={loginStyles.inputBox}>
           <input
@@ -34,7 +37,7 @@ const SignIn = () => {
             required
             className={loginStyles.input}
             value={userCredentials.username}
-            placeholder='Enter you Discord Username'
+            placeholder='Enter your Discord Username'
             onChange={(e) =>
               setUserCredentials((state) => ({
                 ...state,
@@ -51,7 +54,7 @@ const SignIn = () => {
             required
             className={loginStyles.input}
             value={userCredentials.password}
-            placeholder='Enter you Password'
+            placeholder='Enter your Password'
             onChange={(e) =>
               setUserCredentials((state) => ({
                 ...state,

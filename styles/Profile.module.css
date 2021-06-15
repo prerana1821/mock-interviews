@@ -1,0 +1,36 @@
+.profileCard {
+  width: max-content;
+  padding: 2rem 4rem;
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  margin: 2rem auto;
+  box-shadow: 8.71px 8.71px 15px rgb(0 0 0 / 5%),
+    -8.71px -8.71px 15px rgb(0 0 0 / 3%);
+}
+
+.profileCard > h1,
+.profileCard > p,
+.profileCard > h3 {
+  margin: 0.5rem;
+}
+
+.iconBtn {
+  align-self: flex-end;
+  border: none;
+  background: none;
+  outline: #fff;
+  cursor: pointer;
+  top: 1rem;
+  right: 1rem;
+}
+
+.btnSecondary {
+  background: none;
+  cursor: pointer;
+  padding: 0.6rem 1rem;
+  color: var(--primary-color);
+  border: 2px solid var(--primary-color);
+  border-radius: 2rem;
+  font-size: initial;
+}

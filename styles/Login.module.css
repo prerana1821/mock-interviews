@@ -1,0 +1,62 @@
+.login {
+  display: flex;
+  justify-content: center;
+  margin: 3rem;
+}
+
+.form {
+  width: max-content;
+  padding: 2rem;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-shadow: 8.71px 8.71px 15px rgb(0 0 0 / 5%),
+    -8.71px -8.71px 15px rgb(0 0 0 / 3%);
+}
+
+.inputBox {
+  position: relative;
+  width: 244px;
+}
+
+.input {
+  border: 0;
+  padding: 0.7rem 0;
+  outline: #fff;
+  border-bottom: 2px solid #ccc;
+  width: 244px;
+  margin: 1rem 0 0 0;
+  font-size: initial;
+  text-align: initial;
+}
+
+.input ~ .focusBorder {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--primary-color);
+  transition: 0.4s;
+}
+
+.input:focus ~ .focusBorder {
+  width: 100%;
+  transition: 0.4s;
+}
+
+.btnLogin {
+  border: none;
+  padding: 0.8rem 1.7rem;
+  border-radius: 2rem;
+  font-size: large;
+  background-color: var(--primary-color);
+  color: #fff;
+  margin: 1rem;
+}
+
+.secondaryTxt {
+  font-size: 1.3rem;
+}

@@ -5,9 +5,9 @@ export const Footer = () => {
   return (
     <footer className={footerStyles.mainFooter}>
       <p>
-        © | 2021 | <span className={footerStyles.blueTxt}>Mocky</span>
+        © | 2021 | <span className='blueTxt'>Mocky</span>
       </p>
-      <p className={footerStyles.blueTxt}>Mocky by #teamtanay</p>
+      <p className='blueTxt'>Mocky by #teamtanay</p>
 
       <ul className={footerStyles.footerList}>
         <li>

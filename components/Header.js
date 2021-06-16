@@ -27,7 +27,7 @@ export const Header = () => {
             <a>Interviews</a>
           </li>
         </Link>
-        <Link href={token ? `profile/${user._id}` : "/auth/login"}>
+        <Link href={token ? `/profile/${user._id}` : "/auth/login"}>
           <li>
             <a>{token ? "Account" : "Login"}</a>
           </li>

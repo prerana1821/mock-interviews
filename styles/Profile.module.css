@@ -1,10 +1,17 @@
+.profile {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin: 2rem;
+}
+
 .profileCard {
   width: max-content;
-  padding: 2rem 4rem;
+  padding: 2rem 3rem;
   align-items: flex-start;
   display: flex;
+  border-radius: 1rem;
   flex-direction: column;
-  margin: 2rem auto;
   box-shadow: 8.71px 8.71px 15px rgb(0 0 0 / 5%),
     -8.71px -8.71px 15px rgb(0 0 0 / 3%);
 }
@@ -13,6 +20,13 @@
 .profileCard > p,
 .profileCard > h3 {
   margin: 0.5rem;
+}
+
+.interviewSlotForm {
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 8.71px 8.71px 15px rgb(0 0 0 / 5%),
+    -8.71px -8.71px 15px rgb(0 0 0 / 3%);
 }
 
 .iconBtn {
@@ -33,4 +47,5 @@
   border: 2px solid var(--primary-color);
   border-radius: 2rem;
   font-size: initial;
+  margin: 1rem 0;
 }

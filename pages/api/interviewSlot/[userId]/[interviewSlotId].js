@@ -1,7 +1,6 @@
 import dbConnect from "../../../../middlewares/db.connect";
 import verifiedUser from "../../../../middlewares/verifiedUser";
 import InterviewSlot from "../../../../models/InterviewSlot";
-import { extend } from "lodash";
 
 async function handler(req, res) {
   const {
@@ -33,8 +32,6 @@ async function handler(req, res) {
               message: "Scheduled interview not found",
             });
           } else {
-            console.log({ partner });
-            console.log({ interviewSlot });
             interviewSlot.slots.id(interviewSlotId).partner = partner;
             const updatedInterviewSlotFromDB = await interviewSlot.save();
             console.log(updatedInterviewSlotFromDB.slots);

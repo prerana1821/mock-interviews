@@ -41,6 +41,7 @@ export const EditProfile = ({ userDetail, setEditProfile }) => {
         fullName: data.fullName,
         interviewDone: data.interviewDone,
       });
+      setEditProfile(false);
     }
   };
 

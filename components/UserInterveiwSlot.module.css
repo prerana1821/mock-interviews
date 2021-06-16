@@ -1,0 +1,37 @@
+.interviewSlots {
+  display: flex;
+  justify-content: center;
+  grid-gap: 1rem;
+  gap: 1rem;
+  margin: 2rem 6rem;
+  flex-wrap: wrap;
+}
+
+.greenInterviewSlot {
+  color: green;
+  background-color: #d0ecc7;
+  width: max-content;
+  padding: 2rem 4rem;
+  align-items: flex-start;
+  border-radius: 1rem;
+  flex-direction: column;
+  box-shadow: 8.71px 8.71px 15px rgb(0 0 0 / 5%),
+    -8.71px -8.71px 15px rgb(0 0 0 / 3%);
+}
+
+.redInterviewSlot {
+  color: #ff2b2b;
+  background-color: #fbcfe8;
+  width: max-content;
+  padding: 2rem 4rem;
+  align-items: flex-start;
+  border-radius: 1rem;
+  flex-direction: column;
+  box-shadow: 8.71px 8.71px 15px rgb(0 0 0 / 5%),
+    -8.71px -8.71px 15px rgb(0 0 0 / 3%);
+}
+
+.textCenter {
+  text-align: center;
+  margin: 3rem;
+}

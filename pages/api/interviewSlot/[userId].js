@@ -38,19 +38,17 @@ async function handler(req, res) {
           const NewInterviewSlot = new InterviewSlot({ userId });
           NewInterviewSlot.slots.push({ slot: dateAndTime });
           const newUserInterviewSlot = await NewInterviewSlot.save();
-          console.log({ newUserInterviewSlot });
           res.status(200).json({
             success: true,
-            data: newUserInterviewSlot,
+            data: { slots: newUserInterviewSlot.slots },
             message: "Successful",
           });
         } else {
           interviewSlots.slots.push({ slot: dateAndTime });
           const newInterviewSlot = await interviewSlots.save();
-          console.log({ newInterviewSlot });
           res.status(200).json({
             success: true,
-            data: newInterviewSlot,
+            data: { slots: newInterviewSlot.slots },
             message: "Successful",
           });
         }

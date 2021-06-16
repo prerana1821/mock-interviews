@@ -30,6 +30,7 @@
   margin: 1rem 0 0 0;
   font-size: initial;
   text-align: initial;
+  font-family: "Work Sans";
 }
 
 .input ~ .focusBorder {
@@ -55,7 +56,7 @@
   font-size: large;
   background-color: var(--primary-color);
   color: #fff;
-  margin: 1rem;
+  margin: 1rem 0;
   cursor: pointer;
 }
 

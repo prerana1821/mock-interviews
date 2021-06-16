@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { useAuth, useInterviewSlot } from "../context";
+import formStyles from "../styles/Auth.module.css";
 
 export const AddInterviewSlot = () => {
   const [dateAndTime, setDateAndTime] = useState("");
   const { user, token } = useAuth();
-  const { interviewSlotState, interviewSlotDispatch } = useInterviewSlot();
+  const { interviewSlotDispatch } = useInterviewSlot();
 
   const addInterviewSlot = async (e) => {
     e.preventDefault();
@@ -35,12 +36,20 @@ export const AddInterviewSlot = () => {
     <div>
       <h1>Add New Interview Slot</h1>
       <form onSubmit={addInterviewSlot}>
+        {/* <div className={formStyles.inputBox}> */}
         <input
           type='datetime-local'
+          required
+          className={formStyles.input}
           value={dateAndTime}
           onChange={(e) => setDateAndTime(() => e.target.value)}
         />
-        <button type='submit'>Add</button>
+        <br />
+        {/* <span className={formStyles.focusBorder}></span> */}
+        {/* </div> */}
+        <button className={formStyles.btnLogin} type='submit'>
+          Add Slot
+        </button>
       </form>
     </div>
   );

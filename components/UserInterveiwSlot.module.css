@@ -15,8 +15,7 @@
   align-items: flex-start;
   border-radius: 1rem;
   flex-direction: column;
-  box-shadow: 8.71px 8.71px 15px rgb(0 0 0 / 5%),
-    -8.71px -8.71px 15px rgb(0 0 0 / 3%);
+  box-shadow: var(--box-shadow);
 }
 
 .redInterviewSlot {
@@ -27,11 +26,5 @@
   align-items: flex-start;
   border-radius: 1rem;
   flex-direction: column;
-  box-shadow: 8.71px 8.71px 15px rgb(0 0 0 / 5%),
-    -8.71px -8.71px 15px rgb(0 0 0 / 3%);
-}
-
-.textCenter {
-  text-align: center;
-  margin: 3rem;
+  box-shadow: var(--box-shadow);
 }

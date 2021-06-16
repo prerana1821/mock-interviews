@@ -12,8 +12,7 @@
   display: flex;
   border-radius: 1rem;
   flex-direction: column;
-  box-shadow: 8.71px 8.71px 15px rgb(0 0 0 / 5%),
-    -8.71px -8.71px 15px rgb(0 0 0 / 3%);
+  box-shadow: var(--box-shadow);
 }
 
 .profileCard > h1,
@@ -25,8 +24,7 @@
 .interviewSlotForm {
   padding: 2rem;
   border-radius: 1rem;
-  box-shadow: 8.71px 8.71px 15px rgb(0 0 0 / 5%),
-    -8.71px -8.71px 15px rgb(0 0 0 / 3%);
+  box-shadow: var(--box-shadow);
 }
 
 .iconBtn {

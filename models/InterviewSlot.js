@@ -1,9 +1,11 @@
 import mongoose, { Schema } from "mongoose";
+import UserCredential from "../models/UserCredential";
 
 const SlotSchema = new Schema({
   partner: {
     type: Schema.Types.ObjectId,
-    ref: "UserCredential",
+    ref: UserCredential,
+    required: "User Id is required",
   },
   slot: {
     type: Date,

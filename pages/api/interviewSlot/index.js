@@ -9,14 +9,32 @@ export default async function handler(req, res) {
   switch (method) {
     case "GET":
       try {
-        const interviewSlots = await InterviewSlot.find({});
-        // .populate({
-        //   path: "userId",
-        //   select: "username fullName",
-        // })
-        // .exec();
+        const interviewSlots = await InterviewSlot.find({})
+          .populate({
+            path: "userId",
+            select: "username fullName",
+          })
+          .exec();
+        const filleredSlots = interviewSlots.map((item) => {
+          console.log(item.slots);
+          return {
+            _id: item._id,
+            userId: item.userId,
+            slots: item.slots.map((val) => {
+              if ("partner" in val) {
+                return val;
+              }
+            }),
+          };
+        });
+        // console.log({ filleredSlots });
+        // const filleredSlots = interviewSlots.map((item) => {
+        //   return item.slots.map((val) => {
+        //     return !val.hasOwnProperty("partner") && val;
+        //   });
+        // });
         return res.status(200).json({
-          interviewSlots,
+          data: interviewSlots,
           success: true,
           message: "Successful Retrieval",
         });

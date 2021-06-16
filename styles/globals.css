@@ -9,6 +9,8 @@ body {
 
 :root {
   --primary-color: #7c3aed;
+  --box-shadow: 8.71px 8.71px 15px rgb(0 0 0 / 5%),
+    -8.71px -8.71px 15px rgb(0 0 0 / 3%);
 }
 
 a {
@@ -32,4 +34,9 @@ li {
 .blueTxt:hover {
   cursor: pointer;
   text-decoration: underline;
+}
+
+.textCenter {
+  text-align: center;
+  margin: 3rem;
 }

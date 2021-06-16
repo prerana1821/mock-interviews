@@ -12,8 +12,7 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  box-shadow: 8.71px 8.71px 15px rgb(0 0 0 / 5%),
-    -8.71px -8.71px 15px rgb(0 0 0 / 3%);
+  box-shadow: var(--box-shadow);
 }
 
 .inputBox {

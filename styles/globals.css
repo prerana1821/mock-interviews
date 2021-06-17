@@ -67,3 +67,19 @@ li {
   font-size: initial;
   margin: 1rem 0;
 }
+
+.btnIcon {
+  align-self: flex-end;
+  border: none;
+  background: none;
+  outline: #fff;
+  cursor: pointer;
+  top: 1rem;
+  right: 1rem;
+}
+
+.btnIconShowPassword {
+  position: absolute;
+  top: 1.3rem;
+  right: 0.3rem;
+}

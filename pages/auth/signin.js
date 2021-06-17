@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useAuth } from "../../context";
 import signInStyles from "../../styles/Auth.module.css";
 import Link from "next/link";
+import { ShowPassword } from "../../components";
 
 const SignIn = () => {
   const [userCredentials, setUserCredentials] = useState({
@@ -10,6 +11,8 @@ const SignIn = () => {
     password: "",
     confirmPassword: "",
     message: "",
+    showPassword: false,
+    showConfirmPassword: false,
   });
 
   const { signInUser } = useAuth();
@@ -43,6 +46,18 @@ const SignIn = () => {
       }));
     }
   };
+
+  const showPassword = () =>
+    setUserCredentials((state) => ({
+      ...state,
+      showPassword: !userCredentials.showPassword,
+    }));
+
+  const showConfirmPassword = () =>
+    setUserCredentials((state) => ({
+      ...state,
+      showConfirmPassword: !userCredentials.showConfirmPassword,
+    }));
 
   return (
     <div className={signInStyles.login}>
@@ -85,7 +100,7 @@ const SignIn = () => {
 
         <div className={signInStyles.inputBox}>
           <input
-            type='password'
+            type={userCredentials.showPassword ? "text" : "password"}
             required
             className={signInStyles.input}
             placeholder='Enter Password'
@@ -99,12 +114,16 @@ const SignIn = () => {
             }
           />
           <span className={signInStyles.focusBorder}></span>
+          <ShowPassword
+            showPasswordHandler={showPassword}
+            showPassword={userCredentials.showPassword}
+          />
         </div>
         <div className={signInStyles.inputBox}>
           <input
-            type='password'
+            type={userCredentials.showConfirmPassword ? "text" : "password"}
             required
-            placeholder='Enter Confirmation Password'
+            placeholder='Enter Confirm Password'
             className={signInStyles.input}
             value={userCredentials.confirmPassword}
             onChange={(e) =>
@@ -116,6 +135,10 @@ const SignIn = () => {
             }
           />
           <span className={signInStyles.focusBorder}></span>
+          <ShowPassword
+            showPasswordHandler={showConfirmPassword}
+            showConfirmPassword={userCredentials.showConfirmPassword}
+          />
         </div>
         <p>{userCredentials.message}</p>
         <button className='btnPrimary' type='submit'>

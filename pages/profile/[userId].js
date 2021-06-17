@@ -29,7 +29,7 @@ const UserProfile = ({ userDetail, slots }) => {
           )}
           <button
             onClick={() => setEditProfile(!editProfile)}
-            className={profileStyles.iconBtn}
+            className='btnIcon'
           >
             <Image src='/images/edit.png' width='30px' height='30px' />
           </button>

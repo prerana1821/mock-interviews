@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useAuth } from "../../context";
 import loginStyles from "../../styles/Auth.module.css";
+import { ShowPassword } from "../../components";
 import Link from "next/link";
 
 const SignIn = () => {
@@ -8,6 +9,7 @@ const SignIn = () => {
     username: "",
     password: "",
     message: "",
+    showPassword: false,
   });
   const { loginUser } = useAuth();
 
@@ -26,6 +28,12 @@ const SignIn = () => {
       }));
     }
   };
+
+  const showPassword = () =>
+    setUserCredentials((state) => ({
+      ...state,
+      showPassword: !userCredentials.showPassword,
+    }));
 
   return (
     <div className={loginStyles.login}>
@@ -50,7 +58,7 @@ const SignIn = () => {
         </div>
         <div className={loginStyles.inputBox}>
           <input
-            type='password'
+            type={userCredentials.showPassword ? "text" : "password"}
             required
             className={loginStyles.input}
             value={userCredentials.password}
@@ -64,6 +72,10 @@ const SignIn = () => {
             }
           />
           <span className={loginStyles.focusBorder}></span>
+          <ShowPassword
+            showPasswordHandler={showPassword}
+            showPassword={userCredentials.showPassword}
+          />
         </div>
         <p className={loginStyles.secondaryTxt}>{userCredentials.message}</p>
         <button className='btnPrimary' type='submit'>

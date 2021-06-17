@@ -26,13 +26,3 @@
   border-radius: 1rem;
   box-shadow: var(--box-shadow);
 }
-
-.iconBtn {
-  align-self: flex-end;
-  border: none;
-  background: none;
-  outline: #fff;
-  cursor: pointer;
-  top: 1rem;
-  right: 1rem;
-}

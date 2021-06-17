@@ -1,15 +1,15 @@
 import { useState } from "react";
-import PrivateRoute from "../../components/PrivateRoute";
-import dbConnect from "../../middlewares/db.connect";
-import UserCredential from "../../models/UserCredential";
-import profileStyles from "../../styles/Profile.module.css";
-import { EditProfile } from "../../components/EditProfile";
-import { AddInterviewSlot } from "../../components/AddInterviewSlot";
-import { UserInterveiwSlot } from "../../components/UserInterveiwSlot";
-import { ProfileCard } from "../../components/ProfileCard";
-import { useAuth } from "../../context";
 import Image from "next/image";
+import { useAuth } from "../../context";
+import UserCredential from "../../models/UserCredential";
 import InterviewSlot from "../../models/InterviewSlot";
+import dbConnect from "../../middlewares/db.connect";
+import { EditProfile } from "../../components";
+import { AddInterviewSlot } from "../../components";
+import { UserInterveiwSlot } from "../../components";
+import { ProfileCard } from "../../components";
+import PrivateRoute from "../../components/PrivateRoute";
+import profileStyles from "../../styles/Profile.module.css";
 
 const UserProfile = ({ userDetail, slots }) => {
   const [editProfile, setEditProfile] = useState(false);

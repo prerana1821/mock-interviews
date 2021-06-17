@@ -1,8 +1,8 @@
+import { useState } from "react";
 import { formatDateTime } from "../utils/dateFormatter";
 import interviewSlotStyles from "../styles/Interviews.module.css";
+import { LoginAlert } from "../components";
 import { useAuth } from "../context";
-import { LoginAlert } from "../components/LoginAlert";
-import { useState } from "react";
 
 const interviews = ({ interviewSlots }) => {
   const { user, token } = useAuth();

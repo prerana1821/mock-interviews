@@ -1,4 +1,4 @@
-import { Banner } from "../components/Banner";
+import { Banner } from "../components";
 import { useAuth } from "../context";
 import styles from "../styles/Home.module.css";
 

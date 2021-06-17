@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { useAuth, useInterviewSlot } from "../context";
-import formStyles from "../styles/Auth.module.css";
+import { useAuth, useInterviewSlot } from "../../context";
+import formStyles from "../../styles/Auth.module.css";
 
 export const AddInterviewSlot = () => {
   const [dateAndTime, setDateAndTime] = useState("");

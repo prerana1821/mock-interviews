@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { useAuth } from "../context";
+import { useAuth } from "../../context";
 import editProfileStyles from "./EditProfile.module.css";
-import formStyles from "../styles/Auth.module.css";
+import formStyles from "../../styles/Auth.module.css";
 import Image from "next/image";
 
 export const EditProfile = ({ userDetail, setEditProfile }) => {

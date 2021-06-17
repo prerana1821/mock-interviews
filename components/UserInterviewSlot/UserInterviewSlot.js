@@ -1,20 +1,20 @@
 import cn from "classnames";
-import { formatDateTime } from "../utils/dateFormatter";
-import userInterveiwSlot from "./UserInterveiwSlot.module.css";
+import { formatDateTime } from "../../utils/dateFormatter";
+import userInterviewSlot from "./UserInterviewSlot.module.css";
 
-export const UserInterveiwSlot = ({ slots, userDetail }) => {
+export const UserInterviewSlot = ({ slots, userDetail }) => {
   return (
     <>
       <h1 className='textCenter'>Your Interview Slots</h1>
-      <div className={userInterveiwSlot.interviewSlots}>
+      <div className={userInterviewSlot.interviewSlots}>
         {slots.map((item) => {
           return (
             // <div className={`${profileStyles.profileCard}`}>
             <div
               key={item._id}
               className={cn({
-                [userInterveiwSlot.greenInterviewSlot]: item.partner,
-                [userInterveiwSlot.redInterviewSlot]: !item.partner,
+                [userInterviewSlot.greenInterviewSlot]: item.partner,
+                [userInterviewSlot.redInterviewSlot]: !item.partner,
               })}
             >
               <h3>@{userDetail.username}</h3>

@@ -1,6 +1,6 @@
 import headerStyles from "./Header.module.css";
 import Link from "next/link";
-import { useAuth } from "../context";
+import { useAuth } from "../../context";
 
 export const Header = () => {
   const { token, user } = useAuth();

@@ -26,3 +26,20 @@ export const formatDateTime = (date) => {
     monthNames[dateObj.getMonth()]
   } ${dateObj.getDate()}, ${dateObj.getFullYear()}`;
 };
+
+// console.log(userInterviewDetails.slots);
+// console.log({ params });
+// const authToken = localStorage.getItem("token");
+// // console.log({ context });
+
+// let response = await fetch(`/api/userDetail/${params.userId}`, {
+//   method: "GET",
+//   headers: {
+//     "Content-Type": "application/json",
+//     Authorization: authToken,
+//   },
+// });
+// const data = await response.json();
+// console.log({ data });
+// return { props: { userDetail: data.userDetail } };
+// // return { props: { userDetail: {} } };

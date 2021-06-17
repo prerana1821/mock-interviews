@@ -6,9 +6,9 @@ import InterviewSlot from "../../models/InterviewSlot";
 import dbConnect from "../../middlewares/db.connect";
 import { EditProfile } from "../../components";
 import { AddInterviewSlot } from "../../components";
-import { UserInterveiwSlot } from "../../components";
+import { UserInterviewSlot } from "../../components";
 import { ProfileCard } from "../../components";
-import PrivateRoute from "../../components/PrivateRoute";
+import PrivateRoute from "../../components/PrivateRoute/PrivateRoute";
 import profileStyles from "../../styles/Profile.module.css";
 
 const UserProfile = ({ userDetail, slots }) => {
@@ -46,7 +46,7 @@ const UserProfile = ({ userDetail, slots }) => {
         {slots.length === 0 ? (
           <h1 className='textCenter'>You haven't added any slots yet!</h1>
         ) : (
-          <UserInterveiwSlot slots={slots} userDetail={userDetail} />
+          <UserInterviewSlot slots={slots} userDetail={userDetail} />
         )}
       </div>
     </>
@@ -66,23 +66,6 @@ export async function getServerSideProps({ params }) {
   }).exec();
 
   userInterviewDetails = JSON.parse(JSON.stringify(userInterviewDetails));
-
-  // console.log(userInterviewDetails.slots);
-  // console.log({ params });
-  // const authToken = localStorage.getItem("token");
-  // // console.log({ context });
-
-  // let response = await fetch(`/api/userDetail/${params.userId}`, {
-  //   method: "GET",
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //     Authorization: authToken,
-  //   },
-  // });
-  // const data = await response.json();
-  // console.log({ data });
-  // return { props: { userDetail: data.userDetail } };
-  // // return { props: { userDetail: {} } };
   return {
     props: {
       userDetail,

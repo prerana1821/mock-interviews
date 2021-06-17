@@ -54,8 +54,8 @@ export const AuthProvider = ({ children }) => {
         email,
         token: data.user.token,
       });
-      // router.push(`/profile/${data.user._id}`);
-      router.push(`/interviews`);
+      router.push(`/profile/${data.user._id}`);
+      // router.push(`/interviews`);
     }
   };
 
@@ -80,8 +80,8 @@ export const AuthProvider = ({ children }) => {
         email: data.user.email,
         token: data.user.token,
       });
-      // router.push(`/profile/${data.user._id}`);
-      router.push(`/interviews`);
+      router.push(`/profile/${data.user._id}`);
+      // router.push(`/interviews`);
     }
   };
 

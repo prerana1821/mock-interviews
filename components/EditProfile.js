@@ -95,7 +95,7 @@ export const EditProfile = ({ userDetail, setEditProfile }) => {
           />
           <span className={formStyles.focusBorder}></span>
         </div>
-        <button className={formStyles.btnLogin} type='submit'>
+        <button className='btnPrimary' type='submit'>
           Save
         </button>
       </form>

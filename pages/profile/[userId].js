@@ -34,10 +34,7 @@ const UserProfile = ({ userDetail, slots }) => {
             <Image src='/images/edit.png' width='30px' height='30px' />
           </button>
           <ProfileCard userDetail={userDetail} />
-          <button
-            onClick={() => logoutUser()}
-            className={profileStyles.btnSecondary}
-          >
+          <button onClick={() => logoutUser()} className='btnSecondary'>
             Logout
           </button>
         </div>
@@ -46,7 +43,11 @@ const UserProfile = ({ userDetail, slots }) => {
         </div>
       </div>
       <div>
-        <UserInterveiwSlot slots={slots} userDetail={userDetail} />
+        {slots.length === 0 ? (
+          <h1 className='textCenter'>You haven't added any slots yet!</h1>
+        ) : (
+          <UserInterveiwSlot slots={slots} userDetail={userDetail} />
+        )}
       </div>
     </>
   );
@@ -66,7 +67,7 @@ export async function getServerSideProps({ params }) {
 
   userInterviewDetails = JSON.parse(JSON.stringify(userInterviewDetails));
 
-  console.log(userInterviewDetails.slots);
+  // console.log(userInterviewDetails.slots);
   // console.log({ params });
   // const authToken = localStorage.getItem("token");
   // // console.log({ context });
@@ -82,7 +83,12 @@ export async function getServerSideProps({ params }) {
   // console.log({ data });
   // return { props: { userDetail: data.userDetail } };
   // // return { props: { userDetail: {} } };
-  return { props: { userDetail, slots: userInterviewDetails.slots } };
+  return {
+    props: {
+      userDetail,
+      slots: userInterviewDetails ? userInterviewDetails.slots : [],
+    },
+  };
 }
 
 export default PrivateRoute(UserProfile);

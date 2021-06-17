@@ -18,11 +18,30 @@ const SignIn = () => {
     e.preventDefault();
 
     console.log({ userCredentials });
-    signInUser({
-      username: userCredentials.username,
-      password: userCredentials.password,
-      email: userCredentials.confirmPassword,
-    });
+    if (
+      userCredentials.email &&
+      userCredentials.username &&
+      userCredentials.password &&
+      userCredentials.confirmPassword
+    ) {
+      if (/^.{3,32}#[0-9]{4}$/.test(userCredentials.username)) {
+        signInUser({
+          username: userCredentials.username,
+          password: userCredentials.password,
+          email: userCredentials.confirmPassword,
+        });
+      } else {
+        setUserCredentials((state) => ({
+          ...state,
+          message: "Enter a valid discord username!",
+        }));
+      }
+    } else {
+      setUserCredentials((state) => ({
+        ...state,
+        message: "All Fields are Required!",
+      }));
+    }
   };
 
   return (
@@ -51,7 +70,7 @@ const SignIn = () => {
             type='text'
             required
             className={signInStyles.input}
-            placeholder='Enter your Username'
+            placeholder='Enter your Discord username'
             value={userCredentials.username}
             onChange={(e) =>
               setUserCredentials((state) => ({
@@ -98,7 +117,8 @@ const SignIn = () => {
           />
           <span className={signInStyles.focusBorder}></span>
         </div>
-        <button className={signInStyles.btnLogin} type='submit'>
+        <p>{userCredentials.message}</p>
+        <button className='btnPrimary' type='submit'>
           SignIn
         </button>
         <p className={signInStyles.secondaryTxt}>

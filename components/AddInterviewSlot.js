@@ -47,7 +47,7 @@ export const AddInterviewSlot = () => {
         <br />
         {/* <span className={formStyles.focusBorder}></span> */}
         {/* </div> */}
-        <button className={formStyles.btnLogin} type='submit'>
+        <button className='btnPrimary' type='submit'>
           Add Slot
         </button>
       </form>

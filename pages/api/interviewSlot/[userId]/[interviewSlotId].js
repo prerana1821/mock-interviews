@@ -8,12 +8,14 @@ async function handler(req, res) {
     method,
   } = req;
   const { partner } = req.body;
+  console.log({ partner });
 
   await dbConnect();
 
   switch (method) {
     case "POST":
       try {
+        console.log("Hello");
         const interviewSlots = await InterviewSlot.findOne({
           userId: userId,
         }).exec();

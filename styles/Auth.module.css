@@ -1,7 +1,7 @@
 .login {
   display: flex;
   justify-content: center;
-  margin: 3rem;
+  margin: 3rem 3rem;
 }
 
 .form {
@@ -45,18 +45,6 @@
 .input:focus ~ .focusBorder {
   width: 100%;
   transition: 0.4s;
-}
-
-.btnLogin {
-  border: none;
-  padding: 0.8rem 1.7rem;
-  outline: none;
-  border-radius: 2rem;
-  font-size: large;
-  background-color: var(--primary-color);
-  color: #fff;
-  margin: 1rem 0;
-  cursor: pointer;
 }
 
 .secondaryTxt {

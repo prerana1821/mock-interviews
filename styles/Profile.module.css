@@ -36,14 +36,3 @@
   top: 1rem;
   right: 1rem;
 }
-
-.btnSecondary {
-  background: none;
-  cursor: pointer;
-  padding: 0.6rem 1rem;
-  color: var(--primary-color);
-  border: 2px solid var(--primary-color);
-  border-radius: 2rem;
-  font-size: initial;
-  margin: 1rem 0;
-}

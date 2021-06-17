@@ -40,3 +40,30 @@ li {
   text-align: center;
   margin: 3rem;
 }
+
+.mainLayout {
+  min-height: 75vh;
+}
+
+.btnPrimary {
+  border: none;
+  padding: 0.8rem 1.7rem;
+  outline: none;
+  border-radius: 2rem;
+  font-size: large;
+  background-color: var(--primary-color);
+  color: #fff;
+  margin: 1rem 0;
+  cursor: pointer;
+}
+
+.btnSecondary {
+  background: none;
+  cursor: pointer;
+  padding: 0.6rem 1rem;
+  color: var(--primary-color);
+  border: 2px solid var(--primary-color);
+  border-radius: 2rem;
+  font-size: initial;
+  margin: 1rem 0;
+}

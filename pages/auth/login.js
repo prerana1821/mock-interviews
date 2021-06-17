@@ -22,7 +22,7 @@ const SignIn = () => {
     } else {
       setUserCredentials((state) => ({
         ...state,
-        msg: "All Fields are Required!",
+        message: "All Fields are Required!",
       }));
     }
   };
@@ -66,7 +66,7 @@ const SignIn = () => {
           <span className={loginStyles.focusBorder}></span>
         </div>
         <p className={loginStyles.secondaryTxt}>{userCredentials.message}</p>
-        <button className={loginStyles.btnLogin} type='submit'>
+        <button className='btnPrimary' type='submit'>
           Login
         </button>
         <p className={loginStyles.secondaryTxt}>

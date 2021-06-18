@@ -8,6 +8,7 @@ import { UserInterviewSlot } from "../../components";
 import { ProfileCard } from "../../components";
 import PrivateRoute from "../../components/PrivateRoute/PrivateRoute";
 import profileStyles from "../../styles/Profile.module.css";
+import { scheduledSlots } from "../../utils/getScheduledInterviews";
 
 const UserProfile = ({ slots }) => {
   const [editProfile, setEditProfile] = useState(false);
@@ -15,6 +16,11 @@ const UserProfile = ({ slots }) => {
   const { interviewSlotState, interviewSlotDispatch } = useInterviewSlot();
 
   console.log("19", { slots });
+
+  const scheduledInterviews = scheduledSlots(
+    interviewSlotState.interviewSlots,
+    authState.user?._id
+  );
 
   useEffect(() => {
     if (slots) {
@@ -58,7 +64,7 @@ const UserProfile = ({ slots }) => {
         )}
       </div>
       <div>
-        {interviewSlotState.interviewSlots.length === 0 ? (
+        {scheduledInterviews.length === 0 ? (
           <h1 className='textCenter'>
             You haven't scheduled any interview slots yet!
           </h1>

@@ -35,12 +35,6 @@ export const EditProfile = ({ userDetail, setEditProfile }) => {
     const data = await response.json();
     console.log({ data });
     if (data.success) {
-      // setUser({
-      //   ...user,
-      //   portfolio: data.portfolio,
-      //   fullName: data.fullName,
-      //   interviewDone: data.interviewDone,
-      // });
       authDispatch({
         type: "UPDATE_USER",
         payload: {

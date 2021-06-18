@@ -1,21 +1,9 @@
 import { useRouter } from "next/router";
-import { createContext, useContext, useReducer, useState } from "react";
+import { createContext, useContext, useReducer } from "react";
 
 export const AuthContext = createContext();
 
-export const setUserAuth = ({
-  // setUser,
-  // setToken,
-  // setStatus,
-  authDispatch,
-  // username,
-  // id,
-  // email,
-  user,
-  token,
-}) => {
-  // setUser({ _id: id, username, email });
-  // setToken(token);
+export const setUserAuth = ({ authDispatch, user, token }) => {
   localStorage?.setItem("token", JSON.stringify({ token }));
   localStorage?.setItem(
     "user",
@@ -25,7 +13,6 @@ export const setUserAuth = ({
       email: user.email,
     })
   );
-  // authDispatch({ type: "LOGIN_USER", payload: { _id: id, username, email } });
   authDispatch({ type: "LOGIN_USER", payload: user });
   authDispatch({ type: "ADD_TOKEN", payload: { token } });
   authDispatch({
@@ -34,7 +21,6 @@ export const setUserAuth = ({
       status: { success: `Hurray! Signup Successful ${user.username}` },
     },
   });
-  // setStatus({ success: `Hurray! Signup Successful ${username}` });
 };
 
 export const authReducer = (state, action) => {
@@ -71,17 +57,6 @@ export const authReducer = (state, action) => {
 
 export const AuthProvider = ({ children }) => {
   const router = useRouter();
-  // const [token, setToken] = useState("");
-  // const [user, setUser] = useState({
-  //   _id: "",
-  //   username: "",
-  //   email: "",
-  // });
-  // const [status, setStatus] = useState({
-  //   loading: "",
-  //   success: "",
-  //   error: "",
-  // });
 
   const [authState, authDispatch] = useReducer(authReducer, {
     token: "",
@@ -102,19 +77,11 @@ export const AuthProvider = ({ children }) => {
     console.log({ data });
     if (data.success) {
       setUserAuth({
-        // setUser,
-        // setToken,
-        // setStatus,
         authDispatch,
         user: { username, id: data.user._id, email },
         token: data.user.token,
-        // username,
-        // id: data.user._id,
-        // email,
-        // token: data.user.token,
       });
       router.push(`/profile/${data.user._id}`);
-      // router.push(`/interviews`);
     }
   };
 
@@ -131,26 +98,15 @@ export const AuthProvider = ({ children }) => {
     console.log({ data });
     if (data.success) {
       setUserAuth({
-        // setUser,
-        // setToken,
-        // setStatus,
         authDispatch,
         user: data.data.user,
         token: data.data.token,
-        // username,
-        // id: data.user._id,
-        // email: data.user.email,
-        // token: data.user.token,
       });
       router.push(`/profile/${data.data.user._id}`);
-      // router.push(`/interviews`);
     }
   };
 
   const logoutUser = () => {
-    // setToken("");
-    // setStatus({ loading: "", success: "", error: "" });
-    // setUser({});
     authDispatch({ type: "LOGOUT" });
     localStorage?.removeItem("token");
     localStorage?.removeItem("user");
@@ -160,10 +116,6 @@ export const AuthProvider = ({ children }) => {
   return (
     <AuthContext.Provider
       value={{
-        // token,
-        // user,
-        // status,
-        // setUser,
         authState,
         authDispatch,
         signInUser,

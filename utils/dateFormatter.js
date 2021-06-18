@@ -43,3 +43,26 @@ export const formatDateTime = (date) => {
 // console.log({ data });
 // return { props: { userDetail: data.userDetail } };
 // // return { props: { userDetail: {} } };
+
+// console.log("9898", context.req.cookies);
+// const authToken = context.req.cookies.token;
+
+// let userDetail = await UserCredential.findById(context.params.userId).lean();
+// userDetail = JSON.parse(JSON.stringify(userDetail));
+
+// let response = await fetch(
+//   `http://localhost:3000/api/userDetail/${context.params.userId}`,
+//   {
+//     method: "GET",
+//     headers: {
+//       "Content-Type": "application/json",
+//       Authorization: authToken,
+//     },
+//   }
+// );
+
+// const data = await response.json();
+// console.log(data);
+// if(data.success){
+
+// }

@@ -1,8 +1,8 @@
 import { useState } from "react";
 import Image from "next/image";
 import { useAuth } from "../../context";
-import UserCredential from "../../models/UserCredential";
-import InterviewSlot from "../../models/InterviewSlot";
+// import UserCredential from "../../models/UserCredential";
+// import InterviewSlot from "../../models/InterviewSlot";
 import dbConnect from "../../middlewares/db.connect";
 import { EditProfile } from "../../components";
 import { AddInterviewSlot } from "../../components";
@@ -11,12 +11,12 @@ import { ProfileCard } from "../../components";
 import PrivateRoute from "../../components/PrivateRoute/PrivateRoute";
 import profileStyles from "../../styles/Profile.module.css";
 
-const UserProfile = ({ userDetail, slots }) => {
+const UserProfile = ({ slots }) => {
   const [editProfile, setEditProfile] = useState(false);
   const { authState, logoutUser } = useAuth();
   console.log({ editProfile });
-  console.log({ userDetail });
-  console.log({ slots });
+  // console.log({ userDetail });
+  console.log("19", { slots });
   return (
     <>
       <div className={profileStyles.profile}>
@@ -53,23 +53,37 @@ const UserProfile = ({ userDetail, slots }) => {
   );
 };
 
-export async function getServerSideProps({ params }) {
+export async function getServerSideProps(context) {
   await dbConnect();
 
-  let userDetail = await UserCredential.findById(params.userId).lean();
-  userDetail = JSON.parse(JSON.stringify(userDetail));
+  const authToken = context.req.cookies.token;
 
-  console.log(userDetail);
+  // let userInterviewDetails = await InterviewSlot.findOne({
+  //   userId: context.params.userId,
+  // }).exec();
+  // userInterviewDetails = JSON.parse(JSON.stringify(userInterviewDetails));
 
-  let userInterviewDetails = await InterviewSlot.findOne({
-    userId: params.userId,
-  }).exec();
+  let response = await fetch(
+    `http://localhost:3000/api/interviewSlot/${context.params.userId}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: authToken,
+      },
+    }
+  );
+  const data = await response.json();
+  let userInterviewDetails;
+  console.log(data);
+  if (data.success) {
+    userInterviewDetails = JSON.parse(JSON.stringify(data.data.slots));
+  }
 
-  userInterviewDetails = JSON.parse(JSON.stringify(userInterviewDetails));
   return {
     props: {
-      userDetail,
-      slots: userInterviewDetails ? userInterviewDetails.slots : [],
+      // userDetail,
+      slots: userInterviewDetails ? userInterviewDetails : [],
     },
   };
 }

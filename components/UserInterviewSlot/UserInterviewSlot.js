@@ -6,9 +6,9 @@ import userInterviewSlot from "./UserInterviewSlot.module.css";
 export const UserInterviewSlot = ({ slots, userDetail }) => {
   const { interviewSlotState } = useInterviewSlot();
 
-  console.log({ interviewSlotState });
+  // console.log({ interviewSlotState });
 
-  console.log("cool", { slots });
+  // console.log("cool", { slots });
 
   return (
     <>

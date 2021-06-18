@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { createContext, useContext, useReducer } from "react";
+import cookies from "js-cookie";
 
 export const AuthContext = createContext();
 
@@ -13,6 +14,7 @@ export const setUserAuth = ({ authDispatch, user, token }) => {
       email: user.email,
     })
   );
+  cookies.set("token", token, { expires: 7 });
   authDispatch({ type: "LOGIN_USER", payload: user });
   authDispatch({ type: "ADD_TOKEN", payload: { token } });
   authDispatch({
@@ -81,8 +83,8 @@ export const AuthProvider = ({ children }) => {
         user: { username, _id: data.user._id, email },
         token: data.user.token,
       });
-      // router.push(`/profile/${data.user._id}`);
-      router.push("/interviews");
+      router.push(`/profile/${data.user._id}`);
+      // router.push("/interviews");
     }
   };
 
@@ -103,8 +105,8 @@ export const AuthProvider = ({ children }) => {
         user: data.data.user,
         token: data.data.token,
       });
-      router.push("/interviews");
-      // router.push(`/profile/${data.data.user._id}`);
+      // router.push("/interviews");
+      router.push(`/profile/${data.data.user._id}`);
     }
   };
 
@@ -112,6 +114,7 @@ export const AuthProvider = ({ children }) => {
     authDispatch({ type: "LOGOUT" });
     localStorage?.removeItem("token");
     localStorage?.removeItem("user");
+    cookies.remove("token");
     router.replace("/");
   };
 

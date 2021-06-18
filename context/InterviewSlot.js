@@ -29,7 +29,7 @@ export const InterviewSlotProvider = ({ children }) => {
     }
   );
 
-  console.log({ interviewSlotState });
+  // console.log({ interviewSlotState });
 
   return (
     <InterviewSlotContext.Provider

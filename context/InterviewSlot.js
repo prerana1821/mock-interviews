@@ -3,6 +3,7 @@ import { createContext, useContext, useReducer } from "react";
 export const InterviewSlotContext = createContext();
 
 export const interviewSlotReducer = (state, action) => {
+  console.log(state, action);
   switch (action.type) {
     case "ADD_INTERVIEW_SLOT":
       console.log(action.payload);
@@ -24,7 +25,7 @@ export const InterviewSlotProvider = ({ children }) => {
     interviewSlotReducer,
     {
       interviewSlots: [],
-      userInterViewSlots: {},
+      userInterViewSlots: { slots: [] },
     }
   );
 

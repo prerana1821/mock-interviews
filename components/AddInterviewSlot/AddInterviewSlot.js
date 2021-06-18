@@ -10,25 +10,29 @@ export const AddInterviewSlot = () => {
   const addInterviewSlot = async (e) => {
     e.preventDefault();
     console.log({ dateAndTime });
-    const response = await fetch(`/api/interviewSlot/${authState.user._id}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: authState.token,
-      },
-      body: JSON.stringify({
-        dateAndTime,
-      }),
-    });
-
-    const { data } = await response.json();
-    console.log({ data });
-    console.log(data.slots);
-    if (data.success) {
-      interviewSlotDispatch({
-        type: "ADD_INTERVIEW_SLOT",
-        payload: { slots: data.slots },
+    try {
+      const response = await fetch(`/api/interviewSlot/${authState.user._id}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: authState.token,
+        },
+        body: JSON.stringify({
+          dateAndTime,
+        }),
       });
+
+      const data = await response.json();
+      console.log({ data });
+      console.log(data.data.slots);
+      if (data.success) {
+        interviewSlotDispatch({
+          type: "ADD_INTERVIEW_SLOT",
+          payload: { slots: data.data.slots },
+        });
+      }
+    } catch (error) {
+      console.log({ error });
     }
   };
 
@@ -36,7 +40,6 @@ export const AddInterviewSlot = () => {
     <div>
       <h1>Add New Interview Slot</h1>
       <form onSubmit={addInterviewSlot}>
-        {/* <div className={formStyles.inputBox}> */}
         <input
           type='datetime-local'
           required
@@ -45,8 +48,6 @@ export const AddInterviewSlot = () => {
           onChange={(e) => setDateAndTime(() => e.target.value)}
         />
         <br />
-        {/* <span className={formStyles.focusBorder}></span> */}
-        {/* </div> */}
         <button className='btnPrimary' type='submit'>
           Add Slot
         </button>

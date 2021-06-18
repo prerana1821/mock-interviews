@@ -9,6 +9,8 @@ async function handler(req, res) {
   } = req;
   const { dateAndTime } = req.body;
 
+  console.log(dateAndTime);
+
   await dbConnect();
 
   switch (method) {
@@ -38,7 +40,7 @@ async function handler(req, res) {
           const NewInterviewSlot = new InterviewSlot({ userId });
           NewInterviewSlot.slots.push({ slot: dateAndTime });
           const newUserInterviewSlot = await NewInterviewSlot.save();
-          res.status(200).json({
+          return res.status(200).json({
             success: true,
             data: { slots: newUserInterviewSlot.slots },
             message: "Successful",
@@ -46,14 +48,14 @@ async function handler(req, res) {
         } else {
           interviewSlots.slots.push({ slot: dateAndTime });
           const newInterviewSlot = await interviewSlots.save();
-          res.status(200).json({
+          return res.status(200).json({
             success: true,
             data: { slots: newInterviewSlot.slots },
             message: "Successful",
           });
         }
       } catch (error) {
-        res.status(400).json({ success: false, message: "Error" });
+        res.status(400).json({ success: false, message: "Not working" });
       }
       break;
     default:

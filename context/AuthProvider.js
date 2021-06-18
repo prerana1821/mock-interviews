@@ -78,7 +78,7 @@ export const AuthProvider = ({ children }) => {
     if (data.success) {
       setUserAuth({
         authDispatch,
-        user: { username, id: data.user._id, email },
+        user: { username, _id: data.user._id, email },
         token: data.user.token,
       });
       router.push(`/profile/${data.user._id}`);

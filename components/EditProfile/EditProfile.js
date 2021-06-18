@@ -5,8 +5,6 @@ import formStyles from "../../styles/Auth.module.css";
 import Image from "next/image";
 
 export const EditProfile = ({ userDetail, setEditProfile }) => {
-  console.log({ userDetail });
-
   const [details, setDetails] = useState({
     fullName: userDetail.fullName,
     portfolio: userDetail.portfolio,
@@ -19,7 +17,8 @@ export const EditProfile = ({ userDetail, setEditProfile }) => {
     e.preventDefault();
     console.log({ userDetail });
     console.log(details);
-    const response = await fetch(`/api/userDetail/${userDetail._id}`, {
+    console.log(authState);
+    const response = await fetch(`/api/userDetail/${authState.user._id}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -87,6 +86,7 @@ export const EditProfile = ({ userDetail, setEditProfile }) => {
           <input
             type='number'
             value={details.interviewDone}
+            placeholder='Interviews Done'
             className={formStyles.input}
             onChange={(e) =>
               setDetails((state) => ({

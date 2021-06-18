@@ -5,7 +5,6 @@ const SlotSchema = new Schema({
   partner: {
     type: Schema.Types.ObjectId,
     ref: UserCredential,
-    required: "User Id is required",
   },
   slot: {
     type: Date,

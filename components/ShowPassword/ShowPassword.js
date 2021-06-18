@@ -6,6 +6,7 @@ export const ShowPassword = ({
 }) => {
   return (
     <button
+      type='button'
       className='btnIcon btnIconShowPassword'
       onClick={showPasswordHandler}
     >

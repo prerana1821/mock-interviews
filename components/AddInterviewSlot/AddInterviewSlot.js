@@ -27,7 +27,7 @@ export const AddInterviewSlot = () => {
       console.log(data.data.slot);
       if (data.success) {
         interviewSlotDispatch({
-          type: "ADD_INTERVIEW_SLOT",
+          type: "ADD_USER_INTERVIEW_SLOT",
           payload: { slot: data.data.slot },
         });
       }

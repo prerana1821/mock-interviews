@@ -58,22 +58,8 @@ async function handler(req, res) {
         if (!interviewSlots) {
           const NewInterviewSlot = new InterviewSlot({ userId });
           await addInterviewSlot(NewInterviewSlot, dateAndTime, res);
-          // NewInterviewSlot.slots.push({ slot: dateAndTime,});
-          // const newUserInterviewSlot = await NewInterviewSlot.save();
-          // return res.status(200).json({
-          //   success: true,
-          //   data: { slots: newUserInterviewSlot.slots },
-          //   message: "Successful",
-          // });
         } else {
           await addInterviewSlot(interviewSlots, dateAndTime, res);
-          // interviewSlots.slots.push({ slot: dateAndTime });
-          // const newInterviewSlot = await interviewSlots.save();
-          // return res.status(200).json({
-          //   success: true,
-          //   data: { slots: newInterviewSlot.slots },
-          //   message: "Successful",
-          // });
         }
       } catch (error) {
         res.status(400).json({ success: false, message: "Not working" });

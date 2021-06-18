@@ -1,12 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { formatDateTime } from "../utils/dateFormatter";
 import interviewSlotStyles from "../styles/Interviews.module.css";
 import { LoginAlert } from "../components";
-import { useAuth } from "../context";
+import { useAuth, useInterviewSlot } from "../context";
 
 const interviews = ({ interviewSlots }) => {
   const { authState } = useAuth();
   const [showLoginAlert, setShowLoginAlert] = useState(false);
+  const { interviewSlotDispatch } = useInterviewSlot();
+
+  useEffect(() => {
+    interviewSlotDispatch({
+      type: "LOAD_INTERVIEW_SLOTS",
+      payload: { interviewSlots },
+    });
+  }, [interviewSlots]);
 
   const connectWithUser = async (interviewId) => {
     if (authState.token) {

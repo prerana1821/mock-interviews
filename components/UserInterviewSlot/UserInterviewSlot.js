@@ -3,7 +3,7 @@ import { useInterviewSlot } from "../../context";
 import { formatDateTime } from "../../utils/dateFormatter";
 import userInterviewSlot from "./UserInterviewSlot.module.css";
 
-export const UserInterviewSlot = ({ slots, userDetail }) => {
+export const UserInterviewSlot = ({ userDetail }) => {
   const { interviewSlotState } = useInterviewSlot();
 
   console.log(interviewSlotState.userInterViewSlots.slots);

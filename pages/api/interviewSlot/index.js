@@ -14,6 +14,10 @@ export default async function handler(req, res) {
             path: "userId",
             select: "username fullName",
           })
+          .populate({
+            path: "slots.partner",
+            select: "username fullName",
+          })
           .exec();
         return res.status(200).json({
           data: interviewSlots,

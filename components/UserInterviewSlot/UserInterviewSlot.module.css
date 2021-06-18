@@ -5,6 +5,7 @@
   gap: 1rem;
   margin: 2rem 6rem;
   flex-wrap: wrap;
+  align-items: center;
 }
 
 .greenInterviewSlot {

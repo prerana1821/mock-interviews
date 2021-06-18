@@ -77,3 +77,14 @@ export const formatDateTime = (date) => {
 //      console.log(err);
 //    }
 //  );
+
+//     // const scheduleInterviewSlots = slots.map((item) => {
+//   return item.slots.reduce((acc, slot) => {
+//     return slot.partner === userId ? acc.concat(slot) : acc;
+//   }, []);
+// });
+// const scheduleInterviewSlots = slots.map((item) => {
+//   return item.slots.map((slot) => {
+//     return slot.partner === userId && slot;
+//   });
+// });

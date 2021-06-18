@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useAuth, useInterviewSlot } from "../../context";
-// import UserCredential from "../../models/UserCredential";
-// import InterviewSlot from "../../models/InterviewSlot";
 import dbConnect from "../../middlewares/db.connect";
-import { EditProfile } from "../../components";
+import { EditProfile, ScheduledInterviewSlot } from "../../components";
 import { AddInterviewSlot } from "../../components";
 import { UserInterviewSlot } from "../../components";
 import { ProfileCard } from "../../components";
@@ -14,7 +12,7 @@ import profileStyles from "../../styles/Profile.module.css";
 const UserProfile = ({ slots }) => {
   const [editProfile, setEditProfile] = useState(false);
   const { authState, logoutUser } = useAuth();
-  const { interviewSlotDispatch } = useInterviewSlot();
+  const { interviewSlotState, interviewSlotDispatch } = useInterviewSlot();
 
   console.log("19", { slots });
 
@@ -56,7 +54,16 @@ const UserProfile = ({ slots }) => {
         {slots.length === 0 ? (
           <h1 className='textCenter'>You haven't added any slots yet!</h1>
         ) : (
-          <UserInterviewSlot slots={slots} userDetail={authState.user} />
+          <UserInterviewSlot userDetail={authState.user} />
+        )}
+      </div>
+      <div>
+        {interviewSlotState.interviewSlots.length === 0 ? (
+          <h1 className='textCenter'>
+            You haven't scheduled any interview slots yet!
+          </h1>
+        ) : (
+          <ScheduledInterviewSlot />
         )}
       </div>
     </>
@@ -80,7 +87,6 @@ export async function getServerSideProps(context) {
   );
   const data = await response.json();
   let userInterviewDetails;
-  // console.log(data);
   if (data.success) {
     userInterviewDetails = JSON.parse(JSON.stringify(data.data.slots));
   }

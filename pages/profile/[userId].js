@@ -13,7 +13,7 @@ import profileStyles from "../../styles/Profile.module.css";
 
 const UserProfile = ({ userDetail, slots }) => {
   const [editProfile, setEditProfile] = useState(false);
-  const { logoutUser } = useAuth();
+  const { authState, logoutUser } = useAuth();
   console.log({ editProfile });
   console.log({ userDetail });
   console.log({ slots });
@@ -24,7 +24,7 @@ const UserProfile = ({ userDetail, slots }) => {
           {editProfile && (
             <EditProfile
               setEditProfile={setEditProfile}
-              userDetail={userDetail}
+              userDetail={authState.user}
             />
           )}
           <button
@@ -33,7 +33,7 @@ const UserProfile = ({ userDetail, slots }) => {
           >
             <Image src='/images/edit.png' width='30px' height='30px' />
           </button>
-          <ProfileCard userDetail={userDetail} />
+          <ProfileCard userDetail={authState.user} />
           <button onClick={() => logoutUser()} className='btnSecondary'>
             Logout
           </button>
@@ -46,7 +46,7 @@ const UserProfile = ({ userDetail, slots }) => {
         {slots.length === 0 ? (
           <h1 className='textCenter'>You haven't added any slots yet!</h1>
         ) : (
-          <UserInterviewSlot slots={slots} userDetail={userDetail} />
+          <UserInterviewSlot slots={slots} userDetail={authState.user} />
         )}
       </div>
     </>

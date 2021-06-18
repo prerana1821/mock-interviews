@@ -4,17 +4,17 @@ import formStyles from "../../styles/Auth.module.css";
 
 export const AddInterviewSlot = () => {
   const [dateAndTime, setDateAndTime] = useState("");
-  const { user, token } = useAuth();
+  const { authState } = useAuth();
   const { interviewSlotDispatch } = useInterviewSlot();
 
   const addInterviewSlot = async (e) => {
     e.preventDefault();
     console.log({ dateAndTime });
-    const response = await fetch(`/api/interviewSlot/${user._id}`, {
+    const response = await fetch(`/api/interviewSlot/${authState.user._id}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: token,
+        Authorization: authState.token,
       },
       body: JSON.stringify({
         dateAndTime,

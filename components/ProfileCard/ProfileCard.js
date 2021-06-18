@@ -1,4 +1,6 @@
 export const ProfileCard = ({ userDetail }) => {
+  console.log(2, { userDetail });
+
   return (
     <>
       <h1>Profile</h1>

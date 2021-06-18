@@ -5,21 +5,21 @@ import { LoginAlert } from "../components";
 import { useAuth } from "../context";
 
 const interviews = ({ interviewSlots }) => {
-  const { user, token } = useAuth();
+  const { authState } = useAuth();
   const [showLoginAlert, setShowLoginAlert] = useState(false);
 
   const connectWithUser = async (interviewId) => {
-    if (token) {
+    if (authState.token) {
       try {
         const response = await fetch(
-          `http://localhost:3000/api/interviewSlot/${user._id}/${interviewId}`,
+          `http://localhost:3000/api/interviewSlot/${authState.user._id}/${interviewId}`,
           {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
-              Authorization: token,
+              Authorization: authState.token,
             },
-            body: JSON.stringify({ partner: user._id }),
+            body: JSON.stringify({ partner: authState.user._id }),
           }
         );
 

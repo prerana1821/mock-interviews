@@ -3,9 +3,9 @@ import Link from "next/link";
 import { useAuth } from "../../context";
 
 export const Header = () => {
-  const { token, user } = useAuth();
+  const { authState } = useAuth();
 
-  console.log({ token, user });
+  console.log(8, { authState });
 
   return (
     <nav className={headerStyles.nav}>
@@ -27,9 +27,13 @@ export const Header = () => {
             <a>Interviews</a>
           </li>
         </Link>
-        <Link href={token ? `/profile/${user._id}` : "/auth/login"}>
+        <Link
+          href={
+            authState.token ? `/profile/${authState.user._id}` : "/auth/login"
+          }
+        >
           <li>
-            <a>{token ? "Account" : "Login"}</a>
+            <a>{authState.token ? "Account" : "Login"}</a>
           </li>
         </Link>
       </ul>

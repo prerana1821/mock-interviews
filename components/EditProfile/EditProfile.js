@@ -13,7 +13,7 @@ export const EditProfile = ({ userDetail, setEditProfile }) => {
     interviewDone: userDetail.interviewDone,
   });
 
-  const { user, setUser, token } = useAuth();
+  const { authState, authDispatch } = useAuth();
 
   const editUserDetails = async (e) => {
     e.preventDefault();
@@ -23,7 +23,7 @@ export const EditProfile = ({ userDetail, setEditProfile }) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: token,
+        Authorization: authState.token,
       },
       body: JSON.stringify({
         fullName: details.fullName,
@@ -35,11 +35,19 @@ export const EditProfile = ({ userDetail, setEditProfile }) => {
     const data = await response.json();
     console.log({ data });
     if (data.success) {
-      setUser({
-        ...user,
-        portfolio: data.portfolio,
-        fullName: data.fullName,
-        interviewDone: data.interviewDone,
+      // setUser({
+      //   ...user,
+      //   portfolio: data.portfolio,
+      //   fullName: data.fullName,
+      //   interviewDone: data.interviewDone,
+      // });
+      authDispatch({
+        type: "UPDATE_USER",
+        payload: {
+          portfolio: data.data.portfolio,
+          fullName: data.data.fullName,
+          interviewDone: data.data.interviewDone,
+        },
       });
       setEditProfile(false);
     }

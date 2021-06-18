@@ -28,11 +28,18 @@ const SignIn = () => {
       userCredentials.confirmPassword
     ) {
       if (/^.{3,32}#[0-9]{4}$/.test(userCredentials.username)) {
-        signInUser({
-          username: userCredentials.username,
-          password: userCredentials.password,
-          email: userCredentials.confirmPassword,
-        });
+        if (userCredentials.password === userCredentials.confirmPassword) {
+          signInUser({
+            username: userCredentials.username,
+            password: userCredentials.password,
+            email: userCredentials.confirmPassword,
+          });
+        } else {
+          setUserCredentials((state) => ({
+            ...state,
+            message: "Passwords doesn't match!",
+          }));
+        }
       } else {
         setUserCredentials((state) => ({
           ...state,

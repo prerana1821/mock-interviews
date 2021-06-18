@@ -26,9 +26,10 @@ export default async function handler(req, res) {
           if (validPassword) {
             const token = generateToken(user._id);
             return res.status(200).json({
-              user: {
-                _id: user._doc._id,
-                email: user._doc.email,
+              data: {
+                user: user._doc,
+                // _id: user._doc._id,
+                // email: user._doc.email,
                 token,
               },
               success: true,

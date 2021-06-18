@@ -47,20 +47,26 @@ const interviews = ({ interviewSlots }) => {
   }
 
   const showInterviewSlots = (slots) => {
+    console.log({ slots });
     return slots.map((interviewSlot) => {
       return interviewSlot.slots.map((slot) => {
         return (
-          <div key={slot._id} className={interviewSlotStyles.interviewSlotCard}>
-            <h3>{interviewSlot.userId.fullName}</h3>
-            <h4>@{interviewSlot.userId.username}</h4>
-            <p>{formatDateTime(slot.slot)}</p>
-            <button
-              onClick={() => connectWithUser(slot._id)}
-              className='btnPrimary'
+          !slot.partner && (
+            <div
+              key={slot._id}
+              className={interviewSlotStyles.interviewSlotCard}
             >
-              Connect
-            </button>
-          </div>
+              <h3>{interviewSlot.userId.fullName}</h3>
+              <h4>@{interviewSlot.userId.username}</h4>
+              <p>{formatDateTime(slot.slot)}</p>
+              <button
+                onClick={() => connectWithUser(slot._id)}
+                className='btnPrimary'
+              >
+                Connect
+              </button>
+            </div>
+          )
         );
       });
     });

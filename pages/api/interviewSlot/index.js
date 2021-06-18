@@ -15,24 +15,6 @@ export default async function handler(req, res) {
             select: "username fullName",
           })
           .exec();
-        const filleredSlots = interviewSlots.map((item) => {
-          console.log(item.slots);
-          return {
-            _id: item._id,
-            userId: item.userId,
-            slots: item.slots.map((val) => {
-              if ("partner" in val) {
-                return val;
-              }
-            }),
-          };
-        });
-        // console.log({ filleredSlots });
-        // const filleredSlots = interviewSlots.map((item) => {
-        //   return item.slots.map((val) => {
-        //     return !val.hasOwnProperty("partner") && val;
-        //   });
-        // });
         return res.status(200).json({
           data: interviewSlots,
           success: true,
@@ -51,3 +33,16 @@ export default async function handler(req, res) {
       break;
   }
 }
+
+// const filleredSlots = interviewSlots.map((item) => {
+//   console.log(item.slots);
+//   return {
+//     _id: item._id,
+//     userId: item.userId,
+//     slots: item.slots.map((val) => {
+//       if ("partner" in val) {
+//         return val;
+//       }
+//     }),
+//   };
+// });

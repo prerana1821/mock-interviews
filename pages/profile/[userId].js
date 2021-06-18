@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
-import { useAuth } from "../../context";
+import { useAuth, useInterviewSlot } from "../../context";
 // import UserCredential from "../../models/UserCredential";
 // import InterviewSlot from "../../models/InterviewSlot";
 import dbConnect from "../../middlewares/db.connect";
@@ -14,9 +14,19 @@ import profileStyles from "../../styles/Profile.module.css";
 const UserProfile = ({ slots }) => {
   const [editProfile, setEditProfile] = useState(false);
   const { authState, logoutUser } = useAuth();
-  console.log({ editProfile });
-  // console.log({ userDetail });
+  const { interviewSlotDispatch } = useInterviewSlot();
+
   console.log("19", { slots });
+
+  useEffect(() => {
+    if (slots) {
+      interviewSlotDispatch({
+        type: "LOAD_USER_INTERVIEW_SLOT",
+        payload: { slots },
+      });
+    }
+  }, [slots]);
+
   return (
     <>
       <div className={profileStyles.profile}>
@@ -58,11 +68,6 @@ export async function getServerSideProps(context) {
 
   const authToken = context.req.cookies.token;
 
-  // let userInterviewDetails = await InterviewSlot.findOne({
-  //   userId: context.params.userId,
-  // }).exec();
-  // userInterviewDetails = JSON.parse(JSON.stringify(userInterviewDetails));
-
   let response = await fetch(
     `http://localhost:3000/api/interviewSlot/${context.params.userId}`,
     {
@@ -75,14 +80,13 @@ export async function getServerSideProps(context) {
   );
   const data = await response.json();
   let userInterviewDetails;
-  console.log(data);
+  // console.log(data);
   if (data.success) {
     userInterviewDetails = JSON.parse(JSON.stringify(data.data.slots));
   }
 
   return {
     props: {
-      // userDetail,
       slots: userInterviewDetails ? userInterviewDetails : [],
     },
   };

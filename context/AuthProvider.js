@@ -15,6 +15,7 @@ export const setUserAuth = ({ authDispatch, user, token }) => {
     })
   );
   cookies.set("token", token, { expires: 7 });
+  cookies.set("userId", user._id, { expires: 7 });
   authDispatch({ type: "LOGIN_USER", payload: user });
   authDispatch({ type: "ADD_TOKEN", payload: { token } });
   authDispatch({
@@ -57,8 +58,24 @@ export const authReducer = (state, action) => {
   }
 };
 
-export const AuthProvider = ({ children }) => {
+export const AuthProvider = ({ children, token, userId }) => {
   const router = useRouter();
+
+  console.log(63, token);
+  console.log(63, userId);
+
+  if (token && userId) {
+    async () => {
+      const response = await fetch(`/api/userDetail/${userId}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token,
+        },
+      });
+      console.log(80, { response });
+    };
+  }
 
   const [authState, authDispatch] = useReducer(authReducer, {
     token: "",
@@ -83,8 +100,8 @@ export const AuthProvider = ({ children }) => {
         user: { username, _id: data.user._id, email },
         token: data.user.token,
       });
-      router.push(`/profile/${data.user._id}`);
-      // router.push("/interviews");
+      // router.push(`/profile/${data.user._id}`);
+      router.push("/interviews");
     }
   };
 
@@ -115,6 +132,7 @@ export const AuthProvider = ({ children }) => {
     localStorage?.removeItem("token");
     localStorage?.removeItem("user");
     cookies.remove("token");
+    cookies.remove("userId");
     router.replace("/");
   };
 

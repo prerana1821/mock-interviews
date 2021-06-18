@@ -24,11 +24,11 @@ export const AddInterviewSlot = () => {
 
       const data = await response.json();
       console.log({ data });
-      console.log(data.data.slots);
+      console.log(data.data.slot);
       if (data.success) {
         interviewSlotDispatch({
           type: "ADD_INTERVIEW_SLOT",
-          payload: { slots: data.data.slots },
+          payload: { slot: data.data.slot },
         });
       }
     } catch (error) {

@@ -66,3 +66,14 @@ export const formatDateTime = (date) => {
 // if(data.success){
 
 // }
+
+//  console.log("working");
+//  console.log({ userId });
+//  const result = await InterviewSlot.findOneAndUpdate(
+//    { userId },
+//    { $push: { slots: { slot: dateAndTime } } },
+//    { safe: true, upsert: true, new: true },
+//    function (err, model) {
+//      console.log(err);
+//    }
+//  );

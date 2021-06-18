@@ -2,6 +2,20 @@ import dbConnect from "../../../middlewares/db.connect";
 import verifiedUser from "../../../middlewares/verifiedUser";
 import InterviewSlot from "../../../models/InterviewSlot";
 
+export const addInterviewSlot = async (interviewSlot, dateAndTime, res) => {
+  interviewSlot.slots.push({ slot: dateAndTime });
+  const newUserInterviewSlot = await interviewSlot.save();
+  const newSlot = newUserInterviewSlot.slots.find(
+    (slot) => new Date(slot.slot).getTime() === new Date(dateAndTime).getTime()
+  );
+  console.log({ newSlot });
+  return res.status(200).json({
+    success: true,
+    data: { slot: newSlot },
+    message: "Successful",
+  });
+};
+
 async function handler(req, res) {
   const {
     query: { userId },
@@ -18,7 +32,12 @@ async function handler(req, res) {
       try {
         const interviewSlots = await InterviewSlot.findOne({
           userId: userId,
-        }).exec();
+        })
+          .populate({
+            path: "slots.partner",
+            select: "username fullName",
+          })
+          .exec();
         if (!interviewSlots) {
           return res
             .status(400)
@@ -38,21 +57,23 @@ async function handler(req, res) {
         }).exec();
         if (!interviewSlots) {
           const NewInterviewSlot = new InterviewSlot({ userId });
-          NewInterviewSlot.slots.push({ slot: dateAndTime });
-          const newUserInterviewSlot = await NewInterviewSlot.save();
-          return res.status(200).json({
-            success: true,
-            data: { slots: newUserInterviewSlot.slots },
-            message: "Successful",
-          });
+          await addInterviewSlot(NewInterviewSlot, dateAndTime, res);
+          // NewInterviewSlot.slots.push({ slot: dateAndTime,});
+          // const newUserInterviewSlot = await NewInterviewSlot.save();
+          // return res.status(200).json({
+          //   success: true,
+          //   data: { slots: newUserInterviewSlot.slots },
+          //   message: "Successful",
+          // });
         } else {
-          interviewSlots.slots.push({ slot: dateAndTime });
-          const newInterviewSlot = await interviewSlots.save();
-          return res.status(200).json({
-            success: true,
-            data: { slots: newInterviewSlot.slots },
-            message: "Successful",
-          });
+          await addInterviewSlot(interviewSlots, dateAndTime, res);
+          // interviewSlots.slots.push({ slot: dateAndTime });
+          // const newInterviewSlot = await interviewSlots.save();
+          // return res.status(200).json({
+          //   success: true,
+          //   data: { slots: newInterviewSlot.slots },
+          //   message: "Successful",
+          // });
         }
       } catch (error) {
         res.status(400).json({ success: false, message: "Not working" });

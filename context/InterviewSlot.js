@@ -3,15 +3,23 @@ import { createContext, useContext, useReducer } from "react";
 export const InterviewSlotContext = createContext();
 
 export const interviewSlotReducer = (state, action) => {
-  console.log(state, action);
+  console.log(action);
   switch (action.type) {
+    case "LOAD_USER_INTERVIEW_SLOT":
+      return {
+        ...state,
+        userInterViewSlots: {
+          slots: action.payload.slots,
+        },
+      };
     case "ADD_INTERVIEW_SLOT":
-      console.log(action.payload);
+      console.log(action.payload.slot);
+      console.log(state.userInterViewSlots.slots);
       return {
         ...state,
         userInterViewSlots: {
           ...state.userInterViewSlots,
-          slots: action.payload.slots,
+          slots: state.userInterViewSlots.slots.concat(action.payload.slot),
         },
       };
     default:
@@ -29,7 +37,7 @@ export const InterviewSlotProvider = ({ children }) => {
     }
   );
 
-  // console.log({ interviewSlotState });
+  console.log({ interviewSlotState });
 
   return (
     <InterviewSlotContext.Provider

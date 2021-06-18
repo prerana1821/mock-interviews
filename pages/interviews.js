@@ -22,7 +22,6 @@ const interviews = ({ interviewSlots }) => {
             body: JSON.stringify({ partner: authState.user._id }),
           }
         );
-
         console.log({ response });
       } catch (error) {
         console.log(error);
@@ -32,32 +31,41 @@ const interviews = ({ interviewSlots }) => {
     }
   };
 
-  // console.log({ interviewSlots });
+  let filteredSlots;
+  if (authState.token) {
+    filteredSlots = interviewSlots.filter((interviewSlot) => {
+      return authState.user._id !== interviewSlot.userId._id;
+    });
+  }
+
+  const showInterviewSlots = (slots) => {
+    return slots.map((interviewSlot) => {
+      return interviewSlot.slots.map((slot) => {
+        return (
+          <div key={slot._id} className={interviewSlotStyles.interviewSlotCard}>
+            <h3>{interviewSlot.userId.fullName}</h3>
+            <h4>@{interviewSlot.userId.username}</h4>
+            <p>{formatDateTime(slot.slot)}</p>
+            <button
+              onClick={() => connectWithUser(slot._id)}
+              className='btnPrimary'
+            >
+              Connect
+            </button>
+          </div>
+        );
+      });
+    });
+  };
+
   return (
     <div>
       {showLoginAlert && <LoginAlert setShowLoginAlert={setShowLoginAlert} />}
       <h1 className='textCenter'>Interview Slots</h1>
       <div className={interviewSlotStyles.interviewSlots}>
-        {interviewSlots.map((interviewSlot) => {
-          return interviewSlot.slots.map((slot) => {
-            return (
-              <div
-                key={slot._id}
-                className={interviewSlotStyles.interviewSlotCard}
-              >
-                <h3>{interviewSlot.userId.fullName}</h3>
-                <h4>@{interviewSlot.userId.username}</h4>
-                <p>{formatDateTime(slot.slot)}</p>
-                <button
-                  onClick={() => connectWithUser(slot._id)}
-                  className='btnPrimary'
-                >
-                  Connect
-                </button>
-              </div>
-            );
-          });
-        })}
+        {filteredSlots
+          ? showInterviewSlots(filteredSlots)
+          : showInterviewSlots(interviewSlots)}
       </div>
     </div>
   );
@@ -71,7 +79,6 @@ export async function getServerSideProps() {
     },
   });
   const { data } = await response.json();
-  // console.log({ data });
   return { props: { interviewSlots: data } };
 }
 

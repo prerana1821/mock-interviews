@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { createContext, useContext, useReducer } from "react";
+import { createContext, useContext, useEffect, useReducer } from "react";
 import cookies from "js-cookie";
 
 export const AuthContext = createContext();
@@ -31,6 +31,12 @@ export const authReducer = (state, action) => {
   switch (action.type) {
     case "LOGIN_USER":
       return { ...state, user: action.payload };
+    case "LOAD_USER_DETAILS":
+      return {
+        ...state,
+        user: action.payload.userDetails,
+        token: action.payload.token,
+      };
     case "UPDATE_USER":
       return {
         ...state,
@@ -61,27 +67,36 @@ export const authReducer = (state, action) => {
 export const AuthProvider = ({ children, token, userId }) => {
   const router = useRouter();
 
-  // console.log(63, token);
-  // console.log(63, userId);
-
-  // if (token && userId) {
-  //   async () => {
-  //     const response = await fetch(`/api/userDetail/${userId}`, {
-  //       method: "GET",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         Authorization: token,
-  //       },
-  //     });
-  //     console.log(80, { response });
-  //   };
-  // }
+  console.log(63, token);
+  console.log(63, userId);
 
   const [authState, authDispatch] = useReducer(authReducer, {
     token: "",
     user: null,
     status: null,
   });
+
+  useEffect(() => {
+    (async () => {
+      if (token) {
+        const response = await fetch(`/api/userDetail/${userId}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: token,
+          },
+        });
+        const data = await response.json();
+        console.log({ data });
+        if (data.success) {
+          authDispatch({
+            type: "LOAD_USER_DETAILS",
+            payload: { userDetails: data.data, token },
+          });
+        }
+      }
+    })();
+  }, [token]);
 
   const signInUser = async ({ username, password, email }) => {
     const response = await fetch("/api/auth/signin", {

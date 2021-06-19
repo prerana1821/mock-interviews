@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer } from "react";
+import { createContext, useContext, useEffect, useReducer } from "react";
 
 export const InterviewSlotContext = createContext();
 
@@ -30,7 +30,7 @@ export const interviewSlotReducer = (state, action) => {
   }
 };
 
-export const InterviewSlotProvider = ({ children }) => {
+export const InterviewSlotProvider = ({ children, token }) => {
   const [interviewSlotState, interviewSlotDispatch] = useReducer(
     interviewSlotReducer,
     {
@@ -38,6 +38,26 @@ export const InterviewSlotProvider = ({ children }) => {
       userInterViewSlots: { slots: [] },
     }
   );
+
+  useEffect(() => {
+    (async () => {
+      if (token) {
+        const response = await fetch("/api/interviewSlot", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        const data = await response.json();
+        if (data.success) {
+          interviewSlotDispatch({
+            type: "LOAD_INTERVIEW_SLOTS",
+            payload: { interviewSlots: data.data },
+          });
+        }
+      }
+    })();
+  }, [token]);
 
   console.log({ interviewSlotState });
 

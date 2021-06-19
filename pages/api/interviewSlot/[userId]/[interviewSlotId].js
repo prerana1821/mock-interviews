@@ -35,11 +35,20 @@ async function handler(req, res) {
             });
           } else {
             interviewSlot.slots.id(interviewSlotId).partner = partner;
-            const updatedInterviewSlotFromDB = await interviewSlot.save();
-            console.log(updatedInterviewSlotFromDB.slots);
+            const updatedInterviewSlot = await interviewSlot.save();
+            const normalizedData = await updatedInterviewSlot
+              .populate({
+                path: "userId",
+                select: "username fullName",
+              })
+              .populate({
+                path: "slots.partner",
+                select: "username fullName",
+              })
+              .execPopulate();
             res.status(200).json({
               success: true,
-              data: updatedInterviewSlotFromDB,
+              data: normalizedData,
               message: "Successful",
             });
           }

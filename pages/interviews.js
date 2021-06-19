@@ -7,7 +7,7 @@ import { useAuth, useInterviewSlot } from "../context";
 const interviews = ({ interviewSlots }) => {
   const { authState } = useAuth();
   const [showLoginAlert, setShowLoginAlert] = useState(false);
-  const { interviewSlotDispatch } = useInterviewSlot();
+  const { interviewSlotState, interviewSlotDispatch } = useInterviewSlot();
 
   useEffect(() => {
     interviewSlotDispatch({
@@ -49,9 +49,11 @@ const interviews = ({ interviewSlots }) => {
 
   let filteredSlots;
   if (authState.token) {
-    filteredSlots = interviewSlots.filter((interviewSlot) => {
-      return authState.user._id !== interviewSlot.userId._id;
-    });
+    filteredSlots = interviewSlotState.interviewSlots.filter(
+      (interviewSlot) => {
+        return authState.user._id !== interviewSlot.userId._id;
+      }
+    );
   }
 
   const showInterviewSlots = (slots) => {
@@ -87,7 +89,7 @@ const interviews = ({ interviewSlots }) => {
       <div className={interviewSlotStyles.interviewSlots}>
         {filteredSlots
           ? showInterviewSlots(filteredSlots)
-          : showInterviewSlots(interviewSlots)}
+          : showInterviewSlots(interviewSlotState.interviewSlots)}
       </div>
     </div>
   );

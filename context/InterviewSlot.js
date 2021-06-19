@@ -62,7 +62,7 @@ export const InterviewSlotProvider = ({ children, token }) => {
 
   useEffect(() => {
     (async () => {
-      if (token) {
+      if (token && interviewSlotState.interviewSlots.length === 0) {
         const response = await fetch("/api/interviewSlot", {
           method: "GET",
           headers: {

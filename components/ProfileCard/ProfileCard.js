@@ -1,3 +1,11 @@
+export const formatedUrl = (url) => {
+  const formatedUrl = url
+    .replace(/^(?:https?:\/\/)?(?:www\.)?/i, "")
+    .split("/")[0];
+  console.log({ formatedUrl });
+  return formatedUrl;
+};
+
 export const ProfileCard = ({ userDetail }) => {
   console.log(2, { userDetail });
 
@@ -11,8 +19,19 @@ export const ProfileCard = ({ userDetail }) => {
       <p>Email: {userDetail?.email}</p>
       <p>
         Portfolio:{" "}
-        {userDetail?.portfolio ? userDetail.portfolio : "Your Portfolio Link"}
+        {userDetail?.portfolio ? (
+          <a
+            target='_blank'
+            className='blueTxt'
+            href={`${userDetail.portfolio}`}
+          >
+            {formatedUrl(userDetail.portfolio)}
+          </a>
+        ) : (
+          "Your Portfolio Link"
+        )}
       </p>
+
       <p>Interviews Done: {userDetail?.interviewDone}</p>
     </>
   );

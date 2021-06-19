@@ -15,42 +15,32 @@ async function handler(req, res) {
   switch (method) {
     case "POST":
       try {
-        const interviewSlots = await InterviewSlot.findOne({
-          userId: userId,
-        }).exec();
-        if (!interviewSlots) {
+        const interviewSlot = await InterviewSlot.findOne({
+          "slots._id": interviewSlotId,
+        });
+        if (!interviewSlot) {
           return res.status(400).json({
             success: true,
-            message: "User's scheduled interviews not found",
+            message: "Scheduled interview not found",
           });
         } else {
-          const interviewSlot = await InterviewSlot.findOne({
-            "slots._id": interviewSlotId,
+          interviewSlot.slots.id(interviewSlotId).partner = partner;
+          const updatedInterviewSlot = await interviewSlot.save();
+          const normalizedData = await updatedInterviewSlot
+            .populate({
+              path: "userId",
+              select: "username fullName",
+            })
+            .populate({
+              path: "slots.partner",
+              select: "username fullName",
+            })
+            .execPopulate();
+          res.status(200).json({
+            success: true,
+            data: normalizedData,
+            message: "Successful",
           });
-          if (!interviewSlot) {
-            return res.status(400).json({
-              success: true,
-              message: "Scheduled interview not found",
-            });
-          } else {
-            interviewSlot.slots.id(interviewSlotId).partner = partner;
-            const updatedInterviewSlot = await interviewSlot.save();
-            const normalizedData = await updatedInterviewSlot
-              .populate({
-                path: "userId",
-                select: "username fullName",
-              })
-              .populate({
-                path: "slots.partner",
-                select: "username fullName",
-              })
-              .execPopulate();
-            res.status(200).json({
-              success: true,
-              data: normalizedData,
-              message: "Successful",
-            });
-          }
         }
       } catch (error) {
         res.status(400).json({ success: false, message: "Error" });

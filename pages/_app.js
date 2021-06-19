@@ -16,8 +16,8 @@ function MyApp({ Component, pageProps, token, userId }) {
 
 MyApp.getInitialProps = async (appContext) => {
   const request = appContext.ctx.req;
-  let token = request?.cookies?.token;
-  let userId = request?.cookies?.userId;
+  const token = request?.cookies?.token;
+  const userId = request?.cookies?.userId;
   return { token, userId };
 };
 

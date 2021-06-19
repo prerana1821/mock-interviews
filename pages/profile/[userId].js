@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 import { useAuth, useInterviewSlot } from "../../context";
-import dbConnect from "../../middlewares/db.connect";
 import { EditProfile, ScheduledInterviewSlot } from "../../components";
 import { AddInterviewSlot } from "../../components";
 import { UserInterviewSlot } from "../../components";
@@ -21,10 +20,15 @@ const UserProfile = ({ slots }) => {
   );
 
   useEffect(() => {
-    if (slots) {
+    if (slots && typeof slots !== null) {
       interviewSlotDispatch({
         type: "LOAD_USER_INTERVIEW_SLOT",
         payload: { slots },
+      });
+    } else {
+      interviewSlotDispatch({
+        type: "SET_STATUS",
+        payload: { status: { error: "Couldn't load user interview slot!" } },
       });
     }
   }, [slots]);
@@ -46,7 +50,10 @@ const UserProfile = ({ slots }) => {
             <Image src='/images/edit.png' width='30px' height='30px' />
           </button>
           <ProfileCard userDetail={authState.user} />
-          <button onClick={() => logoutUser()} className='btnSecondary'>
+          <button
+            onClick={() => logoutUser(interviewSlotDispatch)}
+            className='btnSecondary'
+          >
             Logout
           </button>
         </div>
@@ -75,30 +82,33 @@ const UserProfile = ({ slots }) => {
 };
 
 export async function getServerSideProps(context) {
-  await dbConnect();
-
   const authToken = context.req.cookies.token;
 
-  let response = await fetch(
-    `http://localhost:3000/api/interviewSlot/${context.params.userId}`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: authToken,
-      },
+  let userInterviewDetails = null;
+  try {
+    let response = await fetch(
+      `http://localhost:3000/api/interviewSlot/${context.params.userId}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: authToken,
+        },
+      }
+    );
+    const data = await response.json();
+    console.log(97, data);
+    if (data.success) {
+      userInterviewDetails =
+        data?.data && JSON.parse(JSON.stringify(data?.data?.slots));
     }
-  );
-  const data = await response.json();
-  let userInterviewDetails;
-  if (data.success) {
-    userInterviewDetails =
-      data?.data && JSON.parse(JSON.stringify(data?.data?.slots));
+  } catch (error) {
+    console.log({ error });
   }
 
   return {
     props: {
-      slots: userInterviewDetails ? userInterviewDetails : [],
+      slots: userInterviewDetails,
     },
   };
 }

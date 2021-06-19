@@ -1,6 +1,5 @@
 import dbConnect from "../../../middlewares/db.connect";
 import UserCredential from "../../../models/UserCredential";
-import UserDetail from "../../../models/UserDetail";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
@@ -15,8 +14,6 @@ export default async function handler(req, res) {
   const { username, password, email } = req.body;
 
   await dbConnect();
-
-  console.log({ UserDetail });
 
   switch (method) {
     case "POST":

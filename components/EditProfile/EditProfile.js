@@ -15,34 +15,45 @@ export const EditProfile = ({ userDetail, setEditProfile }) => {
 
   const editUserDetails = async (e) => {
     e.preventDefault();
-    console.log({ userDetail });
-    console.log(details);
-    console.log(authState);
-    const response = await fetch(`/api/userDetail/${authState.user._id}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: authState.token,
-      },
-      body: JSON.stringify({
-        fullName: details.fullName,
-        portfolio: details.portfolio,
-        interviewDone: details.interviewDone,
-      }),
-    });
-
-    const data = await response.json();
-    console.log({ data });
-    if (data.success) {
+    try {
       authDispatch({
-        type: "UPDATE_USER",
+        type: "SET_STATUS",
+        payload: { status: { loading: "Updating you profile..." } },
+      });
+      const response = await fetch(`/api/userDetail/${authState.user._id}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: authState.token,
+        },
+        body: JSON.stringify({
+          fullName: details.fullName,
+          portfolio: details.portfolio,
+          interviewDone: details.interviewDone,
+        }),
+      });
+
+      const data = await response.json();
+      console.log({ data });
+      if (data.success) {
+        authDispatch({
+          type: "UPDATE_USER",
+          payload: {
+            portfolio: data.data.portfolio,
+            fullName: data.data.fullName,
+            interviewDone: data.data.interviewDone,
+          },
+        });
+        setEditProfile(false);
+      }
+    } catch (error) {
+      console.log({ error });
+      authDispatch({
+        type: "SET_STATUS",
         payload: {
-          portfolio: data.data.portfolio,
-          fullName: data.data.fullName,
-          interviewDone: data.data.interviewDone,
+          status: { error: "Couldn't update your profile! Try again later" },
         },
       });
-      setEditProfile(false);
     }
   };
 

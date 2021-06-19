@@ -41,7 +41,7 @@ async function handler(req, res) {
         if (!interviewSlots) {
           return res
             .status(400)
-            .json({ success: true, message: "Interview not scheduled" });
+            .json({ success: true, data: "Interview not scheduled" });
         }
         res
           .status(200)

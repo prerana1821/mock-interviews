@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import { createContext, useContext, useEffect, useReducer } from "react";
 import cookies from "js-cookie";
+import { useInterviewSlot } from "./InterviewSlot";
 
 export const AuthContext = createContext();
 
@@ -76,19 +77,31 @@ export const AuthProvider = ({ children, token, userId }) => {
   useEffect(() => {
     (async () => {
       if (token) {
-        const response = await fetch(`/api/userDetail/${userId}`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: token,
-          },
-        });
-        const data = await response.json();
-        console.log({ data });
-        if (data.success) {
+        try {
           authDispatch({
-            type: "LOAD_USER_DETAILS",
-            payload: { userDetails: data.data, token },
+            type: "SET_STATUS",
+            payload: { status: { loading: "Loading user profile..." } },
+          });
+          const response = await fetch(`/api/userDetail/${userId}`, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: token,
+            },
+          });
+          const data = await response.json();
+          console.log({ data });
+          if (data.success) {
+            authDispatch({
+              type: "LOAD_USER_DETAILS",
+              payload: { userDetails: data.data, token },
+            });
+          }
+        } catch (error) {
+          console.log({ error });
+          authDispatch({
+            type: "SET_STATUS",
+            payload: { status: { error: "Couldn't load user profile..." } },
           });
         }
       }
@@ -96,51 +109,74 @@ export const AuthProvider = ({ children, token, userId }) => {
   }, [token]);
 
   const signInUser = async ({ username, password, email }) => {
-    const response = await fetch("/api/auth/signin", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ username, password, email }),
-    });
-
-    const data = await response.json();
-    console.log({ data });
-    if (data.success) {
-      setUserAuth({
-        authDispatch,
-        user: { username, _id: data.user._id, email },
-        token: data.user.token,
+    try {
+      authDispatch({
+        type: "SET_STATUS",
+        payload: { status: { loading: "Signing in user..." } },
       });
-      router.push(`/profile/${data.user._id}`);
-      // router.push("/interviews");
+      const response = await fetch("/api/auth/signin", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, password, email }),
+      });
+
+      const data = await response.json();
+      console.log({ data });
+      if (data.success) {
+        setUserAuth({
+          authDispatch,
+          user: { username, _id: data.user._id, email },
+          token: data.user.token,
+        });
+        router.push(`/profile/${data.user._id}`);
+      }
+    } catch (error) {
+      console.log({ error });
+      authDispatch({
+        type: "SET_STATUS",
+        payload: { status: { error: "Couldn't sign in user..." } },
+      });
     }
   };
 
   const loginUser = async ({ username, password }) => {
-    const response = await fetch("/api/auth/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ username, password }),
-    });
-
-    const data = await response.json();
-    console.log({ data });
-    if (data.success) {
-      setUserAuth({
-        authDispatch,
-        user: data.data.user,
-        token: data.data.token,
+    try {
+      authDispatch({
+        type: "SET_STATUS",
+        payload: { status: { loading: "Logining user..." } },
       });
-      // router.push("/interviews");
-      router.push(`/profile/${data.data.user._id}`);
+      const response = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, password }),
+      });
+
+      const data = await response.json();
+      console.log({ data });
+      if (data.success) {
+        setUserAuth({
+          authDispatch,
+          user: data.data.user,
+          token: data.data.token,
+        });
+        router.push(`/profile/${data.data.user._id}`);
+      }
+    } catch (error) {
+      console.log({ error });
+      authDispatch({
+        type: "SET_STATUS",
+        payload: { status: { error: "Couldn't login user..." } },
+      });
     }
   };
 
-  const logoutUser = () => {
+  const logoutUser = (interviewSlotDispatch) => {
     authDispatch({ type: "LOGOUT" });
+    interviewSlotDispatch({ type: "REMOVE_USER_INTERVIEW_SLOTS" });
     localStorage?.removeItem("token");
     localStorage?.removeItem("user");
     cookies.remove("token");

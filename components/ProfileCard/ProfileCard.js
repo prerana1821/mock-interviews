@@ -2,13 +2,10 @@ export const formatedUrl = (url) => {
   const formatedUrl = url
     .replace(/^(?:https?:\/\/)?(?:www\.)?/i, "")
     .split("/")[0];
-  console.log({ formatedUrl });
   return formatedUrl;
 };
 
 export const ProfileCard = ({ userDetail }) => {
-  console.log(2, { userDetail });
-
   return (
     <>
       <h1>Profile</h1>

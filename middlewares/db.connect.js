@@ -1,7 +1,6 @@
-/* This is a database connection function*/
 import mongoose from "mongoose";
 
-const connection = {}; /* creating connection object*/
+const connection = {};
 
 async function dbConnect() {
   /* check if we have connection to our databse*/

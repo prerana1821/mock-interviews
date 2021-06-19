@@ -10,15 +10,30 @@ const interviews = ({ interviewSlots }) => {
   const { interviewSlotState, interviewSlotDispatch } = useInterviewSlot();
 
   useEffect(() => {
-    interviewSlotDispatch({
-      type: "LOAD_INTERVIEW_SLOTS",
-      payload: { interviewSlots },
-    });
+    if (typeof interviewSlots === "string") {
+      interviewSlotDispatch({
+        type: "SET_STATUS",
+        payload: {
+          status: { error: interviewSlots },
+        },
+      });
+    } else {
+      interviewSlotDispatch({
+        type: "LOAD_INTERVIEW_SLOTS",
+        payload: { interviewSlots },
+      });
+    }
   }, [interviewSlots]);
 
   const connectWithUser = async (interviewId) => {
     if (authState.token) {
       try {
+        interviewSlotDispatch({
+          type: "SET_STATUS",
+          payload: {
+            status: { loading: "Connectingg...!" },
+          },
+        });
         const response = await fetch(
           `http://localhost:3000/api/interviewSlot/${authState.user._id}/${interviewId}`,
           {
@@ -30,9 +45,8 @@ const interviews = ({ interviewSlots }) => {
             body: JSON.stringify({ partner: authState.user._id }),
           }
         );
-        console.log({ response });
         const data = await response.json();
-        console.log(data);
+        console.log({ data });
         if (data.success) {
           interviewSlotDispatch({
             type: "UPDATE_INTERVIEW_SLOTS",
@@ -40,7 +54,11 @@ const interviews = ({ interviewSlots }) => {
           });
         }
       } catch (error) {
-        console.log(error);
+        console.log({ error });
+        interviewSlotDispatch({
+          type: "SET_STATUS",
+          payload: { status: { error: "Couldn't connect! Try again later" } },
+        });
       }
     } else {
       setShowLoginAlert(true);
@@ -57,7 +75,6 @@ const interviews = ({ interviewSlots }) => {
   }
 
   const showInterviewSlots = (slots) => {
-    console.log({ slots });
     return slots.map((interviewSlot) => {
       return interviewSlot.slots.map((slot) => {
         return (
@@ -96,14 +113,24 @@ const interviews = ({ interviewSlots }) => {
 };
 
 export async function getServerSideProps() {
-  let response = await fetch(`http://localhost:3000/api/interviewSlot`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-  const { data } = await response.json();
-  return { props: { interviewSlots: data } };
+  let interviewSlots;
+  try {
+    let response = await fetch(`http://localhost:3000/api/interviewSlot`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await response.json();
+    if (data.success) {
+      interviewSlots = data.data;
+    }
+  } catch (error) {
+    console.log({ error });
+    interviewSlots = "Couldn't load interview slots! Try again later";
+  }
+
+  return { props: { interviewSlots } };
 }
 
 export default interviews;

@@ -8,24 +8,38 @@ export const UserInterviewSlot = ({ userDetail }) => {
   const { interviewSlotState, interviewSlotDispatch } = useInterviewSlot();
   const { authState } = useAuth();
 
-  console.log(interviewSlotState.userInterViewSlots.slots);
-
   const deleteInterviewSlot = async (slotId) => {
-    const response = await fetch(
-      `http://localhost:3000/api/interviewSlot/${authState.user._id}/${slotId}`,
-      {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: authState.token,
-        },
-      }
-    );
-    const data = await response.json();
-    if (data.success) {
+    try {
       interviewSlotDispatch({
-        type: "DELETE_USER_INTERVIEW_SLOT",
-        payload: { interviewSlotId: data.data },
+        type: "SET_STATUS",
+        payload: { status: { loading: "Deleting Interview Slot..." } },
+      });
+      const response = await fetch(
+        `http://localhost:3000/api/interviewSlot/${authState.user._id}/${slotId}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: authState.token,
+          },
+        }
+      );
+      const data = await response.json();
+      if (data.success) {
+        interviewSlotDispatch({
+          type: "DELETE_USER_INTERVIEW_SLOT",
+          payload: { interviewSlotId: data.data },
+        });
+      }
+    } catch (error) {
+      console.log({ error });
+      interviewSlotDispatch({
+        type: "SET_STATUS",
+        payload: {
+          status: {
+            loading: "Couldn't deleting interview slot! Try again later",
+          },
+        },
       });
     }
   };

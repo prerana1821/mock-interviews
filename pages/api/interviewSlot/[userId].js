@@ -8,7 +8,6 @@ export const addInterviewSlot = async (interviewSlot, dateAndTime, res) => {
   const newSlot = newUserInterviewSlot.slots.find(
     (slot) => new Date(slot.slot).getTime() === new Date(dateAndTime).getTime()
   );
-  console.log({ newSlot });
   return res.status(200).json({
     success: true,
     data: { slot: newSlot },
@@ -22,8 +21,6 @@ async function handler(req, res) {
     method,
   } = req;
   const { dateAndTime } = req.body;
-
-  console.log(dateAndTime);
 
   await dbConnect();
 
@@ -40,14 +37,14 @@ async function handler(req, res) {
           .exec();
         if (!interviewSlots) {
           return res
-            .status(400)
+            .status(200)
             .json({ success: true, data: "Interview not scheduled" });
         }
         res
           .status(200)
           .json({ success: true, data: interviewSlots, message: "Successful" });
       } catch (error) {
-        res.status(400).json({ success: false, message: "Error" });
+        res.status(400).json({ success: false, errorMessage: "Error" });
       }
       break;
     case "POST":
@@ -62,11 +59,14 @@ async function handler(req, res) {
           await addInterviewSlot(interviewSlots, dateAndTime, res);
         }
       } catch (error) {
-        res.status(400).json({ success: false, message: "Not working" });
+        res.status(400).json({
+          success: false,
+          errorMessage: "Couldn't add interview slot",
+        });
       }
       break;
     default:
-      res.status(400).json({ success: false, message: "Default" });
+      res.status(400).json({ success: false, errorMessage: "Default" });
       break;
   }
 }

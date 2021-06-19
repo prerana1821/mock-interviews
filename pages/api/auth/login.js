@@ -28,8 +28,6 @@ export default async function handler(req, res) {
             return res.status(200).json({
               data: {
                 user: user._doc,
-                // _id: user._doc._id,
-                // email: user._doc.email,
                 token,
               },
               success: true,
@@ -47,11 +45,13 @@ export default async function handler(req, res) {
           errorMessage: "User not found. Check your user credentials",
         });
       } catch (error) {
-        res.status(400).json({ success: false, message: "Error" });
+        res
+          .status(400)
+          .json({ success: false, errorMessage: "Error! Couldn't login User" });
       }
       break;
     default:
-      res.status(400).json({ success: false, message: "Invalid" });
+      res.status(400).json({ success: false, errorMessage: "Invalid" });
       break;
   }
 }

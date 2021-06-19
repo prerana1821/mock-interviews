@@ -38,11 +38,16 @@ export default async function handler(req, res) {
             .json({ success: false, errorMessage: "User Already Exists" });
         }
       } catch (error) {
-        res.status(400).json({ success: false, message: "Error" });
+        res
+          .status(400)
+          .json({
+            success: false,
+            errorMessage: "Error! Couldn't Sign In User",
+          });
       }
       break;
     default:
-      res.status(400).json({ success: false, message: "Invalid" });
+      res.status(400).json({ success: false, errorMessage: "Invalid" });
       break;
   }
 }

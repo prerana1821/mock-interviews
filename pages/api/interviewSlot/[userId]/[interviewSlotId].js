@@ -8,7 +8,6 @@ async function handler(req, res) {
     method,
   } = req;
   const { partner } = req.body;
-  console.log({ partner });
 
   await dbConnect();
 
@@ -19,7 +18,7 @@ async function handler(req, res) {
           "slots._id": interviewSlotId,
         });
         if (!interviewSlot) {
-          return res.status(400).json({
+          return res.status(200).json({
             success: true,
             message: "Scheduled interview not found",
           });
@@ -43,7 +42,7 @@ async function handler(req, res) {
           });
         }
       } catch (error) {
-        res.status(400).json({ success: false, message: "Error" });
+        res.status(400).json({ success: false, errorMessage: "Error" });
       }
       break;
     case "DELETE":
@@ -52,7 +51,7 @@ async function handler(req, res) {
           userId: userId,
         }).exec();
         if (!interviewSlots) {
-          return res.status(400).json({
+          return res.status(200).json({
             success: true,
             message: "User's scheduled interviews not found",
           });
@@ -61,7 +60,7 @@ async function handler(req, res) {
             "slots._id": interviewSlotId,
           });
           if (!interviewSlot) {
-            return res.status(400).json({
+            return res.status(200).json({
               success: true,
               message: "Scheduled interview not found",
             });
@@ -75,11 +74,11 @@ async function handler(req, res) {
           });
         }
       } catch (error) {
-        res.status(400).json({ success: false, message: "Error" });
+        res.status(400).json({ success: false, errorMessage: "Error" });
       }
       break;
     default:
-      res.status(400).json({ success: false, message: "Default" });
+      res.status(400).json({ success: false, errorMessage: "Invalid" });
       break;
   }
 }

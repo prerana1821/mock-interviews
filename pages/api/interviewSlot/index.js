@@ -33,20 +33,7 @@ export default async function handler(req, res) {
       }
       break;
     default:
-      res.status(400).json({ success: false, message: "Invalid" });
+      res.status(400).json({ success: false, errorMessage: "Invalid" });
       break;
   }
 }
-
-// const filleredSlots = interviewSlots.map((item) => {
-//   console.log(item.slots);
-//   return {
-//     _id: item._id,
-//     userId: item.userId,
-//     slots: item.slots.map((val) => {
-//       if ("partner" in val) {
-//         return val;
-//       }
-//     }),
-//   };
-// });

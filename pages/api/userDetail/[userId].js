@@ -19,13 +19,13 @@ async function handler(req, res) {
         if (!userDetails) {
           return res
             .status(400)
-            .json({ success: false, message: "User Details not found" });
+            .json({ success: false, errorMessage: "User Details not found" });
         }
         res
           .status(200)
           .json({ success: true, data: userDetails, message: "Successful" });
       } catch (error) {
-        res.status(400).json({ success: false, message: "Error" });
+        res.status(400).json({ success: false, errorMessage: "Error" });
       }
       break;
     case "POST":
@@ -41,21 +41,18 @@ async function handler(req, res) {
           portfolio,
           interviewDone,
         });
-        console.log({ updatedUserDetails });
         const userDetailsFromDB = await userDetails.save();
-        console.log({ userDetailsFromDB });
         res.status(200).json({
           success: true,
           data: userDetailsFromDB,
           message: "Successful",
         });
       } catch (error) {
-        res.status(400).json({ success: false, message: "Error" });
+        res.status(400).json({ success: false, errorMessage: "Error" });
       }
       break;
-
     default:
-      res.status(400).json({ success: false, message: "Default" });
+      res.status(400).json({ success: false, errorMessage: "Invalid" });
       break;
   }
 }

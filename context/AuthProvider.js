@@ -67,9 +67,6 @@ export const authReducer = (state, action) => {
 export const AuthProvider = ({ children, token, userId }) => {
   const router = useRouter();
 
-  console.log(63, token);
-  console.log(63, userId);
-
   const [authState, authDispatch] = useReducer(authReducer, {
     token: "",
     user: null,

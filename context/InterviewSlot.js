@@ -9,6 +9,17 @@ export const interviewSlotReducer = (state, action) => {
         ...state,
         interviewSlots: action.payload.interviewSlots,
       };
+    case "UPDATE_INTERVIEW_SLOTS":
+      console.log("action", action.payload);
+      return {
+        ...state,
+        interviewSlots: state.interviewSlots.map((interviewSlot) => {
+          return interviewSlot.userId._id ===
+            action.payload.interviewSlot.userId._id
+            ? action.payload.interviewSlot
+            : interviewSlot;
+        }),
+      };
     case "LOAD_USER_INTERVIEW_SLOT":
       return {
         ...state,
@@ -22,6 +33,16 @@ export const interviewSlotReducer = (state, action) => {
         userInterViewSlots: {
           ...state.userInterViewSlots,
           slots: state.userInterViewSlots.slots.concat(action.payload.slot),
+        },
+      };
+    case "DELETE_USER_INTERVIEW_SLOT":
+      return {
+        ...state,
+        userInterViewSlots: {
+          ...state.userInterViewSlots,
+          slots: state.userInterViewSlots.slots.filter((userInterViewSlot) => {
+            return userInterViewSlot._id !== action.payload.interviewSlotId;
+          }),
         },
       };
     default:

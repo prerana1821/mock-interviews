@@ -1,12 +1,34 @@
 import cn from "classnames";
-import { useInterviewSlot } from "../../context";
+import { useAuth, useInterviewSlot } from "../../context";
 import { formatDateTime } from "../../utils/dateFormatter";
 import userInterviewSlot from "./UserInterviewSlot.module.css";
+import Image from "next/image";
 
 export const UserInterviewSlot = ({ userDetail }) => {
-  const { interviewSlotState } = useInterviewSlot();
+  const { interviewSlotState, interviewSlotDispatch } = useInterviewSlot();
+  const { authState } = useAuth();
 
   console.log(interviewSlotState.userInterViewSlots.slots);
+
+  const deleteInterviewSlot = async (slotId) => {
+    const response = await fetch(
+      `http://localhost:3000/api/interviewSlot/${authState.user._id}/${slotId}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: authState.token,
+        },
+      }
+    );
+    const data = await response.json();
+    if (data.success) {
+      interviewSlotDispatch({
+        type: "DELETE_USER_INTERVIEW_SLOT",
+        payload: { interviewSlotId: data.data },
+      });
+    }
+  };
 
   return (
     <>
@@ -21,6 +43,12 @@ export const UserInterviewSlot = ({ userDetail }) => {
                 [userInterviewSlot.redInterviewSlot]: !item.partner,
               })}
             >
+              <button
+                className='btnIcon'
+                onClick={() => deleteInterviewSlot(item._id)}
+              >
+                <Image src='/images/delete.svg' width='30px' height='30px' />
+              </button>
               <h3>@{userDetail?.username}</h3>
               <p>{formatDateTime(item.slot)}</p>
               {item.partner && (

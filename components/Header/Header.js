@@ -5,8 +5,6 @@ import { useAuth } from "../../context";
 export const Header = () => {
   const { authState } = useAuth();
 
-  console.log("Header", { authState });
-
   return (
     <nav className={headerStyles.nav}>
       <div>

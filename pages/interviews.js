@@ -31,6 +31,14 @@ const interviews = ({ interviewSlots }) => {
           }
         );
         console.log({ response });
+        const data = await response.json();
+        console.log(data);
+        if (data.success) {
+          interviewSlotDispatch({
+            type: "UPDATE_INTERVIEW_SLOTS",
+            payload: { interviewSlot: data.data },
+          });
+        }
       } catch (error) {
         console.log(error);
       }

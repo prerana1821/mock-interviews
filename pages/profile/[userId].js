@@ -15,8 +15,6 @@ const UserProfile = ({ slots }) => {
   const { authState, logoutUser } = useAuth();
   const { interviewSlotState, interviewSlotDispatch } = useInterviewSlot();
 
-  console.log("19", { slots });
-
   const scheduledInterviews = scheduledSlots(
     interviewSlotState.interviewSlots,
     authState.user?._id

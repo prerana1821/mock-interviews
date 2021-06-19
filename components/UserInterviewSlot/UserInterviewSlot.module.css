@@ -12,6 +12,7 @@
   color: green;
   background-color: #d0ecc7;
   width: max-content;
+  display: flex;
   padding: 2rem 4rem;
   align-items: flex-start;
   border-radius: 1rem;
@@ -23,6 +24,7 @@
   color: #ff2b2b;
   background-color: #fbcfe8;
   width: max-content;
+  display: flex;
   padding: 2rem 4rem;
   align-items: flex-start;
   border-radius: 1rem;

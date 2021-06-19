@@ -21,7 +21,6 @@ export const AddInterviewSlot = () => {
           dateAndTime,
         }),
       });
-
       const data = await response.json();
       console.log({ data });
       console.log(data.data.slot);

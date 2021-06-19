@@ -15,7 +15,6 @@ async function handler(req, res) {
   switch (method) {
     case "POST":
       try {
-        console.log("Hello");
         const interviewSlots = await InterviewSlot.findOne({
           userId: userId,
         }).exec();

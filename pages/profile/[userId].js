@@ -55,7 +55,7 @@ const UserProfile = ({ slots }) => {
         </div>
       </div>
       <div>
-        {slots.length === 0 ? (
+        {interviewSlotState.userInterViewSlots.slots.length === 0 ? (
           <h1 className='textCenter'>You haven't added any slots yet!</h1>
         ) : (
           <UserInterviewSlot userDetail={authState.user} />
@@ -92,7 +92,8 @@ export async function getServerSideProps(context) {
   const data = await response.json();
   let userInterviewDetails;
   if (data.success) {
-    userInterviewDetails = JSON.parse(JSON.stringify(data.data.slots));
+    userInterviewDetails =
+      data?.data && JSON.parse(JSON.stringify(data?.data?.slots));
   }
 
   return {

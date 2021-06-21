@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-// import { useAuth, useInterviewSlot } from "../../context";
+import { useAuth, useInterviewSlot } from "../../context";
 import styles from "./Toast.module.css";
 
 export const Toast = ({
@@ -11,8 +11,8 @@ export const Toast = ({
   interviewSlotSuccess,
 }) => {
   // const [toastVisibility, setToastVisibility] = useState(true);
-  // const { authDispatch } = useAuth();
-  // const { interviewSlotDispatch } = useInterviewSlot();
+  const { authDispatch } = useAuth();
+  const { interviewSlotDispatch } = useInterviewSlot();
 
   // console.log(11, { authStateLoading });
 
@@ -32,6 +32,8 @@ export const Toast = ({
     let timerid = setTimeout(() => {
       toastRef.current.style.display = "none";
     }, 2000);
+    authDispatch({ type: "SET_STATUS", payload: { status: null } });
+    interviewSlotDispatch({ type: "SET_STATUS", payload: { status: null } });
     return () => {
       clearTimeout(timerid);
     };

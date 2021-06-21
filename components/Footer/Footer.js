@@ -11,25 +11,22 @@ export const Footer = () => {
 
       <ul className={footerStyles.footerList}>
         <li>
-          <a className='links' href='mailto: prerananw1@gmail.com'>
+          <a className='links' href='https://www.instagram.com/neogcamp'>
             <Image src='/images/instagram.svg' width='35px' height='35px' />
           </a>
         </li>
         <li>
-          <a className='links' href='https://github.com/prerana1821'>
+          <a className='links' href='https://github.com/neogcamp/'>
             <Image src='/images/github.svg' width='35px' height='35px' />
           </a>
         </li>
         <li>
-          <a
-            className='links'
-            href='https://www.linkedin.com/in/prerana-nawar/'
-          >
+          <a className='links' href='https://bit.ly/tanaydiscord'>
             <Image src='/images/discord.svg' width='42px' height='42px' />
           </a>
         </li>
         <li>
-          <a className='links' href='https://twitter.com/precodes18'>
+          <a className='links' href='https://twitter.com/neogcamp'>
             <Image src='/images/twitter.svg' width='35px' height='35px' />
           </a>
         </li>

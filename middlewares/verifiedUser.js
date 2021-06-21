@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const jwtSecret = "gfkjcgbkjsbjfgkhbjcabb";
+const jwtSecret = process.env.jwtSecret;
 
 const verifiedUser = (handler) => {
   return async (req, res) => {

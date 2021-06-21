@@ -26,3 +26,15 @@
   border-radius: 1rem;
   box-shadow: var(--box-shadow);
 }
+@media only screen and (max-width: 780px) {
+  .profile {
+    flex-direction: column;
+    gap: 3rem;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .profileCard {
+    padding: 2rem;
+  }
+}

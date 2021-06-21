@@ -3,6 +3,7 @@ import { useAuth } from "../../context";
 import loginStyles from "../../styles/Auth.module.css";
 import { ShowPassword } from "../../components";
 import Link from "next/link";
+import Image from "next/image";
 
 const SignIn = () => {
   const [userCredentials, setUserCredentials] = useState({
@@ -11,12 +12,11 @@ const SignIn = () => {
     message: "",
     showPassword: false,
   });
-  const { loginUser } = useAuth();
+  const { authState, loginUser } = useAuth();
 
   const signInUserWithCredentials = async (e) => {
     e.preventDefault();
     if (userCredentials.username && userCredentials.password) {
-      console.log({ userCredentials });
       loginUser({
         username: userCredentials.username,
         password: userCredentials.password,
@@ -39,6 +39,11 @@ const SignIn = () => {
     <div className={loginStyles.login}>
       <form onSubmit={signInUserWithCredentials} className={loginStyles.form}>
         <h1>Login</h1>
+        {authState.status?.loading && (
+          <div className='loading'>
+            <Image src='/images/loading.svg' width='200px' height='200px' />
+          </div>
+        )}
         <div className={loginStyles.inputBox}>
           <input
             type='text'

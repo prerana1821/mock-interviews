@@ -3,6 +3,7 @@ import { formatDateTime } from "../utils/dateFormatter";
 import interviewSlotStyles from "../styles/Interviews.module.css";
 import { LoginAlert } from "../components";
 import { useAuth, useInterviewSlot } from "../context";
+import Image from "next/image";
 
 const interviews = ({ interviewSlots }) => {
   const { authState } = useAuth();
@@ -10,18 +11,28 @@ const interviews = ({ interviewSlots }) => {
   const { interviewSlotState, interviewSlotDispatch } = useInterviewSlot();
 
   useEffect(() => {
-    if (typeof interviewSlots === "string") {
+    if (interviewSlots?.type === "error") {
       interviewSlotDispatch({
         type: "SET_STATUS",
         payload: {
-          status: { error: interviewSlots },
+          status: { error: interviewSlots.message },
         },
       });
     } else {
-      interviewSlotDispatch({
-        type: "LOAD_INTERVIEW_SLOTS",
-        payload: { interviewSlots },
-      });
+      if (
+        Object.entries(interviewSlots).length === 0 ||
+        interviewSlots.length === 0
+      ) {
+        interviewSlotDispatch({
+          type: "SET_STATUS",
+          payload: { status: { loading: "Loading interview slots" } },
+        });
+      } else {
+        interviewSlotDispatch({
+          type: "LOAD_INTERVIEW_SLOTS",
+          payload: { interviewSlots },
+        });
+      }
     }
   }, [interviewSlots]);
 
@@ -103,6 +114,11 @@ const interviews = ({ interviewSlots }) => {
     <div>
       {showLoginAlert && <LoginAlert setShowLoginAlert={setShowLoginAlert} />}
       <h1 className='textCenter'>Interview Slots</h1>
+      {interviewSlotState.status?.loading && (
+        <div className='loading'>
+          <Image src='/images/loading.svg' width='200px' height='200px' />
+        </div>
+      )}
       <div className={interviewSlotStyles.interviewSlots}>
         {filteredSlots
           ? showInterviewSlots(filteredSlots)
@@ -127,7 +143,10 @@ export async function getServerSideProps() {
     }
   } catch (error) {
     console.log({ error });
-    interviewSlots = "Couldn't load interview slots! Try again later";
+    interviewSlots = {
+      type: "error",
+      message: "Couldn't load interview slots! Try again later",
+    };
   }
 
   return { props: { interviewSlots } };

@@ -4,6 +4,7 @@
   gap: 2rem;
   align-items: center;
   margin: 2rem;
+  justify-content: center;
 }
 
 .interviewSlotCard {

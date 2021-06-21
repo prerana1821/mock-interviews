@@ -17,3 +17,10 @@
 .navLinks li {
   list-style: none;
 }
+
+@media only screen and (max-width: 780px) {
+  .navLinks {
+    gap: 1rem;
+    font-size: 1rem;
+  }
+}

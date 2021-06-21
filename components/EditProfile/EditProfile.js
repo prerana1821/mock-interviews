@@ -18,7 +18,7 @@ export const EditProfile = ({ userDetail, setEditProfile }) => {
     try {
       authDispatch({
         type: "SET_STATUS",
-        payload: { status: { loading: "Updating you profile..." } },
+        payload: { status: { loading: "Updating your profile..." } },
       });
       const response = await fetch(`/api/userDetail/${authState.user._id}`, {
         method: "POST",

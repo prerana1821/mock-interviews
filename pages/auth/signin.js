@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { useAuth } from "../../context";
 import signInStyles from "../../styles/Auth.module.css";
-import Link from "next/link";
 import { ShowPassword } from "../../components";
+import Link from "next/link";
+import Image from "next/image";
 
 const SignIn = () => {
   const [userCredentials, setUserCredentials] = useState({
@@ -15,12 +16,11 @@ const SignIn = () => {
     showConfirmPassword: false,
   });
 
-  const { signInUser } = useAuth();
+  const { authState, signInUser } = useAuth();
 
   const signInUserWithCredentials = async (e) => {
     e.preventDefault();
 
-    console.log({ userCredentials });
     if (
       userCredentials.email &&
       userCredentials.username &&
@@ -70,6 +70,11 @@ const SignIn = () => {
     <div className={signInStyles.login}>
       <form onSubmit={signInUserWithCredentials} className={signInStyles.form}>
         <h1>Sign In</h1>
+        {authState.status?.loading && (
+          <div className='loading'>
+            <Image src='/images/loading.svg' width='200px' height='200px' />
+          </div>
+        )}
         <div className={signInStyles.inputBox}>
           <input
             type='email'

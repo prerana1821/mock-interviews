@@ -10,7 +10,6 @@ export const interviewSlotReducer = (state, action) => {
         interviewSlots: action.payload.interviewSlots,
       };
     case "UPDATE_INTERVIEW_SLOTS":
-      console.log("action", action.payload);
       return {
         ...state,
         interviewSlots: state.interviewSlots.map((interviewSlot) => {
@@ -94,6 +93,10 @@ export const InterviewSlotProvider = ({ children, token }) => {
               payload: { interviewSlots: data.data },
             });
           }
+          interviewSlotDispatch({
+            type: "SET_STATUS",
+            payload: { status: { success: "Successfull" } },
+          });
         } catch (error) {
           console.log({ error });
           interviewSlotDispatch({
@@ -109,7 +112,7 @@ export const InterviewSlotProvider = ({ children, token }) => {
     })();
   }, [token]);
 
-  console.log({ interviewSlotState });
+  // console.log({ interviewSlotState });
 
   return (
     <InterviewSlotContext.Provider

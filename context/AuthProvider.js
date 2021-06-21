@@ -28,7 +28,6 @@ export const setUserAuth = ({ authDispatch, user, token }) => {
 };
 
 export const authReducer = (state, action) => {
-  console.log(state, action);
   switch (action.type) {
     case "LOGIN_USER":
       return { ...state, user: action.payload };
@@ -97,6 +96,10 @@ export const AuthProvider = ({ children, token, userId }) => {
               payload: { userDetails: data.data, token },
             });
           }
+          authDispatch({
+            type: "SET_STATUS",
+            payload: { status: { success: "Successfull" } },
+          });
         } catch (error) {
           console.log({ error });
           authDispatch({

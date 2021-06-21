@@ -31,3 +31,9 @@
   flex-direction: column;
   box-shadow: var(--box-shadow);
 }
+
+@media only screen and (max-width: 780px) {
+  .interviewSlots {
+    margin: 2rem 2rem;
+  }
+}

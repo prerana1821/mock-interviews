@@ -83,3 +83,16 @@ li {
   top: 1.3rem;
   right: 0.3rem;
 }
+
+.loading {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  margin: auto;
+  display: flex;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+}

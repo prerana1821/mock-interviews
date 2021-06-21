@@ -8,6 +8,7 @@ import { ProfileCard } from "../../components";
 import PrivateRoute from "../../components/PrivateRoute/PrivateRoute";
 import profileStyles from "../../styles/Profile.module.css";
 import { scheduledSlots } from "../../utils/getScheduledInterviews";
+// import { Toast } from "../../components";
 
 const UserProfile = ({ slots }) => {
   const [editProfile, setEditProfile] = useState(false);
@@ -68,6 +69,14 @@ const UserProfile = ({ slots }) => {
           <UserInterviewSlot userDetail={authState.user} />
         )}
       </div>
+      {/* <Toast
+        authStateLoading={authState.status?.loading}
+        authStateError={authState.status?.error}
+        authStateSuccess={authState.status?.success}
+        interviewSlotLoading={interviewSlotState.status?.loading}
+        interviewSlotError={interviewSlotState.status?.error}
+        interviewSlotSuccess={interviewSlotState.status?.success}
+      /> */}
       <div>
         {scheduledInterviews.length === 0 ? (
           <h1 className='textCenter'>
@@ -97,7 +106,6 @@ export async function getServerSideProps(context) {
       }
     );
     const data = await response.json();
-    console.log(97, data);
     if (data.success) {
       userInterviewDetails =
         data?.data && JSON.parse(JSON.stringify(data?.data?.slots));

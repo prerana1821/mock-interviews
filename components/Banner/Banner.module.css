@@ -10,3 +10,16 @@
   font-weight: 700;
   width: 600px;
 }
+
+@media only screen and (max-width: 780px) {
+  .banner {
+    flex-direction: column;
+  }
+
+  .title {
+    font-size: 3rem;
+    font-weight: 700;
+    width: 335px;
+    text-align: center;
+  }
+}

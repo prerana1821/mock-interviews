@@ -1,7 +1,6 @@
 import { useRouter } from "next/router";
 import { createContext, useContext, useEffect, useReducer } from "react";
 import cookies from "js-cookie";
-import { useInterviewSlot } from "./InterviewSlot";
 
 export const AuthContext = createContext();
 
@@ -75,11 +74,13 @@ export const AuthProvider = ({ children, token, userId }) => {
 
   useEffect(() => {
     (async () => {
-      if (token) {
+      if (token && userId !== null) {
         try {
           authDispatch({
             type: "SET_STATUS",
-            payload: { status: { loading: "Loading user profile..." } },
+            payload: {
+              status: { loading: { userType: "Loading user profile..." } },
+            },
           });
           const response = await fetch(`/api/userDetail/${userId}`, {
             method: "GET",
@@ -96,10 +97,6 @@ export const AuthProvider = ({ children, token, userId }) => {
               payload: { userDetails: data.data, token },
             });
           }
-          authDispatch({
-            type: "SET_STATUS",
-            payload: { status: { success: "Successfull" } },
-          });
         } catch (error) {
           console.log({ error });
           authDispatch({
@@ -115,7 +112,7 @@ export const AuthProvider = ({ children, token, userId }) => {
     try {
       authDispatch({
         type: "SET_STATUS",
-        payload: { status: { loading: "Signing in user..." } },
+        payload: { status: { loading: { userType: "Signing in user..." } } },
       });
       const response = await fetch("/api/auth/signin", {
         method: "POST",
@@ -148,7 +145,7 @@ export const AuthProvider = ({ children, token, userId }) => {
     try {
       authDispatch({
         type: "SET_STATUS",
-        payload: { status: { loading: "Logining user..." } },
+        payload: { status: { loading: { userType: "Logining user..." } } },
       });
       const response = await fetch("/api/auth/login", {
         method: "POST",

@@ -15,10 +15,10 @@ export const Layout = ({ children }) => {
       <Header />
       <main className='mainLayout'>{children}</main>
       <Toast
-        authStateLoading={authState.status?.loading}
+        authStateLoading={authState.status?.loading?.userDetailType}
         authStateError={authState.status?.error}
         authStateSuccess={authState.status?.success}
-        interviewSlotLoading={interviewSlotState.status?.loading}
+        interviewSlotLoading={interviewSlotState.status?.loading?.actionType}
         interviewSlotError={interviewSlotState.status?.error}
         interviewSlotSuccess={interviewSlotState.status?.success}
       />

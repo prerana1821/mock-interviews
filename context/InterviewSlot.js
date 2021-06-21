@@ -78,7 +78,11 @@ export const InterviewSlotProvider = ({ children, token }) => {
         try {
           interviewSlotDispatch({
             type: "SET_STATUS",
-            payload: { status: { loading: "loading interview slots..." } },
+            payload: {
+              status: {
+                loading: { loadingType: "loading interview slots..." },
+              },
+            },
           });
           const response = await fetch("/api/interviewSlot", {
             method: "GET",
@@ -93,10 +97,12 @@ export const InterviewSlotProvider = ({ children, token }) => {
               payload: { interviewSlots: data.data },
             });
           }
-          interviewSlotDispatch({
-            type: "SET_STATUS",
-            payload: { status: { success: "Successfull" } },
-          });
+          // interviewSlotDispatch({
+          //   type: "SET_STATUS",
+          //   payload: {
+          //     status: { success: "Successfull", loading: "loading..." },
+          //   },
+          // });
         } catch (error) {
           console.log({ error });
           interviewSlotDispatch({

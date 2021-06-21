@@ -13,7 +13,7 @@ export const AddInterviewSlot = () => {
       interviewSlotDispatch({
         type: "SET_STATUS",
         payload: {
-          status: { loading: "Adding interview slot..." },
+          status: { loading: { actionType: "Adding interview slot..." } },
         },
       });
       const response = await fetch(`/api/interviewSlot/${authState.user._id}`, {
@@ -34,6 +34,12 @@ export const AddInterviewSlot = () => {
         });
         setDateAndTime("");
       }
+      // interviewSlotDispatch({
+      //   type: "SET_STATUS",
+      //   payload: {
+      //     status: { success: "Succesfully added your slot" },
+      //   },
+      // });
     } catch (error) {
       console.log({ error });
       interviewSlotDispatch({

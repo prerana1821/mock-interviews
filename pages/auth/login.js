@@ -5,7 +5,7 @@ import { ShowPassword } from "../../components";
 import Link from "next/link";
 import Image from "next/image";
 
-const SignIn = () => {
+const Login = () => {
   const [userCredentials, setUserCredentials] = useState({
     username: "",
     password: "",
@@ -39,7 +39,7 @@ const SignIn = () => {
     <div className={loginStyles.login}>
       <form onSubmit={signInUserWithCredentials} className={loginStyles.form}>
         <h1>Login</h1>
-        {authState.status?.loading && (
+        {authState.status?.loading?.userType && (
           <div className='loading'>
             <Image src='/images/loading.svg' width='200px' height='200px' />
           </div>
@@ -97,4 +97,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default Login;

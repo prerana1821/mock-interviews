@@ -5,7 +5,7 @@ import { LoginAlert } from "../components";
 import { useAuth, useInterviewSlot } from "../context";
 import Image from "next/image";
 
-const interviews = ({ interviewSlots }) => {
+const Interviews = ({ interviewSlots }) => {
   const { authState } = useAuth();
   const [showLoginAlert, setShowLoginAlert] = useState(false);
   const { interviewSlotState, interviewSlotDispatch } = useInterviewSlot();
@@ -25,7 +25,9 @@ const interviews = ({ interviewSlots }) => {
       ) {
         interviewSlotDispatch({
           type: "SET_STATUS",
-          payload: { status: { loading: "Loading interview slots" } },
+          payload: {
+            status: { loading: { loadingType: "Loading interview slots" } },
+          },
         });
       } else {
         interviewSlotDispatch({
@@ -42,7 +44,9 @@ const interviews = ({ interviewSlots }) => {
         interviewSlotDispatch({
           type: "SET_STATUS",
           payload: {
-            status: { loading: "Connectingg...!" },
+            status: {
+              loading: { actionType: "Scheduling the interview slot...!" },
+            },
           },
         });
         const response = await fetch(
@@ -63,6 +67,12 @@ const interviews = ({ interviewSlots }) => {
             type: "UPDATE_INTERVIEW_SLOTS",
             payload: { interviewSlot: data.data },
           });
+          // interviewSlotDispatch({
+          //   type: "SET_STATUS",
+          //   payload: {
+          //     status: { success: "Connected...!" },
+          //   },
+          // });
         }
       } catch (error) {
         console.log({ error });
@@ -86,35 +96,40 @@ const interviews = ({ interviewSlots }) => {
   }
 
   const showInterviewSlots = (slots) => {
-    return slots.map((interviewSlot) => {
-      return interviewSlot.slots.map((slot) => {
-        return (
-          !slot.partner && (
-            <div
-              key={slot._id}
-              className={interviewSlotStyles.interviewSlotCard}
-            >
-              <h3>{interviewSlot.userId.fullName}</h3>
-              <h4>@{interviewSlot.userId.username}</h4>
-              <p>{formatDateTime(slot.slot)}</p>
-              <button
-                onClick={() => connectWithUser(slot._id)}
-                className='btnPrimary'
+    console.log("len", { slots });
+    return slots.length === 0 ? (
+      <div>We don't have any scheduled interview slots</div>
+    ) : (
+      slots.map((interviewSlot) => {
+        return interviewSlot.slots.map((slot) => {
+          return (
+            !slot.partner && (
+              <div
+                key={slot._id}
+                className={interviewSlotStyles.interviewSlotCard}
               >
-                Connect
-              </button>
-            </div>
-          )
-        );
-      });
-    });
+                <h3>{interviewSlot.userId.fullName}</h3>
+                <h4>@{interviewSlot.userId.username}</h4>
+                <p>{formatDateTime(slot.slot)}</p>
+                <button
+                  onClick={() => connectWithUser(slot._id)}
+                  className='btnPrimary'
+                >
+                  Connect
+                </button>
+              </div>
+            )
+          );
+        });
+      })
+    );
   };
 
   return (
     <div>
       {showLoginAlert && <LoginAlert setShowLoginAlert={setShowLoginAlert} />}
       <h1 className='textCenter'>Interview Slots</h1>
-      {interviewSlotState.status?.loading && (
+      {interviewSlotState.status?.loading?.loadingType && (
         <div className='loading'>
           <Image src='/images/loading.svg' width='200px' height='200px' />
         </div>
@@ -152,4 +167,4 @@ export async function getServerSideProps() {
   return { props: { interviewSlots } };
 }
 
-export default interviews;
+export default Interviews;

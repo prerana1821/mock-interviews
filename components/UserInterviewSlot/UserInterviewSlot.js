@@ -12,7 +12,9 @@ export const UserInterviewSlot = ({ userDetail }) => {
     try {
       interviewSlotDispatch({
         type: "SET_STATUS",
-        payload: { status: { loading: "Deleting Interview Slot..." } },
+        payload: {
+          status: { loading: { actionType: "Deleting Interview Slot..." } },
+        },
       });
       const response = await fetch(
         `http://localhost:3000/api/interviewSlot/${authState.user._id}/${slotId}`,
@@ -37,7 +39,7 @@ export const UserInterviewSlot = ({ userDetail }) => {
         type: "SET_STATUS",
         payload: {
           status: {
-            loading: "Couldn't deleting interview slot! Try again later",
+            error: "Couldn't deleting interview slot! Try again later",
           },
         },
       });

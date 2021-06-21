@@ -70,7 +70,7 @@ const SignIn = () => {
     <div className={signInStyles.login}>
       <form onSubmit={signInUserWithCredentials} className={signInStyles.form}>
         <h1>Sign In</h1>
-        {authState.status?.loading && (
+        {authState.status?.loading?.userType && (
           <div className='loading'>
             <Image src='/images/loading.svg' width='200px' height='200px' />
           </div>

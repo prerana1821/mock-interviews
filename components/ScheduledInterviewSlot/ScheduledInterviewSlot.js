@@ -20,7 +20,7 @@ export const ScheduledInterviewSlot = () => {
             return (
               <div className={styles.greenInterviewSlot} key={interview._id}>
                 <h3>@{scheduledInterview.userId.username}</h3>
-                <p>Time:{formatDateTime(interview.slot)}</p>
+                <p>{formatDateTime(interview.slot)}</p>
               </div>
             );
           });

@@ -10,6 +10,8 @@ const Interviews = ({ interviewSlots }) => {
   const [showLoginAlert, setShowLoginAlert] = useState(false);
   const { interviewSlotState, interviewSlotDispatch } = useInterviewSlot();
 
+  console.log({ interviewSlots });
+
   useEffect(() => {
     if (interviewSlots?.type === "error") {
       interviewSlotDispatch({

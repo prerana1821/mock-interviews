@@ -1,0 +1,26 @@
+.nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 2rem;
+  font-size: 1rem;
+  align-items: center;
+  background-color: #7c3aed;
+  color: #fff;
+}
+
+.navLinks {
+  display: flex;
+  gap: 2rem;
+  font-size: larger;
+}
+
+.navLinks li {
+  list-style: none;
+}
+
+@media only screen and (max-width: 780px) {
+  .navLinks {
+    gap: 1rem;
+    font-size: 1rem;
+  }
+}

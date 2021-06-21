@@ -3,6 +3,7 @@ import { useAuth, useInterviewSlot } from "../../context";
 import { formatDateTime } from "../../utils";
 import userInterviewSlot from "./UserInterviewSlot.module.css";
 import Image from "next/image";
+import { API_URL } from "../../env/env";
 
 export const UserInterviewSlot = ({ userDetail }) => {
   const { interviewSlotState, interviewSlotDispatch } = useInterviewSlot();
@@ -17,7 +18,7 @@ export const UserInterviewSlot = ({ userDetail }) => {
         },
       });
       const response = await fetch(
-        `http://localhost:3000/api/interviewSlot/${authState.user._id}/${slotId}`,
+        `${API_URL}api/interviewSlot/${authState.user._id}/${slotId}`,
         {
           method: "DELETE",
           headers: {

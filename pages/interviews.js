@@ -4,6 +4,7 @@ import interviewSlotStyles from "../styles/Interviews.module.css";
 import { LoginAlert } from "../components";
 import { useAuth, useInterviewSlot } from "../context";
 import Image from "next/image";
+import { API_URL } from "../env/env";
 
 const Interviews = ({ interviewSlots }) => {
   const { authState } = useAuth();
@@ -52,7 +53,7 @@ const Interviews = ({ interviewSlots }) => {
           },
         });
         const response = await fetch(
-          `http://localhost:3000/api/interviewSlot/${authState.user._id}/${interviewId}`,
+          `${API_URL}api/interviewSlot/${authState.user._id}/${interviewId}`,
           {
             method: "POST",
             headers: {
@@ -141,7 +142,7 @@ const Interviews = ({ interviewSlots }) => {
 export async function getServerSideProps() {
   let interviewSlots;
   try {
-    let response = await fetch(`http://localhost:3000/api/interviewSlot`, {
+    let response = await fetch(`${API_URL}api/interviewSlot`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

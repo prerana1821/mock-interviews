@@ -7,8 +7,7 @@ import { UserInterviewSlot } from "../../components";
 import { ProfileCard } from "../../components";
 import PrivateRoute from "../../components/PrivateRoute/PrivateRoute";
 import profileStyles from "../../styles/Profile.module.css";
-import { scheduledSlots } from "../../utils/getScheduledInterviews";
-// import { Toast } from "../../components";
+import { scheduledSlots } from "../../utils";
 
 const UserProfile = ({ slots }) => {
   const [editProfile, setEditProfile] = useState(false);

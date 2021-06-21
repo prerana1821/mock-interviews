@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useAuth, useInterviewSlot } from "../../context";
-import formStyles from "../../styles/Auth.module.css";
+import formStyles from "../../styles/Form.module.css";
 
 export const AddInterviewSlot = () => {
   const [dateAndTime, setDateAndTime] = useState("");
@@ -34,12 +34,6 @@ export const AddInterviewSlot = () => {
         });
         setDateAndTime("");
       }
-      // interviewSlotDispatch({
-      //   type: "SET_STATUS",
-      //   payload: {
-      //     status: { success: "Succesfully added your slot" },
-      //   },
-      // });
     } catch (error) {
       console.log({ error });
       interviewSlotDispatch({

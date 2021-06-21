@@ -7,9 +7,6 @@ export const Layout = ({ children }) => {
   const { authState } = useAuth();
   const { interviewSlotState } = useInterviewSlot();
 
-  console.log(authState.status);
-  console.log(interviewSlotState.status);
-
   return (
     <div>
       <Header />

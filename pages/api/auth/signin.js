@@ -1,13 +1,15 @@
 import dbConnect from "../../../middlewares/db.connect";
 import UserCredential from "../../../models/UserCredential";
+import { generateToken } from "../../../utils";
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
 
-const jwtSecret = "gfkjcgbkjsbjfgkhbjcabb";
+// import jwt from "jsonwebtoken";
 
-const generateToken = (userId) => {
-  return jwt.sign({ userId }, jwtSecret, { expiresIn: "24h" });
-};
+// const jwtSecret = "gfkjcgbkjsbjfgkhbjcabb";
+
+// const generateToken = (userId) => {
+//   return jwt.sign({ userId }, jwtSecret, { expiresIn: "24h" });
+// };
 
 export default async function handler(req, res) {
   const { method } = req;
@@ -38,12 +40,10 @@ export default async function handler(req, res) {
             .json({ success: false, errorMessage: "User Already Exists" });
         }
       } catch (error) {
-        res
-          .status(400)
-          .json({
-            success: false,
-            errorMessage: "Error! Couldn't Sign In User",
-          });
+        res.status(400).json({
+          success: false,
+          errorMessage: "Error! Couldn't Sign In User",
+        });
       }
       break;
     default:

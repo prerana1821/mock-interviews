@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { formatDateTime } from "../utils/dateFormatter";
+import { formatDateTime } from "../utils";
 import interviewSlotStyles from "../styles/Interviews.module.css";
 import { LoginAlert } from "../components";
 import { useAuth, useInterviewSlot } from "../context";
@@ -67,12 +67,6 @@ const Interviews = ({ interviewSlots }) => {
             type: "UPDATE_INTERVIEW_SLOTS",
             payload: { interviewSlot: data.data },
           });
-          // interviewSlotDispatch({
-          //   type: "SET_STATUS",
-          //   payload: {
-          //     status: { success: "Connected...!" },
-          //   },
-          // });
         }
       } catch (error) {
         console.log({ error });
@@ -96,7 +90,6 @@ const Interviews = ({ interviewSlots }) => {
   }
 
   const showInterviewSlots = (slots) => {
-    console.log("len", { slots });
     return slots.length === 0 ? (
       <div>We don't have any scheduled interview slots</div>
     ) : (

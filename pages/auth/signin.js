@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useAuth } from "../../context";
-import signInStyles from "../../styles/Auth.module.css";
+import signInStyles from "../../styles/Form.module.css";
 import { ShowPassword } from "../../components";
 import Link from "next/link";
 import Image from "next/image";

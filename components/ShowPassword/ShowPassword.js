@@ -1,4 +1,5 @@
 import Image from "next/image";
+
 export const ShowPassword = ({
   showPasswordHandler,
   showPassword,

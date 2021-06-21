@@ -14,9 +14,6 @@ const verifiedUser = (handler) => {
         .status(401)
         .json({ errorMessage: "Unauthorised access, please add the token" });
     }
-    // await client.connect();
-    // req.db = client.db("somedb");
-    // return handler(req, res);
   };
 };
 

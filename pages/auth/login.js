@@ -17,10 +17,17 @@ const Login = () => {
   const signInUserWithCredentials = async (e) => {
     e.preventDefault();
     if (userCredentials.username && userCredentials.password) {
-      loginUser({
-        username: userCredentials.username,
-        password: userCredentials.password,
-      });
+      if (/^.{3,32}#[0-9]{4}$/.test(userCredentials.username)) {
+        loginUser({
+          username: userCredentials.username,
+          password: userCredentials.password,
+        });
+      } else {
+        setUserCredentials((state) => ({
+          ...state,
+          message: "Enter a valid discord username!",
+        }));
+      }
     } else {
       setUserCredentials((state) => ({
         ...state,

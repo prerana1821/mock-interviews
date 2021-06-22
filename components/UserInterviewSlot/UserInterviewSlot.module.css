@@ -34,7 +34,7 @@
 
 .greenInterviewSlot h3,
 .redInterviewSlot h3 {
-  margin: 0;
+  margin: 0.5rem;
 }
 
 @media only screen and (max-width: 780px) {

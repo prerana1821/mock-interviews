@@ -74,6 +74,11 @@ export const AuthProvider = ({ children, token, userId }) => {
           token: data.user.token,
         });
         router.push(`/profile/${data.user._id}`);
+      } else {
+        authDispatch({
+          type: "SET_STATUS",
+          payload: { status: { error: data.errorMessage } },
+        });
       }
     } catch (error) {
       console.log({ error });
@@ -106,6 +111,11 @@ export const AuthProvider = ({ children, token, userId }) => {
           token: data.data.token,
         });
         router.push(`/profile/${data.data.user._id}`);
+      } else {
+        authDispatch({
+          type: "SET_STATUS",
+          payload: { status: { error: data.errorMessage } },
+        });
       }
     } catch (error) {
       console.log({ error });

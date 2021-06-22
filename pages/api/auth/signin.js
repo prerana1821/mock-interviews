@@ -3,14 +3,6 @@ import UserCredential from "../../../models/UserCredential";
 import { generateToken } from "../../../utils";
 import bcrypt from "bcrypt";
 
-// import jwt from "jsonwebtoken";
-
-// const jwtSecret = "gfkjcgbkjsbjfgkhbjcabb";
-
-// const generateToken = (userId) => {
-//   return jwt.sign({ userId }, jwtSecret, { expiresIn: "24h" });
-// };
-
 export default async function handler(req, res) {
   const { method } = req;
   const { username, password, email } = req.body;

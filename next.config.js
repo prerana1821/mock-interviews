@@ -5,4 +5,24 @@ module.exports = {
     jwtSecret:
       "QoRJIFoLTLU5Bdga0Ke8wXJoSXHMQru5ZqhVoSG7to0gdHUDqIgRXGW6jKONm88ZpkkHscy8mEL6ko6wcGjgQEZI9+svVgB9U8i3bTYVoGHuPgOhl1rlzd25mj4uuoZBFFfgMSI+k7kGe1dyvqT2BBjTbFgVGQk0YZ4Rx2njuwGUhpVKie/S4B1D2U1Bk7m/Y+MOQppfNmNODBa8yjBydTN8BLKiRIpaOvHfGOPNOiVBClT5ibjHCfZqqpl8eadVPy7fW6t2k+3hJME/FJKgviN3Uogzj7NQtE6MQ39AATg1cS671RxfCtfaT+Kk0b0lPNQInz91948MJG8sesLkrQ==",
   },
+  async headers() {
+    return [
+      {
+        source: "/api/:path*",
+        headers: [
+          { key: "Access-Control-Allow-Credentials", value: "true" },
+          { key: "Access-Control-Allow-Origin", value: "*" },
+          {
+            key: "Access-Control-Allow-Methods",
+            value: "GET,OPTIONS,PATCH,DELETE,POST,PUT",
+          },
+          {
+            key: "Access-Control-Allow-Headers",
+            value:
+              "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
+          },
+        ],
+      },
+    ];
+  },
 };

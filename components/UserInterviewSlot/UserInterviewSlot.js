@@ -71,7 +71,7 @@ export const UserInterviewSlot = ({ userDetail }) => {
               {item.partner && (
                 <div>
                   <h3>Partner:</h3>
-                  <p>@{item.partner.username}</p>
+                  <p>Discord Username: @{item.partner.username}</p>
                   <p>{item.partner.fullName}</p>
                 </div>
               )}

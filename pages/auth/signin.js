@@ -32,7 +32,7 @@ const SignIn = () => {
           signInUser({
             username: userCredentials.username,
             password: userCredentials.password,
-            email: userCredentials.confirmPassword,
+            email: userCredentials.email,
           });
         } else {
           setUserCredentials((state) => ({

@@ -2,12 +2,14 @@ import dbConnect from "../../../middlewares/db.connect";
 import UserCredential from "../../../models/UserCredential";
 import { generateToken } from "../../../utils";
 import bcrypt from "bcrypt";
+import runCors, { cors } from "../../../middlewares/cors";
 
 export default async function handler(req, res) {
   const { method } = req;
   const { username, password, email } = req.body;
 
   await dbConnect();
+  await runCors(req, res, cors);
 
   switch (method) {
     case "POST":

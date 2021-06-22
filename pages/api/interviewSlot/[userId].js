@@ -1,5 +1,6 @@
 import dbConnect from "../../../middlewares/db.connect";
 import verifiedUser from "../../../middlewares/verifiedUser";
+import runCors, { cors } from "../../../middlewares/cors";
 import InterviewSlot from "../../../models/InterviewSlot";
 
 export const addInterviewSlot = async (interviewSlot, dateAndTime, res) => {
@@ -23,6 +24,7 @@ async function handler(req, res) {
   const { dateAndTime } = req.body;
 
   await dbConnect();
+  await runCors(req, res, cors);
 
   switch (method) {
     case "GET":

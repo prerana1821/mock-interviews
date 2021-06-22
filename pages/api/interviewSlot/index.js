@@ -1,10 +1,12 @@
 import dbConnect from "../../../middlewares/db.connect";
 import InterviewSlot from "../../../models/InterviewSlot";
+import runCors, { cors } from "../../../middlewares/cors";
 
 export default async function handler(req, res) {
   const { method } = req;
 
   await dbConnect();
+  await runCors(req, res, cors);
 
   switch (method) {
     case "GET":

@@ -1,6 +1,7 @@
 import dbConnect from "../../../../middlewares/db.connect";
 import verifiedUser from "../../../../middlewares/verifiedUser";
 import InterviewSlot from "../../../../models/InterviewSlot";
+import runCors, { cors } from "../../../middlewares/cors";
 
 async function handler(req, res) {
   const {
@@ -10,6 +11,7 @@ async function handler(req, res) {
   const { partner } = req.body;
 
   await dbConnect();
+  await runCors(req, res, cors);
 
   switch (method) {
     case "POST":

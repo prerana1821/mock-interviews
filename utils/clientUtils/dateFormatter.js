@@ -14,7 +14,8 @@ export const monthNames = [
 ];
 
 export const formatDateTime = (date) => {
-  const dateObj = new Date(date.slice(0, -6));
+  console.log({ date });
+  const dateObj = new Date(date.slice(0, -5));
   let hours = dateObj.getHours();
   let minutes = dateObj.getMinutes();
   const ampm = hours >= 12 ? "pm" : "am";

@@ -1,8 +1,8 @@
 import dbConnect from "../../../middlewares/db.connect";
 import verifiedUser from "../../../middlewares/verifiedUser";
 import UserCredential from "../../../models/UserCredential";
-import runCors, { cors } from "../../../middlewares/cors";
 import { extend } from "lodash";
+import runCors, { cors } from "../../../middlewares/cors";
 
 async function handler(req, res) {
   const {

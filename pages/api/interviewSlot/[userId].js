@@ -1,6 +1,6 @@
+import runCors, { cors } from "../../../middlewares/cors";
 import dbConnect from "../../../middlewares/db.connect";
 import verifiedUser from "../../../middlewares/verifiedUser";
-import runCors, { cors } from "../../../middlewares/cors";
 import InterviewSlot from "../../../models/InterviewSlot";
 
 export const addInterviewSlot = async (interviewSlot, dateAndTime, res) => {

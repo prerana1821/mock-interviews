@@ -1,7 +1,7 @@
+import runCors, { cors } from "../../../../middlewares/cors";
 import dbConnect from "../../../../middlewares/db.connect";
 import verifiedUser from "../../../../middlewares/verifiedUser";
 import InterviewSlot from "../../../../models/InterviewSlot";
-import runCors, { cors } from "../../../middlewares/cors";
 
 async function handler(req, res) {
   const {

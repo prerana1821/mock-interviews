@@ -85,7 +85,7 @@ const Interviews = ({ interviewSlots }) => {
   if (authState.token) {
     filteredSlots = interviewSlotState.interviewSlots.filter(
       (interviewSlot) => {
-        return authState.user._id !== interviewSlot.userId._id;
+        return authState.user._id !== interviewSlot.userId?._id;
       }
     );
   }

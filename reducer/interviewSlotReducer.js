@@ -9,7 +9,7 @@ export const interviewSlotReducer = (state, action) => {
       return {
         ...state,
         interviewSlots: state.interviewSlots.map((interviewSlot) => {
-          return interviewSlot.userId._id ===
+          return interviewSlot?.userId?._id ===
             action.payload.interviewSlot.userId._id
             ? action.payload.interviewSlot
             : interviewSlot;

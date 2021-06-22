@@ -1,6 +1,6 @@
 export const scheduledSlots = (interviewSlots, userId) => {
   const slots = interviewSlots.filter((interviewSlot) => {
-    return interviewSlot.userId._id !== userId;
+    return interviewSlot?.userId?._id !== userId;
   });
   const filteredInterviewSlots = slots.reduce((acc, item) => {
     return acc.concat({

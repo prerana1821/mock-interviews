@@ -22,10 +22,19 @@ const UserProfile = ({ slots }) => {
 
   useEffect(() => {
     if (slots && typeof slots !== null) {
-      interviewSlotDispatch({
-        type: "LOAD_USER_INTERVIEW_SLOT",
-        payload: { slots },
-      });
+      if (typeof slots === "string") {
+        interviewSlotDispatch({
+          type: "SET_STATUS",
+          payload: {
+            status: { success: "You haven't scheduled any interview slot!" },
+          },
+        });
+      } else {
+        interviewSlotDispatch({
+          type: "LOAD_USER_INTERVIEW_SLOT",
+          payload: { slots },
+        });
+      }
     } else {
       interviewSlotDispatch({
         type: "SET_STATUS",
@@ -98,9 +107,13 @@ export async function getServerSideProps(context) {
       }
     );
     const data = await response.json();
-    if (data.success) {
+    if (data.statusCode === 200) {
       userInterviewDetails =
         data?.data && JSON.parse(JSON.stringify(data?.data?.slots));
+    } else {
+      if (data.statusCode === 202) {
+        userInterviewDetails = data?.data;
+      }
     }
   } catch (error) {
     console.log({ error });

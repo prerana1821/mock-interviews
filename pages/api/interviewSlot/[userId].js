@@ -38,13 +38,18 @@ async function handler(req, res) {
           })
           .exec();
         if (!interviewSlots) {
-          return res
-            .status(200)
-            .json({ success: true, data: "Interviews not scheduled" });
+          return res.status(202).json({
+            success: true,
+            data: "Interviews not scheduled",
+            statusCode: 202,
+          });
         }
-        res
-          .status(200)
-          .json({ success: true, data: interviewSlots, message: "Successful" });
+        res.status(200).json({
+          success: true,
+          data: interviewSlots,
+          message: "Successful",
+          statusCode: 200,
+        });
       } catch (error) {
         res.status(400).json({ success: false, errorMessage: "Error" });
       }

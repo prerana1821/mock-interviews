@@ -32,6 +32,11 @@
   box-shadow: var(--box-shadow);
 }
 
+.greenInterviewSlot h3,
+.redInterviewSlot h3 {
+  margin: 0;
+}
+
 @media only screen and (max-width: 780px) {
   .interviewSlots {
     margin: 2rem 2rem;

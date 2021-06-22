@@ -1,32 +1,24 @@
 module.exports = {
-  async rewrites() {
+  async headers() {
     return [
       {
         source: "/api/:path*",
-        destination: "https://mock-interviews.vercel.app/:path*",
+        headers: [
+          { key: "Access-Control-Allow-Credentials", value: "true" },
+          { key: "Access-Control-Allow-Origin", value: "*" },
+          {
+            key: "Access-Control-Allow-Methods",
+            value: "GET,OPTIONS,PATCH,DELETE,POST,PUT",
+          },
+          {
+            key: "Access-Control-Allow-Headers",
+            value:
+              "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
+          },
+        ],
       },
     ];
   },
-  // async headers() {
-  //   return [
-  //     {
-  //       source: "/api/:path*",
-  //       headers: [
-  //         { key: "Access-Control-Allow-Credentials", value: "true" },
-  //         { key: "Access-Control-Allow-Origin", value: "*" },
-  //         {
-  //           key: "Access-Control-Allow-Methods",
-  //           value: "GET,OPTIONS,PATCH,DELETE,POST,PUT",
-  //         },
-  //         {
-  //           key: "Access-Control-Allow-Headers",
-  //           value:
-  //             "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
-  //         },
-  //       ],
-  //     },
-  //   ];
-  // },
   env: {
     mongodbUrl:
       "mongodb://mock-interviews:mock-interviews@interview-clustor-shard-00-00.8woww.mongodb.net:27017,interview-clustor-shard-00-01.8woww.mongodb.net:27017,interview-clustor-shard-00-02.8woww.mongodb.net:27017/database?ssl=true&replicaSet=atlas-ixai5r-shard-0&authSource=admin&retryWrites=true&w=majority",

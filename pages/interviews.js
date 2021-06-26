@@ -12,32 +12,81 @@ const Interviews = ({ interviewSlots }) => {
   const { interviewSlotState, interviewSlotDispatch } = useInterviewSlot();
 
   useEffect(() => {
-    if (interviewSlots?.type === "error") {
+    if (
+      Object.entries(interviewSlots).length === 0 ||
+      interviewSlots.length === 0
+      // interviewSlots?.type === "error"
+    ) {
+      // interviewSlotDispatch({
+      //   type: "SET_STATUS",
+      //   payload: {
+      //     status: { error: interviewSlots.message },
+      //   },
+      // });
       interviewSlotDispatch({
         type: "SET_STATUS",
         payload: {
-          status: { error: interviewSlots.message },
+          status: { loading: { loadingType: "Loading interview slots" } },
         },
       });
     } else {
       if (
-        Object.entries(interviewSlots).length === 0 ||
-        interviewSlots.length === 0
+        // Object.entries(interviewSlots).length === 0 ||
+        // interviewSlots.length === 0
+        interviewSlots?.type !== "error"
       ) {
-        interviewSlotDispatch({
-          type: "SET_STATUS",
-          payload: {
-            status: { loading: { loadingType: "Loading interview slots" } },
-          },
-        });
-      } else {
+        // interviewSlotDispatch({
+        //   type: "SET_STATUS",
+        //   payload: {
+        //     status: { loading: { loadingType: "Loading interview slots" } },
+        //   },
+        // });
         interviewSlotDispatch({
           type: "LOAD_INTERVIEW_SLOTS",
           payload: { interviewSlots },
         });
+      } else {
+        // interviewSlotDispatch({
+        //   type: "LOAD_INTERVIEW_SLOTS",
+        //   payload: { interviewSlots },
+        // });
+        interviewSlotDispatch({
+          type: "SET_STATUS",
+          payload: {
+            status: { error: interviewSlots.message },
+          },
+        });
       }
     }
   }, [interviewSlots]);
+
+  // useEffect(() => {
+  //   if (interviewSlots?.type === "error") {
+  //     interviewSlotDispatch({
+  //       type: "SET_STATUS",
+  //       payload: {
+  //         status: { error: interviewSlots.message },
+  //       },
+  //     });
+  //   } else {
+  //     if (
+  //       Object.entries(interviewSlots).length === 0 ||
+  //       interviewSlots.length === 0
+  //     ) {
+  //       interviewSlotDispatch({
+  //         type: "SET_STATUS",
+  //         payload: {
+  //           status: { loading: { loadingType: "Loading interview slots" } },
+  //         },
+  //       });
+  //     } else {
+  //       interviewSlotDispatch({
+  //         type: "LOAD_INTERVIEW_SLOTS",
+  //         payload: { interviewSlots },
+  //       });
+  //     }
+  //   }
+  // }, [interviewSlots]);
 
   const connectWithUser = async (interviewId) => {
     if (authState.token) {

@@ -1,0 +1,1 @@
+export { deleteInterviewSlot } from "./deleteInterviewSlot";

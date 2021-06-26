@@ -157,7 +157,6 @@ export async function getServerSideProps() {
       message: "Couldn't load interview slots! Try again later",
     };
   }
-
   return { props: { interviewSlots } };
 }
 

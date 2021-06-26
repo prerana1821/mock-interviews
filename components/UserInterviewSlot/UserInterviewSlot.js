@@ -1,51 +1,14 @@
-import cn from "classnames";
+import computedClassName from "classnames";
 import { useAuth, useInterviewSlot } from "../../context";
 import { formatDateTime } from "../../utils";
 import userInterviewSlot from "./UserInterviewSlot.module.css";
 import Image from "next/image";
-import { API_URL } from "../../env/env";
+
+import { deleteInterviewSlot } from "../../serviceCalls";
 
 export const UserInterviewSlot = ({ userDetail }) => {
   const { interviewSlotState, interviewSlotDispatch } = useInterviewSlot();
   const { authState } = useAuth();
-
-  const deleteInterviewSlot = async (slotId) => {
-    try {
-      interviewSlotDispatch({
-        type: "SET_STATUS",
-        payload: {
-          status: { loading: { actionType: "Deleting Interview Slot..." } },
-        },
-      });
-      const response = await fetch(
-        `${API_URL}api/interviewSlot/${authState.user._id}/${slotId}`,
-        {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: authState.token,
-          },
-        }
-      );
-      const data = await response.json();
-      if (data.success) {
-        interviewSlotDispatch({
-          type: "DELETE_USER_INTERVIEW_SLOT",
-          payload: { interviewSlotId: data.data },
-        });
-      }
-    } catch (error) {
-      console.log({ error });
-      interviewSlotDispatch({
-        type: "SET_STATUS",
-        payload: {
-          status: {
-            error: "Couldn't deleting interview slot! Try again later",
-          },
-        },
-      });
-    }
-  };
 
   return (
     <>
@@ -55,14 +18,20 @@ export const UserInterviewSlot = ({ userDetail }) => {
           return (
             <div
               key={item._id}
-              className={cn({
+              className={computedClassName({
                 [userInterviewSlot.greenInterviewSlot]: item.partner,
                 [userInterviewSlot.redInterviewSlot]: !item.partner,
               })}
             >
               <button
                 className='btnIcon'
-                onClick={() => deleteInterviewSlot(item._id)}
+                onClick={() =>
+                  deleteInterviewSlot(
+                    item._id,
+                    authState,
+                    interviewSlotDispatch
+                  )
+                }
               >
                 <Image src='/images/delete.svg' width='30px' height='30px' />
               </button>

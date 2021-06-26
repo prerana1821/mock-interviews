@@ -68,21 +68,6 @@ const Interviews = ({ interviewSlots }) => {
             setShowLoginAlert={setShowLoginAlert}
           />
         )}
-        {/* {filteredSlots
-          ? showInterviewSlots(
-              filteredSlots,
-              interviewSlotStyles,
-              authState,
-              interviewSlotDispatch,
-              setShowLoginAlert
-            )
-          : showInterviewSlots(
-              interviewSlotState.interviewSlots,
-              interviewSlotStyles,
-              authState,
-              interviewSlotDispatch,
-              setShowLoginAlert
-            )} */}
       </div>
     </div>
   );

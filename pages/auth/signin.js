@@ -4,8 +4,11 @@ import signInStyles from "../../styles/Form.module.css";
 import { ShowPassword } from "../../components";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/router";
+import { signInUserWithCredentials, togglePassword } from "../../utils";
 
 const SignIn = () => {
+  const router = useRouter();
   const [userCredentials, setUserCredentials] = useState({
     email: "",
     username: "",
@@ -16,49 +19,7 @@ const SignIn = () => {
     showConfirmPassword: false,
   });
 
-  const { authState, signInUser } = useAuth();
-
-  const signInUserWithCredentials = async (e) => {
-    e.preventDefault();
-
-    if (
-      userCredentials.email &&
-      userCredentials.username &&
-      userCredentials.password &&
-      userCredentials.confirmPassword
-    ) {
-      if (/^.{3,32}#[0-9]{4}$/.test(userCredentials.username)) {
-        if (userCredentials.password === userCredentials.confirmPassword) {
-          signInUser({
-            username: userCredentials.username,
-            password: userCredentials.password,
-            email: userCredentials.email,
-          });
-        } else {
-          setUserCredentials((state) => ({
-            ...state,
-            message: "Passwords doesn't match!",
-          }));
-        }
-      } else {
-        setUserCredentials((state) => ({
-          ...state,
-          message: "Enter a valid discord username!",
-        }));
-      }
-    } else {
-      setUserCredentials((state) => ({
-        ...state,
-        message: "All Fields are Required!",
-      }));
-    }
-  };
-
-  const showPassword = () =>
-    setUserCredentials((state) => ({
-      ...state,
-      showPassword: !userCredentials.showPassword,
-    }));
+  const { authState, authDispatch } = useAuth();
 
   const showConfirmPassword = () =>
     setUserCredentials((state) => ({
@@ -68,7 +29,18 @@ const SignIn = () => {
 
   return (
     <div className={signInStyles.login}>
-      <form onSubmit={signInUserWithCredentials} className={signInStyles.form}>
+      <form
+        onSubmit={(e) =>
+          signInUserWithCredentials(
+            e,
+            userCredentials,
+            authDispatch,
+            router,
+            setUserCredentials
+          )
+        }
+        className={signInStyles.form}
+      >
         <h1>Sign In</h1>
         {authState.status?.loading?.userType && (
           <div className='loading'>
@@ -97,7 +69,7 @@ const SignIn = () => {
             type='text'
             required
             className={signInStyles.input}
-            placeholder='Enter your Discord username'
+            placeholder='Discord Username eg. Name#0000'
             value={userCredentials.username}
             onChange={(e) =>
               setUserCredentials((state) => ({
@@ -127,7 +99,9 @@ const SignIn = () => {
           />
           <span className={signInStyles.focusBorder}></span>
           <ShowPassword
-            showPasswordHandler={showPassword}
+            showPasswordHandler={() =>
+              togglePassword(userCredentials, setUserCredentials)
+            }
             showPassword={userCredentials.showPassword}
           />
         </div>

@@ -1,9 +1,4 @@
-export const formatedUrl = (url) => {
-  const formatedUrl = url
-    .replace(/^(?:https?:\/\/)?(?:www\.)?/i, "")
-    .split("/")[0];
-  return formatedUrl;
-};
+import { formatedUrl } from "../../utils";
 
 export const ProfileCard = ({ userDetail }) => {
   return (

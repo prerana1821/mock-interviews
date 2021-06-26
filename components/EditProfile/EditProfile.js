@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useAuth } from "../../context";
 import editProfileStyles from "./EditProfile.module.css";
 import formStyles from "../../styles/Form.module.css";
+import { editUserDetails } from "../../serviceCalls";
 import Image from "next/image";
 
 export const EditProfile = ({ userDetail, setEditProfile }) => {
@@ -13,56 +14,20 @@ export const EditProfile = ({ userDetail, setEditProfile }) => {
 
   const { authState, authDispatch } = useAuth();
 
-  const editUserDetails = async (e) => {
-    e.preventDefault();
-    try {
-      authDispatch({
-        type: "SET_STATUS",
-        payload: {
-          status: { loading: { userDetailType: "Updating your profile..." } },
-        },
-      });
-      const response = await fetch(`/api/userDetail/${authState.user._id}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: authState.token,
-        },
-        body: JSON.stringify({
-          fullName: details.fullName,
-          portfolio: details.portfolio,
-          interviewDone: details.interviewDone,
-        }),
-      });
-
-      const data = await response.json();
-      console.log({ data });
-      if (data.success) {
-        authDispatch({
-          type: "UPDATE_USER",
-          payload: {
-            portfolio: data.data.portfolio,
-            fullName: data.data.fullName,
-            interviewDone: data.data.interviewDone,
-          },
-        });
-        setEditProfile(false);
-      }
-    } catch (error) {
-      console.log({ error });
-      authDispatch({
-        type: "SET_STATUS",
-        payload: {
-          status: { error: "Couldn't update your profile! Try again later" },
-        },
-      });
-    }
-  };
-
   return (
     <div className={editProfileStyles.editProfile}>
       <form
-        onSubmit={editUserDetails}
+        onSubmit={(e) =>
+          editUserDetails(
+            e,
+            authState,
+            authDispatch,
+            details.fullName,
+            details.portfolio,
+            details.interviewDone,
+            setEditProfile
+          )
+        }
         className={editProfileStyles.editProfileForm}
       >
         <button

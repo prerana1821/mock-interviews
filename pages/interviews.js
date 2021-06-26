@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
-import { formatDateTime } from "../utils";
 import interviewSlotStyles from "../styles/Interviews.module.css";
-import { LoginAlert } from "../components";
+import { LoginAlert, ShowInterviewSlots } from "../components";
 import { useAuth, useInterviewSlot } from "../context";
-import Image from "next/image";
 import { API_URL } from "../env/env";
+import Image from "next/image";
 
 const Interviews = ({ interviewSlots }) => {
   const { authState } = useAuth();
@@ -15,14 +14,7 @@ const Interviews = ({ interviewSlots }) => {
     if (
       Object.entries(interviewSlots).length === 0 ||
       interviewSlots.length === 0
-      // interviewSlots?.type === "error"
     ) {
-      // interviewSlotDispatch({
-      //   type: "SET_STATUS",
-      //   payload: {
-      //     status: { error: interviewSlots.message },
-      //   },
-      // });
       interviewSlotDispatch({
         type: "SET_STATUS",
         payload: {
@@ -30,26 +22,12 @@ const Interviews = ({ interviewSlots }) => {
         },
       });
     } else {
-      if (
-        // Object.entries(interviewSlots).length === 0 ||
-        // interviewSlots.length === 0
-        interviewSlots?.type !== "error"
-      ) {
-        // interviewSlotDispatch({
-        //   type: "SET_STATUS",
-        //   payload: {
-        //     status: { loading: { loadingType: "Loading interview slots" } },
-        //   },
-        // });
+      if (interviewSlots?.type !== "error") {
         interviewSlotDispatch({
           type: "LOAD_INTERVIEW_SLOTS",
           payload: { interviewSlots },
         });
       } else {
-        // interviewSlotDispatch({
-        //   type: "LOAD_INTERVIEW_SLOTS",
-        //   payload: { interviewSlots },
-        // });
         interviewSlotDispatch({
           type: "SET_STATUS",
           payload: {
@@ -60,76 +38,6 @@ const Interviews = ({ interviewSlots }) => {
     }
   }, [interviewSlots]);
 
-  // useEffect(() => {
-  //   if (interviewSlots?.type === "error") {
-  //     interviewSlotDispatch({
-  //       type: "SET_STATUS",
-  //       payload: {
-  //         status: { error: interviewSlots.message },
-  //       },
-  //     });
-  //   } else {
-  //     if (
-  //       Object.entries(interviewSlots).length === 0 ||
-  //       interviewSlots.length === 0
-  //     ) {
-  //       interviewSlotDispatch({
-  //         type: "SET_STATUS",
-  //         payload: {
-  //           status: { loading: { loadingType: "Loading interview slots" } },
-  //         },
-  //       });
-  //     } else {
-  //       interviewSlotDispatch({
-  //         type: "LOAD_INTERVIEW_SLOTS",
-  //         payload: { interviewSlots },
-  //       });
-  //     }
-  //   }
-  // }, [interviewSlots]);
-
-  const connectWithUser = async (interviewId) => {
-    if (authState.token) {
-      try {
-        interviewSlotDispatch({
-          type: "SET_STATUS",
-          payload: {
-            status: {
-              loading: { actionType: "Scheduling the interview slot...!" },
-            },
-          },
-        });
-        const response = await fetch(
-          `${API_URL}api/interviewSlot/${authState.user._id}/${interviewId}`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: authState.token,
-            },
-            body: JSON.stringify({ partner: authState.user._id }),
-          }
-        );
-        const data = await response.json();
-        console.log({ data });
-        if (data.success) {
-          interviewSlotDispatch({
-            type: "UPDATE_INTERVIEW_SLOTS",
-            payload: { interviewSlot: data.data },
-          });
-        }
-      } catch (error) {
-        console.log({ error });
-        interviewSlotDispatch({
-          type: "SET_STATUS",
-          payload: { status: { error: "Couldn't connect! Try again later" } },
-        });
-      }
-    } else {
-      setShowLoginAlert(true);
-    }
-  };
-
   let filteredSlots;
   if (authState.token) {
     filteredSlots = interviewSlotState.interviewSlots.filter(
@@ -138,35 +46,6 @@ const Interviews = ({ interviewSlots }) => {
       }
     );
   }
-
-  const showInterviewSlots = (slots) => {
-    return slots.length === 0 ? (
-      <div>We don't have any scheduled interview slots</div>
-    ) : (
-      slots.map((interviewSlot) => {
-        return interviewSlot.slots.map((slot) => {
-          return (
-            !slot.partner && (
-              <div
-                key={slot._id}
-                className={interviewSlotStyles.interviewSlotCard}
-              >
-                <h3>{interviewSlot.userId.fullName}</h3>
-                <h4>@{interviewSlot.userId.username}</h4>
-                <p>{formatDateTime(slot.slot)}</p>
-                <button
-                  onClick={() => connectWithUser(slot._id)}
-                  className='btnPrimary'
-                >
-                  Connect
-                </button>
-              </div>
-            )
-          );
-        });
-      })
-    );
-  };
 
   return (
     <div>
@@ -178,9 +57,32 @@ const Interviews = ({ interviewSlots }) => {
         </div>
       )}
       <div className={interviewSlotStyles.interviewSlots}>
-        {filteredSlots
-          ? showInterviewSlots(filteredSlots)
-          : showInterviewSlots(interviewSlotState.interviewSlots)}
+        {filteredSlots ? (
+          <ShowInterviewSlots
+            slots={filteredSlots}
+            setShowLoginAlert={setShowLoginAlert}
+          />
+        ) : (
+          <ShowInterviewSlots
+            slots={interviewSlotState.interviewSlots}
+            setShowLoginAlert={setShowLoginAlert}
+          />
+        )}
+        {/* {filteredSlots
+          ? showInterviewSlots(
+              filteredSlots,
+              interviewSlotStyles,
+              authState,
+              interviewSlotDispatch,
+              setShowLoginAlert
+            )
+          : showInterviewSlots(
+              interviewSlotState.interviewSlots,
+              interviewSlotStyles,
+              authState,
+              interviewSlotDispatch,
+              setShowLoginAlert
+            )} */}
       </div>
     </div>
   );

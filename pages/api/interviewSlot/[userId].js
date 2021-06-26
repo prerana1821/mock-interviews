@@ -2,19 +2,7 @@ import runCors, { cors } from "../../../middlewares/cors";
 import dbConnect from "../../../middlewares/db.connect";
 import verifiedUser from "../../../middlewares/verifiedUser";
 import InterviewSlot from "../../../models/InterviewSlot";
-
-export const addInterviewSlot = async (interviewSlot, dateAndTime, res) => {
-  interviewSlot.slots.push({ slot: dateAndTime });
-  const newUserInterviewSlot = await interviewSlot.save();
-  const newSlot = newUserInterviewSlot.slots.find(
-    (slot) => new Date(slot.slot).getTime() === new Date(dateAndTime).getTime()
-  );
-  return res.status(200).json({
-    success: true,
-    data: { slot: newSlot },
-    message: "Successful",
-  });
-};
+import { addInterviewSlot } from "../../../utils";
 
 async function handler(req, res) {
   const {

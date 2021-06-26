@@ -44,6 +44,7 @@ export const Toast = ({
     interviewSlotLoading ||
     interviewSlotError ||
     interviewSlotSuccess;
+
   return (
     <>
       {checkUndefined && (

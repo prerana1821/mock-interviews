@@ -1,8 +1,8 @@
 import dbConnect from "../../../middlewares/db.connect";
+import runCors, { cors } from "../../../middlewares/cors";
 import UserCredential from "../../../models/UserCredential";
 import { generateToken } from "../../../utils";
 import bcrypt from "bcrypt";
-import runCors, { cors } from "../../../middlewares/cors";
 
 export default async function handler(req, res) {
   const { method } = req;

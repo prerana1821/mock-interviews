@@ -2,9 +2,8 @@ import computedClassName from "classnames";
 import { useAuth, useInterviewSlot } from "../../context";
 import { formatDateTime } from "../../utils";
 import userInterviewSlot from "./UserInterviewSlot.module.css";
-import Image from "next/image";
-
 import { deleteInterviewSlot } from "../../serviceCalls";
+import Image from "next/image";
 
 export const UserInterviewSlot = ({ userDetail }) => {
   const { interviewSlotState, interviewSlotDispatch } = useInterviewSlot();

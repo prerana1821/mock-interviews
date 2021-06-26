@@ -38,11 +38,11 @@ li {
 
 .textCenter {
   text-align: center;
-  margin: 3rem;
+  padding: 2rem;
 }
 
 .mainLayout {
-  min-height: 75vh;
+  min-height: 77vh;
 }
 
 .btnPrimary {

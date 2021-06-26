@@ -17,13 +17,3 @@ function runCors(req, res, fn) {
 }
 
 export default runCors;
-
-// async function handler(req, res) {
-//   // Run the middleware
-//   await runCors(req, res, cors);
-
-//   // Rest of the API logic
-//   res.json({ message: "Hello Everyone!" });
-// }
-
-// export default handler;

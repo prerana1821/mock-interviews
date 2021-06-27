@@ -1,4 +1,4 @@
-import { API_URL } from "../env/env";
+// import { API_URL } from "../env/env";
 
 export const deleteInterviewSlot = async (
   slotId,
@@ -13,7 +13,7 @@ export const deleteInterviewSlot = async (
       },
     });
     const response = await fetch(
-      `${API_URL}api/interviewSlot/${authState.user._id}/${slotId}`,
+      `${process.env.API_URL}api/interviewSlot/${authState.user._id}/${slotId}`,
       {
         method: "DELETE",
         headers: {

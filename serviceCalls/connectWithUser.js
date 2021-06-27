@@ -1,4 +1,4 @@
-import { API_URL } from "../env/env";
+// import { API_URL } from "../env/env";
 
 export const connectWithUser = async (
   interviewId,
@@ -17,7 +17,7 @@ export const connectWithUser = async (
         },
       });
       const response = await fetch(
-        `${API_URL}api/interviewSlot/${authState.user._id}/${interviewId}`,
+        `${process.env.API_URL}api/interviewSlot/${authState.user._id}/${interviewId}`,
         {
           method: "POST",
           headers: {

@@ -1,7 +1,6 @@
 import "../styles/globals.css";
 import { InterviewSlotProvider, AuthProvider } from "../context";
 import { Layout } from "../components";
-
 function MyApp({ Component, pageProps, token, userId }) {
   return (
     <AuthProvider token={token} userId={userId}>

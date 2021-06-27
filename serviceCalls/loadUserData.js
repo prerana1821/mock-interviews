@@ -15,7 +15,6 @@ export const loadUserData = async (token, userId, authDispatch) => {
         },
       });
       const data = await response.json();
-      console.log({ data });
       if (data.success) {
         authDispatch({
           type: "LOAD_USER_DETAILS",

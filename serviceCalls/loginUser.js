@@ -18,7 +18,6 @@ export const loginUser = async ({
       body: JSON.stringify({ username, password }),
     });
     const data = await response.json();
-    console.log({ data });
     if (data.success) {
       setUserAuth({
         authDispatch,

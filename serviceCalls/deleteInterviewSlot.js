@@ -1,5 +1,3 @@
-// import { API_URL } from "../env/env";
-
 export const deleteInterviewSlot = async (
   slotId,
   authState,

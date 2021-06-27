@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import interviewSlotStyles from "../styles/Interviews.module.css";
 import { LoginAlert, ShowInterviewSlots } from "../components";
 import { useAuth, useInterviewSlot } from "../context";
-// import { API_URL } from "../env/env";
 import Image from "next/image";
 
 const Interviews = ({ interviewSlots }) => {

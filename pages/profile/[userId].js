@@ -8,7 +8,6 @@ import { ProfileCard } from "../../components";
 import PrivateRoute from "../../components/PrivateRoute/PrivateRoute";
 import profileStyles from "../../styles/Profile.module.css";
 import { scheduledSlots } from "../../utils";
-// import { API_URL } from "../../env/env";
 
 const UserProfile = ({ slots }) => {
   const [editProfile, setEditProfile] = useState(false);

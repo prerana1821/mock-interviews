@@ -29,7 +29,6 @@ export const editUserDetails = async (
     });
 
     const data = await response.json();
-    console.log({ data });
     if (data.success) {
       authDispatch({
         type: "UPDATE_USER",

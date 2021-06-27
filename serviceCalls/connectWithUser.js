@@ -1,5 +1,3 @@
-// import { API_URL } from "../env/env";
-
 export const connectWithUser = async (
   interviewId,
   authState,
@@ -28,7 +26,6 @@ export const connectWithUser = async (
         }
       );
       const data = await response.json();
-      console.log({ data });
       if (data.success) {
         interviewSlotDispatch({
           type: "UPDATE_INTERVIEW_SLOTS",

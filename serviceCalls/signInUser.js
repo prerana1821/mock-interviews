@@ -20,7 +20,6 @@ export const signInUser = async ({
     });
     console.log({ response });
     const data = await response.json();
-    console.log({ data });
     if (data.success) {
       setUserAuth({
         authDispatch,

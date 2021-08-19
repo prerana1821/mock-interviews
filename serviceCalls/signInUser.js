@@ -18,7 +18,6 @@ export const signInUser = async ({
       },
       body: JSON.stringify({ username, password, email }),
     });
-    console.log({ response });
     const data = await response.json();
     if (data.success) {
       setUserAuth({

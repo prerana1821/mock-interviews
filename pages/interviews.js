@@ -9,8 +9,6 @@ const Interviews = ({ interviewSlots }) => {
   const [showLoginAlert, setShowLoginAlert] = useState(false);
   const { interviewSlotState, interviewSlotDispatch } = useInterviewSlot();
 
-  console.log({ interviewSlots });
-
   useEffect(() => {
     // if (
     //   Object.entries(interviewSlots).length === 0 ||
@@ -86,7 +84,6 @@ export async function getServerSideProps() {
         "Content-Type": "application/json",
       },
     });
-    console.log({ response });
     const data = await response.json();
     if (data.success) {
       interviewSlots = data.data;

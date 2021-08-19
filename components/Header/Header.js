@@ -1,6 +1,7 @@
 import headerStyles from "./Header.module.css";
 import Link from "next/link";
 import { useAuth } from "../../context";
+import Image from "next/image";
 
 export const Header = () => {
   const { authState } = useAuth();
@@ -9,9 +10,15 @@ export const Header = () => {
     <nav className={headerStyles.nav}>
       <div>
         <Link href='/'>
-          <h1>
-            <a>Logo</a>
-          </h1>
+          <a>
+            <Image
+              priority
+              src='/images/neogcamp.svg'
+              width='150px'
+              height='50px'
+              alt='neogcamo logo'
+            />
+          </a>
         </Link>
       </div>
       <ul className={headerStyles.navLinks}>

@@ -14,7 +14,7 @@ export const Footer = () => {
         {footerLinks.map((link) => {
           return (
             <li key={link.url}>
-              <a className='links' href={link.url}>
+              <a target='_blank' className='links' href={link.url}>
                 <Image src={link.imageSource} width='35px' height='35px' />
               </a>
             </li>

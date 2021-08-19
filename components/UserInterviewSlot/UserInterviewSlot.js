@@ -32,7 +32,7 @@ export const UserInterviewSlot = ({ userDetail }) => {
                   )
                 }
               >
-                <Image src='/images/delete.svg' width='30px' height='30px' />
+                <Image src='/images/delete.png' width='30px' height='30px' />
               </button>
               <h3>@{userDetail?.username}</h3>
               <p>{formatDateTime(item.slot)}</p>

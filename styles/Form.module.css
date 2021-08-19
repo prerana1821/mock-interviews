@@ -5,7 +5,8 @@
 }
 
 .form {
-  width: max-content;
+  max-width: 600px;
+  width: 100%;
   padding: 2rem 4rem;
   border-radius: 1rem;
   display: flex;

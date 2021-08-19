@@ -16,19 +16,31 @@ export const signInUserWithCredentials = async (
     userCredentials.confirmPassword
   ) {
     if (/^.{3,32}#[0-9]{4}$/.test(userCredentials.username)) {
-      if (userCredentials.password === userCredentials.confirmPassword) {
-        signInUser({
-          username: userCredentials.username,
-          password: userCredentials.password,
-          email: userCredentials.email,
-          authDispatch,
-          setUserAuth,
-          router,
-        });
+      if (
+        /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*#?&]{8,}$/.test(
+          userCredentials.password
+        )
+      ) {
+        if (userCredentials.password === userCredentials.confirmPassword) {
+          signInUser({
+            username: userCredentials.username,
+            password: userCredentials.password,
+            email: userCredentials.email,
+            authDispatch,
+            setUserAuth,
+            router,
+          });
+        } else {
+          setUserCredentials((state) => ({
+            ...state,
+            message: "Passwords doesn't match!",
+          }));
+        }
       } else {
         setUserCredentials((state) => ({
           ...state,
-          message: "Passwords doesn't match!",
+          message:
+            "Passwords must be minimum eight characters, at least one letter and one number!",
         }));
       }
     } else {

@@ -6,7 +6,7 @@ import bcrypt from "bcrypt";
 
 export default async function handler(req, res) {
   const { method } = req;
-  const { username, password } = req.body;
+  const { email, password } = req.body;
 
   await dbConnect();
   await runCors(req, res, cors);
@@ -15,7 +15,7 @@ export default async function handler(req, res) {
     case "POST":
       try {
         const user = await UserCredential.findOne({
-          username: username,
+          email: email,
         }).exec();
         if (user) {
           const validPassword = await bcrypt.compare(password, user.password);

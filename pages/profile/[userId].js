@@ -80,7 +80,7 @@ const UserProfile = ({ slots }) => {
       <div>
         {scheduledInterviews.length === 0 ? (
           <h1 className='textCenter'>
-            You haven't scheduled any interview slots yet!
+            Your interview slots have not matched with anyone yet!
           </h1>
         ) : (
           <ScheduledInterviewSlot />

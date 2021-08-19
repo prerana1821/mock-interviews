@@ -6,7 +6,6 @@ import interviewSlotStyles from "../../styles/Interviews.module.css";
 export const ShowInterviewSlots = ({ slots, setShowLoginAlert }) => {
   const { authState } = useAuth();
   const { interviewSlotDispatch } = useInterviewSlot();
-
   return slots.length === 0 ? (
     <div>We don't have any scheduled interview slots</div>
   ) : (

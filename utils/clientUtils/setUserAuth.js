@@ -17,7 +17,7 @@ export const setUserAuth = ({ authDispatch, user, token }) => {
   authDispatch({
     type: "SET_STATUS",
     payload: {
-      status: { success: `Hurray! Signup Successful ${user.username}` },
+      status: { success: `Hello ${user.username}` },
     },
   });
 };

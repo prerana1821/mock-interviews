@@ -13,7 +13,11 @@ export const ScheduledInterviewSlot = () => {
 
   return (
     <div>
-      <h1 className='textCenter'>Other Scheduled Interviews</h1>
+      <h1 className='textCenter'>Your Scheduled Interviews</h1>
+      <p className='textCenter'>
+        Interview will take place on #teamtanay discord. Connect with the person
+        using discord id.
+      </p>
       <div className={styles.interviewSlots}>
         {scheduledInterviews.map((scheduledInterview) => {
           return scheduledInterview.slots.map((interview) => {

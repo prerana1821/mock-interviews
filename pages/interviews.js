@@ -9,32 +9,34 @@ const Interviews = ({ interviewSlots }) => {
   const [showLoginAlert, setShowLoginAlert] = useState(false);
   const { interviewSlotState, interviewSlotDispatch } = useInterviewSlot();
 
+  console.log({ interviewSlots });
+
   useEffect(() => {
-    if (
-      Object.entries(interviewSlots).length === 0 ||
-      interviewSlots.length === 0
-    ) {
+    // if (
+    //   Object.entries(interviewSlots).length === 0 ||
+    //   interviewSlots.length === 0
+    // ) {
+    //   interviewSlotDispatch({
+    //     type: "SET_STATUS",
+    //     payload: {
+    //       status: { loading: { loadingType: "Loading interview slots" } },
+    //     },
+    //   });
+    // } else {
+    if (interviewSlots?.type !== "error") {
+      interviewSlotDispatch({
+        type: "LOAD_INTERVIEW_SLOTS",
+        payload: { interviewSlots },
+      });
+    } else {
       interviewSlotDispatch({
         type: "SET_STATUS",
         payload: {
-          status: { loading: { loadingType: "Loading interview slots" } },
+          status: { error: interviewSlots.message },
         },
       });
-    } else {
-      if (interviewSlots?.type !== "error") {
-        interviewSlotDispatch({
-          type: "LOAD_INTERVIEW_SLOTS",
-          payload: { interviewSlots },
-        });
-      } else {
-        interviewSlotDispatch({
-          type: "SET_STATUS",
-          payload: {
-            status: { error: interviewSlots.message },
-          },
-        });
-      }
     }
+    // }
   }, [interviewSlots]);
 
   let filteredSlots;
@@ -49,7 +51,10 @@ const Interviews = ({ interviewSlots }) => {
   return (
     <div>
       {showLoginAlert && <LoginAlert setShowLoginAlert={setShowLoginAlert} />}
-      <h1 className='textCenter'>Interview Slots</h1>
+      <h1 className='textCenter'>Open Interview Slots</h1>
+      <p className='textCenter'>
+        Use these available slots to schedule your mock interview
+      </p>
       {interviewSlotState.status?.loading?.loadingType && (
         <div className='loading'>
           <Image src='/images/loading.svg' width='200px' height='200px' />
@@ -81,6 +86,7 @@ export async function getServerSideProps() {
         "Content-Type": "application/json",
       },
     });
+    console.log({ response });
     const data = await response.json();
     if (data.success) {
       interviewSlots = data.data;

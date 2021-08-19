@@ -10,7 +10,7 @@ import Link from "next/link";
 const Login = () => {
   const router = useRouter();
   const [userCredentials, setUserCredentials] = useState({
-    username: "",
+    email: "",
     password: "",
     message: "",
     showPassword: false,
@@ -42,12 +42,12 @@ const Login = () => {
             type='text'
             required
             className={loginStyles.input}
-            value={userCredentials.username}
-            placeholder='Enter your Discord Username'
+            value={userCredentials.email}
+            placeholder='Enter your email'
             onChange={(e) =>
               setUserCredentials((state) => ({
                 ...state,
-                username: e.target.value,
+                email: e.target.value,
                 message: "",
               }))
             }
@@ -84,7 +84,7 @@ const Login = () => {
         <p className={loginStyles.secondaryTxt}>
           Don't have an account?{" "}
           <Link href='/auth/signin'>
-            <a className='blueTxt'>Sign In!</a>
+            <a className='blueTxt'>Sign Up!</a>
           </Link>
         </p>
       </form>

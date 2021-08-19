@@ -41,7 +41,7 @@ const SignIn = () => {
         }
         className={signInStyles.form}
       >
-        <h1>Sign In</h1>
+        <h1>Sign Up</h1>
         {authState.status?.loading?.userType && (
           <div className='loading'>
             <Image src='/images/loading.svg' width='200px' height='200px' />
@@ -128,7 +128,7 @@ const SignIn = () => {
         </div>
         <p>{userCredentials.message}</p>
         <button className='btnPrimary' type='submit'>
-          SignIn
+          SignUp
         </button>
         <p className={signInStyles.secondaryTxt}>
           Already a User?{" "}

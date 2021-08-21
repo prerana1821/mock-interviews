@@ -14,7 +14,11 @@ export const monthNames = [
 ];
 
 export const formatDateTime = (date) => {
-  const dateObj = new Date(date.slice(0, -5));
+  const dateObj = new Date(
+    new Date(date).toLocaleString("en-US", {
+      timeZone: "Asia/Kolkata",
+    })
+  );
   let hours = dateObj.getHours();
   let minutes = dateObj.getMinutes();
   const ampm = hours >= 12 ? "pm" : "am";

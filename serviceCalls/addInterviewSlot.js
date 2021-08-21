@@ -6,6 +6,7 @@ export const addInterviewSlot = async (
   interviewSlotDispatch
 ) => {
   event.preventDefault();
+  console.log(2, { dateAndTime });
   try {
     interviewSlotDispatch({
       type: "SET_STATUS",
@@ -29,7 +30,7 @@ export const addInterviewSlot = async (
         type: "ADD_USER_INTERVIEW_SLOT",
         payload: { slot: data.data.slot },
       });
-      setDateAndTime("");
+      setDateAndTime(null);
     }
   } catch (error) {
     console.log({ error });

@@ -22,11 +22,13 @@ export const Header = () => {
         </Link>
       </div>
       <ul className={headerStyles.navLinks}>
-        <Link href='/'>
-          <li>
-            <a>Home</a>
-          </li>
-        </Link>
+        {!authState.token && (
+          <Link href='/'>
+            <li>
+              <a>Home</a>
+            </li>
+          </Link>
+        )}
         <Link href='/interviews'>
           <li>
             <a>Interviews</a>

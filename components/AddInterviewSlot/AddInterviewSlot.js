@@ -25,15 +25,6 @@ export const AddInterviewSlot = () => {
           );
         }}
       >
-        {/* <input
-          type='datetime-local'
-          required
-          className={formStyles.input}
-          value={dateAndTime}
-          min={getPastDate()}
-          placeholder='Enter date & time for the interview'
-          onChange={(e) => setDateAndTime(() => e.target.value)}
-        /> */}
         <br />
         <KeyboardDateTimePicker
           variant='inline'
@@ -42,7 +33,6 @@ export const AddInterviewSlot = () => {
           value={dateAndTime}
           onChange={setDateAndTime}
           disablePast
-          // format='yyyy/MM/dd HH:mm'
           style={{ width: "300px" }}
         />
         <br />

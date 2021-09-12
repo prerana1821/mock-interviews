@@ -61,6 +61,7 @@ async function handler(req, res) {
           const interviewSlot = await InterviewSlot.findOne({
             "slots._id": interviewSlotId,
           });
+
           if (!interviewSlot) {
             return res.status(200).json({
               success: true,
@@ -69,6 +70,23 @@ async function handler(req, res) {
           }
           interviewSlots.slots.pull({ _id: interviewSlotId });
           await interviewSlots.save();
+
+          // const slottt = await InterviewSlot.updateOne(
+          //   {
+          //     userId: userId,
+          //     slots: {
+          //       $elemMatch: {
+          //         _id: interviewSlotId,
+          //       },
+          //     },
+          //   },
+          //   {
+          //     $set: {
+          //       "slots.$.slot": undefined,
+          //     },
+          //   }
+          // );
+
           res.status(200).json({
             success: true,
             data: interviewSlotId,

@@ -10,8 +10,8 @@ export const setUserAuth = ({ authDispatch, user, token }) => {
       email: user.email,
     })
   );
-  cookies.set("token", token, { expires: 7 });
-  cookies.set("userId", user._id, { expires: 7 });
+  cookies.set("token", token, { expires: 1 });
+  cookies.set("userId", user._id, { expires: 1 });
   authDispatch({ type: "LOGIN_USER", payload: user });
   authDispatch({ type: "ADD_TOKEN", payload: { token } });
   authDispatch({

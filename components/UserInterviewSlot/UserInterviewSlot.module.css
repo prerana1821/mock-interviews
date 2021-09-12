@@ -8,6 +8,13 @@
   align-items: center;
 }
 
+.interviewSlots > p,
+.greenInterviewSlot > p,
+.redInterviewSlot > p,
+.greyInterviewSlot > p {
+  margin: 0.5rem 0;
+}
+
 .greenInterviewSlot {
   color: green;
   background-color: #d0ecc7;
@@ -32,8 +39,21 @@
   box-shadow: var(--box-shadow);
 }
 
+.greyInterviewSlot {
+  color: #787272;
+  background-color: #e6e2e4;
+  width: max-content;
+  display: flex;
+  padding: 2rem 4rem;
+  align-items: flex-start;
+  border-radius: 1rem;
+  flex-direction: column;
+  box-shadow: var(--box-shadow);
+}
+
 .greenInterviewSlot h3,
-.redInterviewSlot h3 {
+.redInterviewSlot h3,
+.greyInterviewSlot h3 {
   margin: 0.5rem 0;
 }
 

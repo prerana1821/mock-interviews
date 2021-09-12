@@ -55,7 +55,7 @@ const ForgetPassword = () => {
             type={userCredentials.showPassword ? "text" : "password"}
             required
             className={loginStyles.input}
-            placeholder='Enter Password'
+            placeholder='Enter new Password'
             value={userCredentials.password}
             onChange={(e) =>
               setUserCredentials((state) => ({

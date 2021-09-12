@@ -26,11 +26,12 @@
   padding: 0.7rem 0;
   outline: #fff;
   border-bottom: 2px solid #ccc;
-  width: 295px;
+  max-width: 295px;
   margin: 1rem 0 0 0;
-  font-size: initial;
-  text-align: initial;
+  font-size: medium;
+  text-align: left;
   font-family: "Work Sans";
+  width: 100%;
 }
 
 .input ~ .focusBorder {
@@ -50,4 +51,20 @@
 
 .secondaryTxt {
   font-size: 1.3rem;
+}
+
+.forgetPassword {
+  align-self: baseline;
+  padding-left: 4rem;
+  padding-bottom: 0.5rem;
+}
+
+.forgetPassword:hover {
+  text-decoration: underline;
+}
+
+@media only screen and (max-width: 400px) {
+  .login {
+    margin: 3rem 1rem 1rem;
+  }
 }

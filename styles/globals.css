@@ -46,10 +46,10 @@ li {
 
 .btnPrimary {
   border: none;
-  padding: 0.8rem 1.7rem;
+  padding: 0.6rem 1.3rem;
   outline: none;
   border-radius: 2rem;
-  font-size: large;
+  font-size: 1.05rem;
   background-color: var(--primary-color);
   color: #fff;
   margin: 1rem 0;

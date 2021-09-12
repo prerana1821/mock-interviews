@@ -1,7 +1,7 @@
 export { signInUserWithCredentials } from "./clientUtils/signInUserWithCredentials";
 export { loginUserWithCredentials } from "./clientUtils/loginUserWithCredentials";
 export { scheduledSlots } from "./clientUtils/getScheduledInterviews";
-export { formatDateTime } from "./clientUtils/getFormattedDate";
+export { formatTime } from "./clientUtils/getFormattedDate";
 export { formatedUrl } from "./clientUtils/getFormattedUrl";
 export { setUserAuth } from "./clientUtils/setUserAuth";
 export { togglePassword } from "./clientUtils/togglePassword";

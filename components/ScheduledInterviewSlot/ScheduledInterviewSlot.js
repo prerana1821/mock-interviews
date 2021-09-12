@@ -1,5 +1,6 @@
 import { useAuth, useInterviewSlot } from "../../context";
-import { formatDateTime, scheduledSlots } from "../../utils";
+import { formatTime, scheduledSlots } from "../../utils";
+import { formatDate } from "../../utils/clientUtils/getFormattedDate";
 import styles from "../UserInterviewSlot/UserInterviewSlot.module.css";
 
 export const ScheduledInterviewSlot = () => {
@@ -20,14 +21,28 @@ export const ScheduledInterviewSlot = () => {
       </p>
       <div className={styles.interviewSlots}>
         {scheduledInterviews.map((scheduledInterview) => {
-          return scheduledInterview.slots.map((interview) => {
-            return (
-              <div className={styles.greenInterviewSlot} key={interview._id}>
-                <h3>@{scheduledInterview.userId.username}</h3>
-                <p>{formatDateTime(interview.slot)}</p>
-              </div>
-            );
-          });
+          return (
+            scheduledInterview.slots
+              // .filter((slot) => {
+              //   const today = new Date();
+              //   let yesterday = new Date(today);
+              //   yesterday.setDate(yesterday.getDate() - 1);
+              //   return new Date(formatDate(slot.slot)) > new Date(yesterday);
+              // })
+              .sort((a, b) => new Date(a.slot) - new Date(b.slot))
+              .map((interview) => {
+                return (
+                  <div
+                    className={styles.greenInterviewSlot}
+                    key={interview._id}
+                  >
+                    <h3>@{scheduledInterview.userId.username}</h3>
+                    <p>{formatTime(interview.slot)}</p>
+                    <p>{formatDate(interview.slot)}</p>
+                  </div>
+                );
+              })
+          );
         })}
       </div>
     </div>

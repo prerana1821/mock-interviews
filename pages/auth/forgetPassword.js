@@ -1,37 +1,32 @@
 import { useState } from "react";
-import { togglePassword, loginUserWithCredentials } from "../../utils";
+import { togglePassword } from "../../utils";
 import loginStyles from "../../styles/Form.module.css";
 import { ShowPassword } from "../../components";
 import { useRouter } from "next/router";
 import { useAuth } from "../../context";
 import Image from "next/image";
 import Link from "next/link";
+import { forgetPassword } from "../../utils/clientUtils/forgetPassword";
 
-const Login = () => {
-  const router = useRouter();
+const ForgetPassword = () => {
   const [userCredentials, setUserCredentials] = useState({
     email: "",
     password: "",
     message: "",
     showPassword: false,
   });
+
   const { authState, authDispatch } = useAuth();
 
   return (
     <div className={loginStyles.login}>
       <form
         onSubmit={(e) =>
-          loginUserWithCredentials(
-            e,
-            authDispatch,
-            userCredentials,
-            router,
-            setUserCredentials
-          )
+          forgetPassword(e, authDispatch, userCredentials, setUserCredentials)
         }
         className={loginStyles.form}
       >
-        <h1>Login</h1>
+        <h1>Forget Password</h1>
         {authState.status?.loading?.userType && (
           <div className='loading'>
             <Image src='/images/loading.svg' width='200px' height='200px' />
@@ -54,13 +49,14 @@ const Login = () => {
           />
           <span className={loginStyles.focusBorder}></span>
         </div>
+
         <div className={loginStyles.inputBox}>
           <input
             type={userCredentials.showPassword ? "text" : "password"}
             required
             className={loginStyles.input}
+            placeholder='Enter Password'
             value={userCredentials.password}
-            placeholder='Enter your Password'
             onChange={(e) =>
               setUserCredentials((state) => ({
                 ...state,
@@ -78,18 +74,13 @@ const Login = () => {
           />
         </div>
         <p className={loginStyles.secondaryTxt}>{userCredentials.message}</p>
-        <Link href='/auth/forgetPassword'>
-          <a className={loginStyles.forgetPassword}>
-            <em> Forget Password?</em>
-          </a>
-        </Link>
         <button className='btnPrimary' type='submit'>
-          Login
+          Submit
         </button>
         <p className={loginStyles.secondaryTxt}>
-          Don't have an account?{" "}
-          <Link href='/auth/signin'>
-            <a className='blueTxt'>Sign Up!</a>
+          Remember Password?{" "}
+          <Link href='/auth/login'>
+            <a className='blueTxt'>Login</a>
           </Link>
         </p>
       </form>
@@ -97,4 +88,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default ForgetPassword;

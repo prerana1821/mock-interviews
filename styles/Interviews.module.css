@@ -10,7 +10,7 @@
 .interviewSlotCard {
   box-shadow: var(--box-shadow);
   border-radius: 1rem;
-  padding: 1.5rem;
+  padding: 1.5rem 2rem;
 }
 
 .interviewSlotCard > h3,

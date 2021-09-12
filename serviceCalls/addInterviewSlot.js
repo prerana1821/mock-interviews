@@ -6,7 +6,6 @@ export const addInterviewSlot = async (
   interviewSlotDispatch
 ) => {
   event.preventDefault();
-  console.log(2, { dateAndTime });
   try {
     interviewSlotDispatch({
       type: "SET_STATUS",

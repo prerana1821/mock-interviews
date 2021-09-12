@@ -13,7 +13,7 @@ export const monthNames = [
   "December",
 ];
 
-export const formatDateTime = (date) => {
+export const formatTime = (date) => {
   const dateObj = new Date(
     new Date(date).toLocaleString("en-US", {
       timeZone: "Asia/Kolkata",
@@ -26,7 +26,16 @@ export const formatDateTime = (date) => {
   hours = hours ? hours : 12;
   minutes = minutes < 10 ? "0" + minutes : minutes;
   const strTime = hours + ":" + minutes + " " + ampm;
-  return `Time: ${strTime}, ${
+  return `Time: ${strTime}`;
+};
+
+export const formatDate = (date) => {
+  const dateObj = new Date(
+    new Date(date).toLocaleString("en-US", {
+      timeZone: "Asia/Kolkata",
+    })
+  );
+  return `Date: ${
     monthNames[dateObj.getMonth()]
   } ${dateObj.getDate()}, ${dateObj.getFullYear()}`;
 };

@@ -1,0 +1,22 @@
+.status {
+  position: fixed;
+  bottom: 7rem;
+  right: 5rem;
+  background-color: #b78efc;
+  font-weight: 500;
+  padding: 0.7rem 1rem;
+  border-radius: 0.5rem;
+}
+
+.status p {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.1rem;
+}
+/* {authState.status?.loading ||
+// authState.status?.error ||
+// authState.status?.success ||
+// interviewSlotState.status?.loading ||
+// interviewSlotState.status?.error ||
+// interviewSlotState.status?.success} */

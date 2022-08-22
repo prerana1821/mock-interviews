@@ -14,6 +14,12 @@ There are multiple features implemented on Mocky to get you ready for neoG Camp.
 
 > 🖼 **Mocky** demo video:
 
+<figure class="video_container">
+  <video controls="true" allowfullscreen="true" poster="./public/images/poster.png">
+    <source src="./public/demo.mp4" type="video/mp4">
+  </video>
+</figure>
+
 ## 🛠️ **Spinning Up Development Environment**
 
 1. Clone the repository

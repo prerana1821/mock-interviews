@@ -15,10 +15,9 @@ There are multiple features implemented on Mocky to get you ready for neoG Camp.
 > 🖼 **Mocky** demo video:
 
 <figure class="video_container">
-  <video controls="true" allowfullscreen="true" poster="./public/images/poster.png">
-    <source src="./public/demo.mp4" type="video/mp4">
-  </video>
+  <iframe src="https://user-images.githubusercontent.com/61601706/185978492-45ba8ff8-6d8f-43b6-a82b-22cf8fa85c3b.mp4" frameborder="0" allowfullscreen="true"> </iframe>
 </figure>
+
 
 ## 🛠️ **Spinning Up Development Environment**
 

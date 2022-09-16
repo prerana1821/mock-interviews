@@ -1,0 +1,138 @@
+.footer.section {
+  padding: 3rem 1rem 2rem;
+}
+
+.footer .text-container {
+  margin-bottom: 0.8rem;
+}
+
+.footer .text-container .text {
+  font-size: 1rem;
+}
+
+.footer-container-main {
+  color: var(--off-white);
+  background-color: var(--primary);
+  text-align: center;
+}
+
+.footer-icons-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0.8rem;
+}
+
+.footer-icons {
+  margin-right: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.footer-icons:nth-of-type(4) {
+  margin-right: 0;
+}
+
+.footer-icons:last-of-type {
+  margin-right: 0;
+}
+
+.footer .links-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 2.5rem;
+}
+
+.footer.links-container-mob {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 320px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer.links-container-mob:nth-of-type(2) {
+  justify-content: center;
+}
+
+.footer .link {
+  color: var(--off-white);
+  margin-right: 0;
+  margin-bottom: 1rem;
+}
+
+.footer .link:hover {
+  text-decoration: underline;
+}
+
+.footer .link:last-of-type {
+  margin-right: 0;
+}
+
+.footer-container-main .header-m {
+  color: var(--off-white);
+  margin-bottom: 24px;
+}
+
+.footer-container-main button {
+  margin: 24px;
+}
+
+.footer-container-other {
+  font-family: 'Manrope';
+  color: var(--off-white);
+  background-color: var(--primary-dark);
+  width: 100%;
+  padding: 22px;
+  text-align: center;
+}
+
+.footer-desktop {
+  display: none;
+}
+
+.footer-mobile {
+  display: block;
+}
+
+@media screen and (min-width: 329px) {
+  .footer-icons:nth-of-type(4) {
+    margin-right: 1.5rem;
+  }
+}
+
+@media screen and (min-width: 800px) {
+  .footer.section {
+    padding: 5rem 1rem 2rem;
+  }
+
+  .footer .text-container .text {
+    font-size: 2.25rem;
+  }
+
+  .footer-icons {
+    margin-bottom: 0rem;
+  }
+
+  .footer .link {
+    margin-right: 2.5rem;
+  }
+
+  .footer-container-main {
+    background-image: url('/images/footer-background.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+  }
+
+  .footer-desktop {
+    display: block;
+  }
+
+  .footer-mobile {
+    display: none;
+  }
+}

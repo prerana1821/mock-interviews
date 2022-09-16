@@ -2,6 +2,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap');
 
+@import url('./footer.css');
+@import url('./button.css');
+
 html,
 body {
   padding: 0;
@@ -11,7 +14,7 @@ body {
 
 :root {
   --box-shadow: 8.71px 8.71px 15px rgb(0 0 0 / 5%), -8.71px -8.71px 15px rgb(0 0 0 / 3%);
-  --primary-color: #0d3344;
+  --primary: #0d3344;
   --primary-dark: #052634;
   --secondary: #49a0eb;
   --secondary-overlay: #49a0ebb3;
@@ -67,7 +70,7 @@ li {
   outline: none;
   border-radius: 2rem;
   font-size: 1.05rem;
-  background-color: var(--primary-color);
+  background-color: var(--primary);
   color: #fff;
   margin: 1rem 0;
   cursor: pointer;
@@ -77,8 +80,8 @@ li {
   background: none;
   cursor: pointer;
   padding: 0.6rem 1rem;
-  color: var(--primary-color);
-  border: 2px solid var(--primary-color);
+  color: var(--primary);
+  border: 2px solid var(--primary);
   border-radius: 2rem;
   font-size: initial;
   margin: 1rem 0;

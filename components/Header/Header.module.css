@@ -13,8 +13,8 @@
 }
 
 .navLinks li:hover {
-  color: var(--primary-color);
-  text-decoration-color: var(--primary-color);
+  color: var(--primary);
+  text-decoration-color: var(--primary);
   text-decoration-line: underline;
   text-underline-offset: 8px;
 }

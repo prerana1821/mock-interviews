@@ -1,2 +1,2 @@
-export { useAuth, AuthProvider } from "./AuthProvider";
+export { AuthContextProvider, useAuth } from "./FirebaseAuthProvider";
 export { InterviewSlotProvider, useInterviewSlot } from "./InterviewSlot";

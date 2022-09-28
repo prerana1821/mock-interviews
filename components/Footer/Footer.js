@@ -35,20 +35,6 @@ export const Footer = () => {
             <FooterIconLink href="https://www.facebook.com/neogcamp" imgSrc="/images/facebook.svg" />
             <FooterIconLink href="https://t.me/teamtanay" imgSrc="/images/telegram.svg" />
           </div>
-          {/* <div className="footer links-container">
-            <a href="/legal/tnc" className="footer link">
-              Terms
-            </a>
-            <a href="/legal/privacy" className="footer link">
-              Privacy Policy
-            </a>
-            <a href="/legal/refund" className="footer link">
-              Refund Policy
-            </a>
-            <a href="/legal/communityguide" className="footer link">
-              Community Guidelines
-            </a>
-          </div> */}
         </footer>
         <section className="footer-container-other footer-desktop">
           <span className="text-s">© neoG.camp. All rights reserved</span>
@@ -83,22 +69,6 @@ export const Footer = () => {
           </div>
         </footer>
         <section className="footer-container-other footer-mobile">
-          {/* <div className="mt-1 mb-1 footer links-container-mob">
-            <a href="/legal/tnc" className="footer link">
-              Terms
-            </a>
-            <a href="/legal/privacy" className="footer link">
-              Privacy Policy
-            </a>
-            <a href="/legal/refund" className="footer link">
-              Refund Policy
-            </a>
-          </div>
-          <div className="mb-1 footer links-container-mob">
-            <a href="/legal/communityguide" className="footer link">
-              Community Guidelines
-            </a>
-          </div> */}
           <span className="text-s">© neoG.camp. All rights reserved</span>
         </section>
       </>

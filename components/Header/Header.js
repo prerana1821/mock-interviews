@@ -1,7 +1,7 @@
-import headerStyles from "./Header.module.css";
-import Link from "next/link";
-import { useAuth } from "../../context";
-import Image from "next/image";
+import headerStyles from './Header.module.css';
+import Link from 'next/link';
+import { useAuth } from '../../context';
+import Image from 'next/image';
 
 export const Header = () => {
   const { authState } = useAuth();
@@ -9,38 +9,28 @@ export const Header = () => {
   return (
     <nav className={headerStyles.nav}>
       <div>
-        <Link href='/'>
+        <Link href="/">
           <a>
-            <Image
-              priority
-              src='/images/neogcamp.svg'
-              width='150px'
-              height='50px'
-              alt='neogcamo logo'
-            />
+            <Image priority src="/images/logo.svg" width="150px" height="50px" alt="neogcamo logo" />
           </a>
         </Link>
       </div>
       <ul className={headerStyles.navLinks}>
         {!authState.token && (
-          <Link href='/'>
+          <Link href="/">
             <li>
               <a>Home</a>
             </li>
           </Link>
         )}
-        <Link href='/interviews'>
+        <Link href="/interviews">
           <li>
             <a>Interviews</a>
           </li>
         </Link>
-        <Link
-          href={
-            authState.token ? `/profile/${authState.user._id}` : "/auth/login"
-          }
-        >
+        <Link href={authState.token ? `/profile/${authState.user._id}` : '/auth/login'}>
           <li>
-            <a>{authState.token ? "Account" : "Login"}</a>
+            <a>{authState.token ? 'Account' : 'Login'}</a>
           </li>
         </Link>
       </ul>

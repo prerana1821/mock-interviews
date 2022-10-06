@@ -1,17 +1,22 @@
 .nav {
   display: flex;
   justify-content: space-between;
-  padding: 0 2rem;
-  font-size: 1rem;
+  padding: 1rem 2rem;
   align-items: center;
-  background-color: #7c3aed;
-  color: #fff;
 }
 
 .navLinks {
   display: flex;
   gap: 2rem;
-  font-size: larger;
+  color: var(--text-color);
+  font-size: 1.25rem;
+}
+
+.navLinks li:hover {
+  color: var(--primary);
+  text-decoration-color: var(--primary);
+  text-decoration-line: underline;
+  text-underline-offset: 8px;
 }
 
 .navLinks li {

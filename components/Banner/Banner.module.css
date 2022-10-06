@@ -9,6 +9,7 @@
   font-size: 4rem;
   font-weight: 700;
   width: 600px;
+  color: var(--primary);
 }
 
 @media only screen and (max-width: 780px) {

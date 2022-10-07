@@ -6,7 +6,7 @@ export const setUserAuth = ({ authDispatch, user, token }) => {
     "user",
     JSON.stringify({
       _id: user._id,
-      username: user.username,
+      fullName: user.fullName,
       email: user.email,
     })
   );
@@ -17,7 +17,7 @@ export const setUserAuth = ({ authDispatch, user, token }) => {
   authDispatch({
     type: "SET_STATUS",
     payload: {
-      status: { success: `Hello ${user.username}` },
+      status: { success: `Hello ${user.fullName}` },
     },
   });
 };

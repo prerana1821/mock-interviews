@@ -15,9 +15,9 @@ const Login = () => {
     message: "",
     showPassword: false,
   });
-  const { authState, authDispatch } = useAuth();
+  const { authState, authDispatch, login } = useAuth();
 
-  const { user, login, signup, logout } = useFirebaseAuth();
+  // const { user, login, signup, logout } = useFirebaseAuth();
 
   return (
     <div className={ loginStyles.login }>
@@ -48,9 +48,9 @@ const Login = () => {
         Login in with GitHub
       </button>
 
-      <button className="btnPrimary" onClick={ () => logout() }>
+      {/* <button className="btnPrimary" onClick={ () => logout() }>
         logout out
-      </button>
+      </button> */}
 
       {/* </form> */ }
     </div>

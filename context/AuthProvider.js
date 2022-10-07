@@ -3,8 +3,19 @@ import { createContext, useContext, useEffect, useReducer } from "react";
 import { authReducer } from "../reducer";
 import cookies from "js-cookie";
 import { loadUserData } from "../serviceCalls";
+import {
+  onAuthStateChanged,
+  signInWithPopup,
+  signOut,
+  GithubAuthProvider,
+} from "firebase/auth";
+import { auth } from "../config/firebase";
+import { loginUser } from "../serviceCalls";
+import { setUserAuth } from "../utils"
 
 export const AuthContext = createContext();
+
+const provider = new GithubAuthProvider();
 
 export const AuthProvider = ({ children, token, userId }) => {
   const router = useRouter();
@@ -16,10 +27,34 @@ export const AuthProvider = ({ children, token, userId }) => {
   });
 
   useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        loginUser({
+          email: user.email,
+          fullName: user.displayName,
+          uid: user.uid,
+          authDispatch,
+          setUserAuth,
+          router,
+        });
+      }
+    });
     loadUserData(token, userId, authDispatch);
+
+    return () => unsubscribe();
   }, [token]);
 
-  const logoutUser = (interviewSlotDispatch) => {
+  const login = () => {
+    return signInWithPopup(auth, provider);
+  };
+
+  // const logout = async () => {
+  //   setUser(null);
+
+
+  // };
+
+  const logoutUser = async (interviewSlotDispatch) => {
     authDispatch({ type: "LOGOUT" });
     interviewSlotDispatch({ type: "REMOVE_USER_INTERVIEW_SLOTS" });
     localStorage?.removeItem("token");
@@ -27,6 +62,7 @@ export const AuthProvider = ({ children, token, userId }) => {
     cookies.remove("token");
     cookies.remove("userId");
     router.replace("/");
+    await signOut(auth);
   };
 
   return (
@@ -35,6 +71,7 @@ export const AuthProvider = ({ children, token, userId }) => {
         authState,
         authDispatch,
         logoutUser,
+        login
       } }
     >
       { children }

@@ -11,7 +11,6 @@ const UserCredentialSchema = new mongoose.Schema(
       type: String,
       index: true,
       trim: true,
-      // required: [true, "Please add your Username"],
       unique: "Username should be unique",
     },
     email: {

@@ -5,17 +5,19 @@ import {
   signOut,
   GithubAuthProvider,
 } from "firebase/auth";
-import { auth } from "../firebase/firebaseApp";
+import { auth } from "../config/firebase";
 
-const AuthContext = createContext({});
+const FirebaseAuthContext = createContext({});
 
 const provider = new GithubAuthProvider();
 
-export const AuthContextProvider = ({ children }) => {
+export const useFirebaseAuth = () => useContext(FirebaseAuthContext);
+
+export const FirebaseAuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  console.log(user);
+  console.log(user, "firebase user");
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -28,7 +30,6 @@ export const AuthContextProvider = ({ children }) => {
       } else {
         setUser(null);
       }
-
       setLoading(false);
     });
 
@@ -45,14 +46,13 @@ export const AuthContextProvider = ({ children }) => {
 
   const logout = async () => {
     setUser(null);
+
     await signOut(auth);
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, signup, logout }}>
+    <FirebaseAuthContext.Provider value={{ user, login, signup, logout }}>
       {loading ? null : children}
-    </AuthContext.Provider>
+    </FirebaseAuthContext.Provider>
   );
 };
-
-export const useAuth = () => useContext(AuthContext);

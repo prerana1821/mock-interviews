@@ -39,20 +39,18 @@ export const AuthProvider = ({ children, token, userId }) => {
         });
       }
     });
-    loadUserData(token, userId, authDispatch);
 
     return () => unsubscribe();
-  }, [token]);
+  }, []);
+
+  useEffect(() => {
+    loadUserData(token, userId, authDispatch);
+  }, [token])
+
 
   const login = () => {
     return signInWithPopup(auth, provider);
   };
-
-  // const logout = async () => {
-  //   setUser(null);
-
-
-  // };
 
   const logoutUser = async (interviewSlotDispatch) => {
     authDispatch({ type: "LOGOUT" });

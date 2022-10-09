@@ -1,16 +1,12 @@
 import { useState } from "react";
 import { useAuth, useInterviewSlot } from "../../context";
 import { addInterviewSlot } from "../../serviceCalls";
-import formStyles from "../../styles/Form.module.css";
-import { getPastDate } from "../../utils";
 import { KeyboardDateTimePicker } from "@material-ui/pickers";
 
 export const AddInterviewSlot = ({ setShowUsernameAlert }) => {
   const [dateAndTime, setDateAndTime] = useState(new Date());
   const { authState } = useAuth();
   const { interviewSlotDispatch } = useInterviewSlot();
-
-  console.log({ authState });
 
   return (
     <div>

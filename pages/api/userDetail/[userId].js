@@ -9,7 +9,7 @@ async function handler(req, res) {
     query: { userId },
     method,
   } = req;
-  const { fullName, portfolio, interviewDone } = req.body;
+  const { username, portfolio, interviewDone } = req.body;
 
   await dbConnect();
   await runCors(req, res, cors);
@@ -39,7 +39,7 @@ async function handler(req, res) {
             .json({ success: false, message: "User Details not found" });
         }
         const updatedUserDetails = extend(userDetails, {
-          fullName,
+          username,
           portfolio,
           interviewDone,
         });

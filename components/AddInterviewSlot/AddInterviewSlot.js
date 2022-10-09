@@ -5,35 +5,42 @@ import formStyles from "../../styles/Form.module.css";
 import { getPastDate } from "../../utils";
 import { KeyboardDateTimePicker } from "@material-ui/pickers";
 
-export const AddInterviewSlot = () => {
+export const AddInterviewSlot = ({ setShowUsernameAlert }) => {
   const [dateAndTime, setDateAndTime] = useState(new Date());
   const { authState } = useAuth();
   const { interviewSlotDispatch } = useInterviewSlot();
+
+  console.log({ authState });
 
   return (
     <div>
       <h1>Add New Interview Slot</h1>
       <form
-        onSubmit={(e) => {
+        onSubmit={ (e) => {
           e.preventDefault();
-          addInterviewSlot(
-            e,
-            authState,
-            dateAndTime,
-            setDateAndTime,
-            interviewSlotDispatch
-          );
-        }}
+          if (authState?.user?.username || authState?.user?.username !== undefined) {
+            addInterviewSlot(
+              e,
+              authState,
+              dateAndTime,
+              setDateAndTime,
+              interviewSlotDispatch
+            );
+          } else {
+            console.log("NICE");
+            setShowUsernameAlert(true);
+          }
+        } }
       >
         <br />
         <KeyboardDateTimePicker
           variant='inline'
-          ampm={true}
+          ampm={ true }
           label='Enter date & time for the interview'
-          value={dateAndTime}
-          onChange={setDateAndTime}
+          value={ dateAndTime }
+          onChange={ setDateAndTime }
           disablePast
-          style={{ width: "300px" }}
+          style={ { width: "300px" } }
         />
         <br />
         <button className='btnPrimary' type='submit'>

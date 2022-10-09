@@ -2,12 +2,17 @@ export const editUserDetails = async (
   event,
   authState,
   authDispatch,
-  fullName,
+  username,
   portfolio,
   interviewDone,
   setEditProfile
 ) => {
   event.preventDefault();
+  console.log({
+    username,
+    portfolio,
+    interviewDone,
+  });
   try {
     authDispatch({
       type: "SET_STATUS",
@@ -22,19 +27,20 @@ export const editUserDetails = async (
         Authorization: authState.token,
       },
       body: JSON.stringify({
-        fullName,
+        username,
         portfolio,
         interviewDone,
       }),
     });
 
     const data = await response.json();
+    console.log({ data });
     if (data.success) {
       authDispatch({
         type: "UPDATE_USER",
         payload: {
           portfolio: data.data.portfolio,
-          fullName: data.data.fullName,
+          username: data.data.username,
           interviewDone: data.data.interviewDone,
         },
       });

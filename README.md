@@ -6,7 +6,7 @@
 
 Get Interview Ready with Mocky.
 
-### [Mocky](https://mock-interviews.vercel.app/) is LIVE!
+### [Mocky](https://mock-interviews.vercel.app/) is LIVE!!
 
 ## 💡 **Features and Interfaces**
 
@@ -14,10 +14,7 @@ There are multiple features implemented on Mocky to get you ready for neoG Camp.
 
 > 🖼 **Mocky** demo video:
 
-
 https://user-images.githubusercontent.com/61601706/185979135-093f5cff-df6e-405b-bb84-b52ca1d5f7d0.mp4
-
-
 
 ## 🛠️ **Spinning Up Development Environment**
 

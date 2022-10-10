@@ -23,7 +23,6 @@ export const AddInterviewSlot = ({ setShowUsernameAlert }) => {
               interviewSlotDispatch
             );
           } else {
-            console.log("NICE");
             setShowUsernameAlert(true);
           }
         } }

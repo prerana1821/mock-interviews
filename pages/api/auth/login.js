@@ -10,7 +10,6 @@ export default async function handler(req, res) {
   await dbConnect();
   await runCors(req, res, cors);
 
-  console.log({ email, fullName, uid });
 
   switch (method) {
     case "POST":

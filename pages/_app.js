@@ -9,7 +9,7 @@ import DateFnsUtils from "@date-io/date-fns";
 
 function MyApp({ Component, pageProps, token, userId }) {
   return (
-    <MuiPickersUtilsProvider utils={ DateFnsUtils }>
+  <MuiPickersUtilsProvider utils={ DateFnsUtils }>
       <AuthProvider token={ token } userId={ userId }>
         <InterviewSlotProvider token={ token }>
           <Layout>

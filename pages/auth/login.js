@@ -18,6 +18,8 @@ const Login = () => {
   const { authState, authDispatch, login } = useAuth();
 
 
+  const { user, login, signup, logout } = useFirebaseAuth();
+
   return (
     <div className={ loginStyles.login }>
       <div className={ loginStyles.form }
@@ -32,6 +34,7 @@ const Login = () => {
           Login in with GitHub
         </button>
       </div>
+
     </div>
   );
 };

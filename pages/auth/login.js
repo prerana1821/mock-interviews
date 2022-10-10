@@ -1,24 +1,11 @@
-import { useState } from "react";
-import { togglePassword, loginUserWithCredentials } from "../../utils";
 import loginStyles from "../../styles/Form.module.css";
-import { ShowPassword } from "../../components";
-import { useRouter } from "next/router";
-import { useAuth, useFirebaseAuth } from "../../context";
+import { useAuth } from "../../context";
 import Image from "next/image";
-import Link from "next/link";
 
 const Login = () => {
-  const router = useRouter();
-  const [userCredentials, setUserCredentials] = useState({
-    email: "",
-    password: "",
-    message: "",
-    showPassword: false,
-  });
-  const { authState, authDispatch, login } = useAuth();
 
+  const { authState, login } = useAuth();
 
-  const { user, login, signup, logout } = useFirebaseAuth();
 
   return (
     <div className={ loginStyles.login }>

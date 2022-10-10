@@ -5,7 +5,6 @@ export { EditProfile } from "./EditProfile/EditProfile";
 export { AddInterviewSlot } from "./AddInterviewSlot/AddInterviewSlot";
 export { UserInterviewSlot } from "./UserInterviewSlot/UserInterviewSlot";
 export { ProfileCard } from "./ProfileCard/ProfileCard";
-export { ShowPassword } from "./ShowPassword/ShowPassword";
 export { ScheduledInterviewSlot } from "./ScheduledInterviewSlot/ScheduledInterviewSlot";
 export { ShowInterviewSlots } from "./ShowInterviewSlots/ShowInterviewSlots";
 export { Toast } from "./Toast/Toast";

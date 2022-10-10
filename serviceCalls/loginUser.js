@@ -1,6 +1,7 @@
 export const loginUser = async ({
   email,
-  password,
+  fullName,
+  uid,
   authDispatch,
   setUserAuth,
   router,
@@ -15,9 +16,12 @@ export const loginUser = async ({
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({
+        email, fullName, uid,
+      }),
     });
     const data = await response.json();
+    console.log('LOGINN', { data });
     if (data.success) {
       setUserAuth({
         authDispatch,

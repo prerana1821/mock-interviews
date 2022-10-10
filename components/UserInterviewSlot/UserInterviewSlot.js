@@ -20,24 +20,24 @@ export const UserInterviewSlot = ({ userDetail }) => {
   return (
     <>
       <h1 className='textCenter'>Your Interview Slots</h1>
-      <div className={userInterviewSlot.interviewSlots}>
-        {interviewSlotState?.userInterViewSlots?.slots
+      <div className={ userInterviewSlot.interviewSlots }>
+        { interviewSlotState?.userInterViewSlots?.slots
           ?.sort((a, b) => new Date(a.slot) - new Date(b.slot))
           .map((item) => {
             return (
               <div
-                key={item._id}
-                className={computedClassName({
+                key={ item._id }
+                className={ computedClassName({
                   [userInterviewSlot.greenInterviewSlot]: item.partner,
                   [userInterviewSlot.redInterviewSlot]: !item.partner,
                   // [userInterviewSlot.greyInterviewSlot]:
                   //   item.slot === null || pastTime(item, formatDate(item.slot)),
-                })}
+                }) }
               >
-                {/* {!pastTime(item, formatDate(item.slot)) && ( */}
+                {/* {!pastTime(item, formatDate(item.slot)) && ( */ }
                 <button
                   className='btnIcon'
-                  onClick={() =>
+                  onClick={ () =>
                     deleteInterviewSlot(
                       item._id,
                       authState,
@@ -47,19 +47,19 @@ export const UserInterviewSlot = ({ userDetail }) => {
                 >
                   <Image src='/images/delete.png' width='30px' height='30px' />
                 </button>
-                <h3>@{userDetail?.username}</h3>
-                <p>{formatTime(item.slot)}</p>
-                <p>{formatDate(item.slot)}</p>
-                {item.partner && (
+                <h3>@{ userDetail?.username }</h3>
+                <p>{ formatTime(item.slot) }</p>
+                <p>{ formatDate(item.slot) }</p>
+                { item.partner && (
                   <div>
                     <h3>Partner:</h3>
-                    <p>Discord Username: @{item.partner.username}</p>
-                    <p>{item.partner.fullName}</p>
+                    <p>Discord Id: @{ item.partner.username }</p>
+                    <p>{ item.partner.fullName }</p>
                   </div>
-                )}
+                ) }
               </div>
             );
-          })}
+          }) }
       </div>
     </>
   );

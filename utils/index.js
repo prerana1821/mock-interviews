@@ -1,10 +1,7 @@
-export { signInUserWithCredentials } from "./clientUtils/signInUserWithCredentials";
-export { loginUserWithCredentials } from "./clientUtils/loginUserWithCredentials";
 export { scheduledSlots } from "./clientUtils/getScheduledInterviews";
 export { formatTime } from "./clientUtils/getFormattedDate";
 export { formatedUrl } from "./clientUtils/getFormattedUrl";
 export { setUserAuth } from "./clientUtils/setUserAuth";
-export { togglePassword } from "./clientUtils/togglePassword";
 export { getPastDate } from "./clientUtils/getPastDate";
 export { generateToken } from "./serverUtils/generateToken";
 export { addInterviewSlot } from "./serverUtils/addInterviewSlot";

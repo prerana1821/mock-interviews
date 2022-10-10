@@ -14,7 +14,7 @@ export const authReducer = (state, action) => {
         user: {
           ...state.user,
           portfolio: action.payload.portfolio,
-          fullName: action.payload.fullName,
+          username: action.payload.username,
           interviewDone: action.payload.interviewDone,
         },
       };

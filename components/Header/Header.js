@@ -1,13 +1,14 @@
 import headerStyles from './Header.module.css';
 import Link from 'next/link';
-import { useAuth } from '../../context';
+import { useAuth, useInterviewSlot } from '../../context';
 import Image from 'next/image';
 
 export const Header = () => {
-  const { authState } = useAuth();
+  const { authState, login, logoutUser } = useAuth();
+  const { interviewSlotDispatch } = useInterviewSlot();
 
   return (
-    <nav className={headerStyles.nav}>
+    <nav className={ headerStyles.nav }>
       <div>
         <Link href="/">
           <a>
@@ -15,24 +16,30 @@ export const Header = () => {
           </a>
         </Link>
       </div>
-      <ul className={headerStyles.navLinks}>
-        {!authState.token && (
-          <Link href="/">
-            <li>
-              <a>Home</a>
-            </li>
-          </Link>
-        )}
+      <ul className={ headerStyles.navLinks }>
         <Link href="/interviews">
           <li>
             <a>Interviews</a>
           </li>
         </Link>
-        <Link href={authState.token ? `/profile/${authState.user._id}` : '/auth/login'}>
+        { authState.token ? <Link href={ `/profile/${authState.user._id}` }>
           <li>
-            <a>{authState.token ? 'Account' : 'Login'}</a>
+            <a>Account</a>
           </li>
-        </Link>
+        </Link> :
+          <button className="btnPrimary" style={ { margin: 0 } }
+            onClick={ () => login() }
+          >
+            Login with GitHub
+          </button>
+        }
+        { authState.token && <button
+          onClick={ () => logoutUser(interviewSlotDispatch) }
+          className='btnSecondary'
+          style={ { margin: 0 } }
+        >
+          Logout
+        </button> }
       </ul>
     </nav>
   );

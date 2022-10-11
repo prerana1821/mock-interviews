@@ -12,7 +12,7 @@ import { UsernameAlert } from "../../components/UsernameAlert/UsernameAlert";
 
 const UserProfile = ({ slots }) => {
   const [editProfile, setEditProfile] = useState(false);
-  const { authState, logoutUser } = useAuth();
+  const { authState } = useAuth();
   const { interviewSlotState, interviewSlotDispatch } = useInterviewSlot();
   const [showUsernameAlert, setShowUsernameAlert] = useState(false);
 
@@ -56,19 +56,8 @@ const UserProfile = ({ slots }) => {
               userDetail={ authState.user }
             />
           ) }
-          <button
-            onClick={ () => setEditProfile(!editProfile) }
-            className='btnIcon'
-          >
-            <Image src='/images/edit.png' width='30px' height='30px' />
-          </button>
-          <ProfileCard userDetail={ authState.user } />
-          <button
-            onClick={ () => logoutUser(interviewSlotDispatch) }
-            className='btnSecondary'
-          >
-            Logout
-          </button>
+
+          <ProfileCard userDetail={ authState.user } editProfile={ editProfile } setEditProfile={ setEditProfile } />
         </div>
         <div className={ profileStyles.interviewSlotForm }>
           <AddInterviewSlot setShowUsernameAlert={ setShowUsernameAlert } />

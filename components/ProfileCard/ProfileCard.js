@@ -1,9 +1,22 @@
+import Image from "next/image";
 import { formatedUrl } from "../../utils";
+import profileCardStyles from './ProfileCard.module.css';
 
-export const ProfileCard = ({ userDetail }) => {
+
+export const ProfileCard = ({ userDetail, editProfile, setEditProfile }) => {
   return (
     <>
-      <h1>Profile</h1>
+      <div className={ profileCardStyles.cardHeader }>
+        <h1>Profile</h1>
+        <div>
+          <button
+            onClick={ () => setEditProfile(!editProfile) }
+            className='btnIcon'
+          >
+            <Image src='/images/edit.png' width='30px' height='30px' />
+          </button>
+        </div>
+      </div>
       <h3>
         Name: { userDetail?.fullName ? userDetail.fullName : "You Full Name" }
       </h3>

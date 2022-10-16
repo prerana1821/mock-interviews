@@ -1,19 +1,21 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap");
 
-@import url('./footer.css');
-@import url('./button.css');
+@import url("./footer.css");
+@import url("./button.css");
+@import url("../components/InfoCards/InfoCards.module.css");
 
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 :root {
-  --box-shadow: 8.71px 8.71px 15px rgb(0 0 0 / 5%), -8.71px -8.71px 15px rgb(0 0 0 / 3%);
+  --box-shadow: 8.71px 8.71px 15px rgb(0 0 0 / 5%),
+    -8.71px -8.71px 15px rgb(0 0 0 / 3%);
   --primary: #0d3344;
   --primary-dark: #052634;
   --secondary: #49a0eb;
@@ -114,4 +116,46 @@ li {
   position: absolute;
   align-items: center;
   justify-content: center;
+}
+
+.fw {
+  background-color: var(--white);
+}
+
+.shadow {
+  box-shadow: var(--box-shadow);
+}
+
+.header-m {
+  color: var(--primary);
+  font-size: 2rem;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.container {
+  padding: 1rem;
+}
+
+.section {
+  padding: 2rem 1rem;
+}
+
+.section + .ow {
+  background-color: var(--off-white);
+}
+
+.header-s {
+  font-size: 24px;
+  color: var(--primary);
+  line-height: 1.5rem;
+  font-weight: 600;
+}
+
+.sub-header {
+  font-size: 18px;
+  line-height: 2rem;
+  margin-bottom: 1rem;
 }

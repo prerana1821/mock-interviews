@@ -1,4 +1,3 @@
-import Link from "next/link";
 import React from "react";
 
 export const InfoCards = ({ content }) => {
@@ -10,13 +9,13 @@ export const InfoCards = ({ content }) => {
 
         <div className="trio mb-1">
           {content.map((level, index) => (
-            <Link href={level.href}>
+            <div>
               <div className="card fw shadow" key={index}>
                 <div className="sub-header">{level.subTitle}</div>
                 <div className="header-s">{level.title}</div>
                 <div className="text">{level.description()}</div>
               </div>
-            </Link>
+            </div>
           ))}
         </div>
       </div>

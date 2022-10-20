@@ -5,6 +5,7 @@
 @import url("./footer.css");
 @import url("./button.css");
 @import url("../components/InfoCards/InfoCards.module.css");
+@import url("../components/SideNav/Sidenav.module.css");
 
 html,
 body {
@@ -158,4 +159,18 @@ li {
   font-size: 18px;
   line-height: 2rem;
   margin-bottom: 1rem;
+}
+
+.interviewContainer {
+  display: flex;
+}
+
+.interviewPageLeft {
+  height: 100%;
+  width: 25%;
+}
+
+.interviewPageRight {
+  height: 100%;
+  width: 75%;
 }

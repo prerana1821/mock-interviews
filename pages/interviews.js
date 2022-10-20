@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import interviewSlotStyles from "../styles/Interviews.module.css";
-import { LoginAlert, ShowInterviewSlots } from "../components";
+import { LoginAlert, ShowInterviewSlots, SideNav } from "../components";
 import { useAuth, useInterviewSlot } from "../context";
 import Image from "next/image";
 
@@ -10,34 +10,35 @@ const Interviews = ({ interviewSlots }) => {
   const { interviewSlotState, interviewSlotDispatch } = useInterviewSlot();
 
   useEffect(() => {
-    // if (
-    //   Object.entries(interviewSlots).length === 0 ||
-    //   interviewSlots.length === 0
-    // ) {
-    //   interviewSlotDispatch({
-    //     type: "SET_STATUS",
-    //     payload: {
-    //       status: { loading: { loadingType: "Loading interview slots" } },
-    //     },
-    //   });
-    // } else {
-    if (interviewSlots?.type !== "error") {
-      interviewSlotDispatch({
-        type: "LOAD_INTERVIEW_SLOTS",
-        payload: { interviewSlots },
-      });
-    } else {
+    if (
+      Object.entries(interviewSlots).length === 0 ||
+      interviewSlots.length === 0
+    ) {
       interviewSlotDispatch({
         type: "SET_STATUS",
         payload: {
-          status: { error: interviewSlots.message },
+          status: { loading: { loadingType: "Loading interview slots" } },
         },
       });
+    } else {
+      if (interviewSlots?.type !== "error") {
+        interviewSlotDispatch({
+          type: "LOAD_INTERVIEW_SLOTS",
+          payload: { interviewSlots },
+        });
+      } else {
+        interviewSlotDispatch({
+          type: "SET_STATUS",
+          payload: {
+            status: { error: interviewSlots.message },
+          },
+        });
+      }
     }
-    // }
   }, [interviewSlots]);
 
   let filteredSlots;
+
   if (authState.token) {
     filteredSlots = interviewSlotState.interviewSlots.filter(
       (interviewSlot) => {
@@ -47,29 +48,35 @@ const Interviews = ({ interviewSlots }) => {
   }
 
   return (
-    <div>
-      {showLoginAlert && <LoginAlert setShowLoginAlert={setShowLoginAlert} />}
-      <h1 className='textCenter'>Open Interview Slots</h1>
-      <p className='textCenter'>
-        Use these available slots to schedule your mock interview
-      </p>
-      {interviewSlotState.status?.loading?.loadingType && (
-        <div className='loading'>
-          <Image src='/images/loading.svg' width='200px' height='200px' />
-        </div>
-      )}
-      <div className={interviewSlotStyles.interviewSlots}>
-        {filteredSlots ? (
-          <ShowInterviewSlots
-            slots={filteredSlots}
-            setShowLoginAlert={setShowLoginAlert}
-          />
-        ) : (
-          <ShowInterviewSlots
-            slots={interviewSlotState.interviewSlots}
-            setShowLoginAlert={setShowLoginAlert}
-          />
+    <div className="interviewContainer">
+      <div className="interviewPageLeft">
+        <SideNav />
+      </div>
+
+      <div className="interviewPageRight">
+        {showLoginAlert && <LoginAlert setShowLoginAlert={setShowLoginAlert} />}
+        <h1 className="textCenter">Open Interview Slots</h1>
+        <p className="textCenter">
+          Use these available slots to schedule your mock interview
+        </p>
+        {interviewSlotState.status?.loading?.loadingType && (
+          <div className="loading">
+            <Image src="/images/loading.svg" width="200px" height="200px" />
+          </div>
         )}
+        <div className={interviewSlotStyles.interviewSlots}>
+          {filteredSlots ? (
+            <ShowInterviewSlots
+              slots={filteredSlots}
+              setShowLoginAlert={setShowLoginAlert}
+            />
+          ) : (
+            <ShowInterviewSlots
+              slots={interviewSlotState.interviewSlots}
+              setShowLoginAlert={setShowLoginAlert}
+            />
+          )}
+        </div>
       </div>
     </div>
   );

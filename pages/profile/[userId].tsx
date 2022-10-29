@@ -1,21 +1,23 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useAuth, useInterviewSlot } from "../../context";
-import { EditProfile, LoginAlert, ScheduledInterviewSlot } from "../../components";
+import { EditProfile, ScheduledInterviewSlot } from "../../components";
 import { AddInterviewSlot } from "../../components";
 import { UserInterviewSlot } from "../../components";
 import { ProfileCard } from "../../components";
 import PrivateRoute from "../../components/PrivateRoute/PrivateRoute";
 import profileStyles from "../../styles/Profile.module.css";
+import React from "react";
 import { scheduledSlots } from "../../utils";
 import { UsernameAlert } from "../../components/UsernameAlert/UsernameAlert";
+import { GetServerSideProps } from "next";
+import { Slots } from "../../types";
 
-const UserProfile = ({ slots }) => {
+const UserProfile = ({ slots }: { slots: Slots }) => {
   const [editProfile, setEditProfile] = useState(false);
   const { authState } = useAuth();
   const { interviewSlotState, interviewSlotDispatch } = useInterviewSlot();
   const [showUsernameAlert, setShowUsernameAlert] = useState(false);
-
 
   const scheduledInterviews = scheduledSlots(
     interviewSlotState.interviewSlots,
@@ -47,43 +49,49 @@ const UserProfile = ({ slots }) => {
 
   return (
     <>
-      { showUsernameAlert && <UsernameAlert setShowUsernameAlert={ setShowUsernameAlert } /> }
-      <div className={ profileStyles.profile }>
-        <div className={ profileStyles.profileCard }>
-          { editProfile && (
+      {showUsernameAlert && (
+        <UsernameAlert setShowUsernameAlert={setShowUsernameAlert} />
+      )}
+      <div className={profileStyles.profile}>
+        <div className={profileStyles.profileCard}>
+          {editProfile && (
             <EditProfile
-              setEditProfile={ setEditProfile }
-              userDetail={ authState.user }
+              setEditProfile={setEditProfile}
+              userDetail={authState.user}
             />
-          ) }
+          )}
 
-          <ProfileCard userDetail={ authState.user } editProfile={ editProfile } setEditProfile={ setEditProfile } />
+          <ProfileCard
+            userDetail={authState.user}
+            editProfile={editProfile}
+            setEditProfile={setEditProfile}
+          />
         </div>
-        <div className={ profileStyles.interviewSlotForm }>
-          <AddInterviewSlot setShowUsernameAlert={ setShowUsernameAlert } />
+        <div className={profileStyles.interviewSlotForm}>
+          <AddInterviewSlot setShowUsernameAlert={setShowUsernameAlert} />
         </div>
       </div>
       <div>
-        { interviewSlotState.userInterViewSlots.slots.length === 0 ? (
+        {interviewSlotState.userInterViewSlots.slots.length === 0 ? (
           <h1 className='textCenter'>You haven't added any slots yet!</h1>
         ) : (
-          <UserInterviewSlot userDetail={ authState.user } />
-        ) }
+          <UserInterviewSlot userDetail={authState.user} />
+        )}
       </div>
       <div>
-        { scheduledInterviews.length === 0 ? (
+        {scheduledInterviews.length === 0 ? (
           <h1 className='textCenter'>
             Your interview slots have not matched with anyone yet!
           </h1>
         ) : (
           <ScheduledInterviewSlot />
-        ) }
+        )}
       </div>
     </>
   );
 };
 
-export async function getServerSideProps(context) {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   const authToken = context.req.cookies.token;
 
   let userInterviewDetails = null;
@@ -116,6 +124,6 @@ export async function getServerSideProps(context) {
       slots: userInterviewDetails,
     },
   };
-}
+};
 
 export default PrivateRoute(UserProfile);

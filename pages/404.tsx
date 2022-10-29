@@ -1,8 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import custom404Style from "../styles/404.module.css";
+import React from "react";
+import { NextPage } from "next";
 
-export default function Custom404() {
+const Custom404: NextPage = () => {
   return (
     <div className={custom404Style.custom404}>
       <Image src='/images/404.svg' width='800px' height='600px' />
@@ -19,4 +21,6 @@ export default function Custom404() {
       </div>
     </div>
   );
-}
+};
+
+export default Custom404;

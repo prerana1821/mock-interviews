@@ -3,8 +3,11 @@ import interviewSlotStyles from "../styles/Interviews.module.css";
 import { LoginAlert, ShowInterviewSlots } from "../components";
 import { useAuth, useInterviewSlot } from "../context";
 import Image from "next/image";
+import React from "react";
+import { GetServerSideProps, NextPage } from "next";
 
 const Interviews = ({ interviewSlots }) => {
+  console.log({ interviewSlots });
   const { authState } = useAuth();
   const [showLoginAlert, setShowLoginAlert] = useState(false);
   const { interviewSlotState, interviewSlotDispatch } = useInterviewSlot();
@@ -30,7 +33,7 @@ const Interviews = ({ interviewSlots }) => {
       interviewSlotDispatch({
         type: "SET_STATUS",
         payload: {
-          status: { error: interviewSlots.message },
+          status: { error: interviewSlots?.message },
         },
       });
     }
@@ -75,7 +78,7 @@ const Interviews = ({ interviewSlots }) => {
   );
 };
 
-export async function getServerSideProps() {
+export const getServerSideProps: GetServerSideProps = async () => {
   let interviewSlots;
   try {
     let response = await fetch(`${process.env.API_URL}api/interviewSlot`, {
@@ -96,6 +99,6 @@ export async function getServerSideProps() {
     };
   }
   return { props: { interviewSlots } };
-}
+};
 
 export default Interviews;

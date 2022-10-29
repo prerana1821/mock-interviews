@@ -11,10 +11,16 @@ const FirebaseAuthContext = createContext({});
 
 const provider = new GithubAuthProvider();
 
+type FirebaseUser = {
+  uid: string;
+  email: string;
+  displayName: string;
+};
+
 export const useFirebaseAuth = () => useContext(FirebaseAuthContext);
 
 export const FirebaseAuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<FirebaseUser | null>(null);
   const [loading, setLoading] = useState(true);
 
   console.log(user, "firebase user");

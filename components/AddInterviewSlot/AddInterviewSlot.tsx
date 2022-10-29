@@ -1,9 +1,13 @@
-import { useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import { useAuth, useInterviewSlot } from "../../context";
 import { addInterviewSlot } from "../../serviceCalls";
 import { KeyboardDateTimePicker } from "@material-ui/pickers";
 
-export const AddInterviewSlot = ({ setShowUsernameAlert }) => {
+export const AddInterviewSlot = ({
+  setShowUsernameAlert,
+}: {
+  setShowUsernameAlert: Dispatch<SetStateAction<boolean>>;
+}) => {
   const [dateAndTime, setDateAndTime] = useState(new Date());
   const { authState } = useAuth();
   const { interviewSlotDispatch } = useInterviewSlot();
@@ -12,9 +16,12 @@ export const AddInterviewSlot = ({ setShowUsernameAlert }) => {
     <div>
       <h1>Add New Interview Slot</h1>
       <form
-        onSubmit={ (e) => {
+        onSubmit={(e) => {
           e.preventDefault();
-          if (authState?.user?.username || authState?.user?.username !== undefined) {
+          if (
+            authState?.user?.username ||
+            authState?.user?.username !== undefined
+          ) {
             addInterviewSlot(
               e,
               authState,
@@ -25,17 +32,17 @@ export const AddInterviewSlot = ({ setShowUsernameAlert }) => {
           } else {
             setShowUsernameAlert(true);
           }
-        } }
+        }}
       >
         <br />
         <KeyboardDateTimePicker
           variant='inline'
-          ampm={ true }
+          ampm={true}
           label='Enter date & time for the interview'
-          value={ dateAndTime }
-          onChange={ setDateAndTime }
+          value={dateAndTime}
+          onChange={setDateAndTime}
           disablePast
-          style={ { width: "300px" } }
+          style={{ width: "300px" }}
         />
         <br />
         <button className='btnPrimary' type='submit'>

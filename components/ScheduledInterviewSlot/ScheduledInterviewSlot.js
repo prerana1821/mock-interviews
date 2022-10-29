@@ -19,8 +19,8 @@ export const ScheduledInterviewSlot = () => {
         Interview will take place on #teamtanay discord. Connect with the person
         using discord id.
       </p>
-      <div className={styles.interviewSlots}>
-        {scheduledInterviews.map((scheduledInterview) => {
+      <div className={ styles.interviewSlots }>
+        { scheduledInterviews.map((scheduledInterview) => {
           return (
             scheduledInterview.slots
               // .filter((slot) => {
@@ -33,17 +33,19 @@ export const ScheduledInterviewSlot = () => {
               .map((interview) => {
                 return (
                   <div
-                    className={styles.greenInterviewSlot}
-                    key={interview._id}
+                    className={ styles.greenInterviewSlot }
+                    key={ interview._id }
                   >
-                    <h3>@{scheduledInterview.userId.username}</h3>
-                    <p>{formatTime(interview.slot)}</p>
-                    <p>{formatDate(interview.slot)}</p>
+                    <div className={ styles.greenInterviewSlotHR } >
+                      <h3>@{ scheduledInterview.userId.username }</h3>
+                      <p>{ formatTime(interview.slot) }</p>
+                      <p>{ formatDate(interview.slot) }</p>
+                    </div>
                   </div>
                 );
               })
           );
-        })}
+        }) }
       </div>
     </div>
   );

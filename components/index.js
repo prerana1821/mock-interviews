@@ -8,3 +8,5 @@ export { ProfileCard } from "./ProfileCard/ProfileCard";
 export { ScheduledInterviewSlot } from "./ScheduledInterviewSlot/ScheduledInterviewSlot";
 export { ShowInterviewSlots } from "./ShowInterviewSlots/ShowInterviewSlots";
 export { Toast } from "./Toast/Toast";
+export { InfoCards } from "./InfoCards/InfoCards";
+export { SideNav } from "./SideNav/SideNav";

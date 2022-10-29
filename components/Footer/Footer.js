@@ -5,8 +5,8 @@ import { footerLinks } from './footerUtils';
 export const Footer = () => {
   function FooterIconLink({ href, imgSrc }) {
     return (
-      <a href={href || '/'} target="_blank" rel="noopener noreferrer" className="footer-icons">
-        <img src={imgSrc} className="btn-icon" />
+      <a href={ href || '/' } target="_blank" rel="noopener noreferrer" className="footer-icons">
+        <img src={ imgSrc } className="btn-icon" />
       </a>
     );
   }
@@ -16,7 +16,7 @@ export const Footer = () => {
       <>
         <footer className="text-center footer section footer-container-main footer-desktop">
           <div className="footer text-container">
-            <span className="text">Join your developer community</span>
+            <span className="text white-text">Join your developer community</span>
           </div>
           <a href="https://bit.ly/team-tanay" target="_blank" rel="noopener noreferrer">
             <button className="btn btn-discord">

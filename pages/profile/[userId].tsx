@@ -48,7 +48,7 @@ const UserProfile = ({ slots }: { slots: Slots }) => {
   }, [slots]);
 
   return (
-    <>
+    <section style={{ margin: "0 15%" }}>
       {showUsernameAlert && (
         <UsernameAlert setShowUsernameAlert={setShowUsernameAlert} />
       )}
@@ -87,7 +87,7 @@ const UserProfile = ({ slots }: { slots: Slots }) => {
           <ScheduledInterviewSlot />
         )}
       </div>
-    </>
+    </section>
   );
 };
 

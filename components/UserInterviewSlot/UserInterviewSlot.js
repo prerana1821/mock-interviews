@@ -47,16 +47,21 @@ export const UserInterviewSlot = ({ userDetail }) => {
                 >
                   <Image src='/images/delete.png' width='30px' height='30px' />
                 </button>
-                <h3>@{ userDetail?.username }</h3>
-                <p>{ formatTime(item.slot) }</p>
-                <p>{ formatDate(item.slot) }</p>
-                { item.partner && (
-                  <div>
-                    <h3>Partner:</h3>
-                    <p>Discord Id: @{ item.partner.username }</p>
-                    <p>{ item.partner.fullName }</p>
-                  </div>
-                ) }
+                <div className={ computedClassName({
+                  [userInterviewSlot.greenInterviewSlotHR]: item.partner,
+                  [userInterviewSlot.redInterviewSlotHR]: !item.partner,
+                }) }>
+                  <h3>@{ userDetail?.username }</h3>
+                  <p>{ formatTime(item.slot) }</p>
+                  <p>{ formatDate(item.slot) }</p>
+                  { item.partner && (
+                    <div>
+                      <h3>Partner:</h3>
+                      <p>Discord Id: @{ item.partner.username }</p>
+                      <p>{ item.partner.fullName }</p>
+                    </div>
+                  ) }
+                </div>
               </div>
             );
           }) }

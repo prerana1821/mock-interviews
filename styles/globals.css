@@ -15,8 +15,9 @@ body {
 }
 
 :root {
-  --box-shadow: 8.71px 8.71px 15px rgb(0 0 0 / 5%),
-    -8.71px -8.71px 15px rgb(0 0 0 / 3%);
+  --box-shadow: 6px 6px 12px #ebebeb, -6px -6px 12px #ffffff;
+  /* --box-shadow: 8.71px 8.71px 15px rgb(0 0 0 / 5%),
+    -8.71px -8.71px 15px rgb(0 0 0 / 3%); */
   --primary: #0d3344;
   --primary-dark: #052634;
   --secondary: #49a0eb;
@@ -51,7 +52,7 @@ li {
 }
 
 .blueTxt {
-  color: #7c3aed;
+  color: #0366d6;
 }
 
 .blueTxt:hover {
@@ -91,13 +92,17 @@ li {
 }
 
 .btnIcon {
-  align-self: flex-end;
+  /* align-self: flex-end; */
   border: none;
   background: none;
   outline: #fff;
   cursor: pointer;
   top: 1rem;
   right: 1rem;
+  width: 38px;
+  position: absolute;
+  /* top: 0; */
+  /* right: 0; */
 }
 
 .btnIconShowPassword {
@@ -166,11 +171,12 @@ li {
 }
 
 .interviewPageLeft {
-  height: 100%;
-  width: 25%;
+  min-height: 100%;
+  width: 22%;
+  border-right: 1px solid #ddd;
 }
 
 .interviewPageRight {
   height: 100%;
-  width: 75%;
+  width: 78%;
 }

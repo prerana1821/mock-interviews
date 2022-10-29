@@ -3,6 +3,7 @@
   justify-content: space-between;
   padding: 1rem 2rem;
   align-items: center;
+  box-shadow: 0px -2px 12px #f1f1f1, -9.01px -9.01px 11px #ffffff;
 }
 
 .navLinks {

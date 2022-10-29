@@ -41,7 +41,9 @@ export const EditProfile = ({ userDetail, setEditProfile }) => {
             type='text'
             value={ details.username }
             className={ formStyles.input }
-            placeholder='Enter your Discord Username'
+            pattern={ "^.{3,32}#[0-9]{4}$" }
+            title="Example: john#6765"
+            placeholder='Enter your username eg. Name#0000'
             onChange={ (e) =>
               setDetails((state) => ({ ...state, username: e.target.value }))
             }

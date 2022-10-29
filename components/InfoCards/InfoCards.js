@@ -8,15 +8,15 @@ export const InfoCards = ({ content }) => {
         <hr />
 
         <div className="trio mb-1">
-          {content.map((level, index) => (
+          { content.map((level, index) => (
             <div>
-              <div className="card fw shadow" key={index}>
-                <div className="sub-header">{level.subTitle}</div>
-                <div className="header-s">{level.title}</div>
-                <div className="text">{level.description()}</div>
+              <div className="card fw shadow" key={ index }>
+                <div className="sub-header">{ level.subTitle }</div>
+                <div className="header-s">{ level.title }</div>
+                <div className="text">{ level.description() }</div>
               </div>
             </div>
-          ))}
+          )) }
         </div>
       </div>
     </section>

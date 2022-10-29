@@ -3,8 +3,10 @@
   flex-wrap: wrap;
   gap: 2rem;
   align-items: center;
-  margin: 2rem;
-  justify-content: center;
+  /* margin: 2rem;
+  justify-content: center; */
+  margin: 2rem 7rem;
+  justify-content: flex-start;
 }
 
 .interviewSlotCard {

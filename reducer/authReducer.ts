@@ -1,4 +1,6 @@
-export const authReducer = (state, action) => {
+import { UserState } from "../context/AuthProvider";
+
+export const authReducer = (state: UserState, action: AuthAction) => {
   switch (action.type) {
     case "LOGIN_USER":
       return { ...state, user: action.payload };
@@ -29,8 +31,19 @@ export const authReducer = (state, action) => {
         status: null,
       };
     default:
-      console.log(state);
-      console.log("Something went wrong!");
+      console.log("Something went wrong!", { state });
+      return state;
       break;
   }
+};
+
+export type AuthAction = {
+  type:
+    | "LOGIN_USER"
+    | "LOAD_USER_DETAILS"
+    | "UPDATE_USER"
+    | "ADD_TOKEN"
+    | "SET_STATUS"
+    | "LOGOUT";
+  payload?: any;
 };

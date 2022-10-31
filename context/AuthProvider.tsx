@@ -1,5 +1,12 @@
 import { useRouter } from "next/router";
-import { createContext, useContext, useEffect, useReducer } from "react";
+import {
+  createContext,
+  Dispatch,
+  ReactNode,
+  useContext,
+  useEffect,
+  useReducer,
+} from "react";
 import { authReducer } from "../reducer";
 import cookies from "js-cookie";
 import { loadUserData } from "../serviceCalls";
@@ -8,23 +15,52 @@ import {
   signInWithPopup,
   signOut,
   GithubAuthProvider,
+  UserCredential,
 } from "firebase/auth";
 import { auth } from "../config/firebase";
 import { loginUser } from "../serviceCalls";
-import { setUserAuth } from "../utils"
+import { setUserAuth } from "../utils";
+import { UserDetails } from "../types";
+import { AuthAction } from "../reducer/authReducer";
+import { InterviewSlotAction } from "../reducer/interviewSlotReducer";
 
-export const AuthContext = createContext();
+type AuthContext = {
+  authState: UserState;
+  authDispatch: Dispatch<AuthAction>;
+  logoutUser: (
+    interviewSlotDispatch: Dispatch<InterviewSlotAction>
+  ) => Promise<void>;
+  login: () => Promise<UserCredential>;
+};
+
+export const AuthContext = createContext<AuthContext>({} as AuthContext);
 
 const provider = new GithubAuthProvider();
 
-export const AuthProvider = ({ children, token, userId }) => {
+export type UserState = {
+  token: string;
+  user: UserDetails;
+  status: Object;
+};
+
+export const AuthProvider = ({
+  children,
+  token,
+  userId,
+}: {
+  children: ReactNode;
+  token: string;
+  userId: any;
+}) => {
   const router = useRouter();
 
-  const [authState, authDispatch] = useReducer(authReducer, {
+  const initialAuthState: UserState = {
     token: "",
     user: null,
     status: null,
-  });
+  };
+
+  const [authState, authDispatch] = useReducer(authReducer, initialAuthState);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -45,8 +81,7 @@ export const AuthProvider = ({ children, token, userId }) => {
 
   useEffect(() => {
     loadUserData(token, userId, authDispatch);
-  }, [token])
-
+  }, [token]);
 
   const login = () => {
     return signInWithPopup(auth, provider);
@@ -65,14 +100,14 @@ export const AuthProvider = ({ children, token, userId }) => {
 
   return (
     <AuthContext.Provider
-      value={ {
+      value={{
         authState,
         authDispatch,
         logoutUser,
-        login
-      } }
+        login,
+      }}
     >
-      { children }
+      {children}
     </AuthContext.Provider>
   );
 };

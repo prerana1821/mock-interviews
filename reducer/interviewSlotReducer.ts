@@ -1,4 +1,9 @@
-export const interviewSlotReducer = (state, action) => {
+import { InterviewSlotState } from "../context/InterviewSlot";
+
+export const interviewSlotReducer = (
+  state: InterviewSlotState,
+  action: InterviewSlotAction
+) => {
   switch (action.type) {
     case "LOAD_INTERVIEW_SLOTS":
       return {
@@ -52,8 +57,20 @@ export const interviewSlotReducer = (state, action) => {
         status: action.payload.status,
       };
     default:
-      console.log({ state });
-      console.log("Something went wrong");
+      console.log("Something went wrong", { state });
+      return state;
       break;
   }
+};
+
+export type InterviewSlotAction = {
+  type:
+    | "LOAD_INTERVIEW_SLOTS"
+    | "UPDATE_INTERVIEW_SLOTS"
+    | "LOAD_USER_INTERVIEW_SLOT"
+    | "ADD_USER_INTERVIEW_SLOT"
+    | "DELETE_USER_INTERVIEW_SLOT"
+    | "REMOVE_USER_INTERVIEW_SLOTS"
+    | "SET_STATUS";
+  payload: any;
 };

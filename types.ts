@@ -1,5 +1,5 @@
 export type Slots = {
-  partner: Object;
+  partner?: Object;
   slot: Date;
   _id: string;
 };

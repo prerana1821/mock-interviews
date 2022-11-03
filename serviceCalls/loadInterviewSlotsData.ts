@@ -1,8 +1,20 @@
-export const loadInterviewSlotsData = async (
+import { Dispatch } from "react";
+import {
+  InterviewSlotAction,
+  InterviewSlotState,
+} from "../context/Interview.types";
+
+type LoadInterviewSlotsDataParams = {
+  token: string;
+  interviewSlotState: InterviewSlotState;
+  interviewSlotDispatch: Dispatch<InterviewSlotAction>;
+};
+
+export const loadInterviewSlotsData = async ({
   token,
   interviewSlotState,
-  interviewSlotDispatch
-) => {
+  interviewSlotDispatch,
+}: LoadInterviewSlotsDataParams): Promise<void> => {
   if (token && interviewSlotState.interviewSlots.length === 0) {
     try {
       interviewSlotDispatch({

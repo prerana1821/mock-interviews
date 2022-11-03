@@ -16,19 +16,19 @@ export const AddInterviewSlot = ({
     <div>
       <h1>Add New Interview Slot</h1>
       <form
-        onSubmit={(e) => {
-          e.preventDefault();
+        onSubmit={(event) => {
+          event.preventDefault();
           if (
             authState?.user?.username ||
             authState?.user?.username !== undefined
           ) {
-            addInterviewSlot(
-              e,
+            addInterviewSlot({
+              event,
               authState,
               dateAndTime,
               setDateAndTime,
-              interviewSlotDispatch
-            );
+              interviewSlotDispatch,
+            });
           } else {
             setShowUsernameAlert(true);
           }

@@ -39,9 +39,11 @@ export const UserInterviewSlot = ({ userDetail }) => {
                   className='btnIcon'
                   onClick={ () =>
                     deleteInterviewSlot(
-                      item._id,
-                      authState,
-                      interviewSlotDispatch
+                      {
+                        slotId: item._id,
+                        authState,
+                        interviewSlotDispatch
+                      }
                     )
                   }
                 >

@@ -1,7 +1,6 @@
 import { useRouter } from "next/router";
 import {
   createContext,
-  Dispatch,
   ReactNode,
   useContext,
   useEffect,
@@ -20,28 +19,11 @@ import {
 import { auth } from "../config/firebase";
 import { loginUser } from "../serviceCalls";
 import { setUserAuth } from "../utils";
-import { UserDetails } from "../types";
-import { AuthAction } from "../reducer/authReducer";
-import { InterviewSlotAction } from "../reducer/interviewSlotReducer";
+import { AuthContextT, UserState } from "./Auth.types";
 
-type AuthContext = {
-  authState: UserState;
-  authDispatch: Dispatch<AuthAction>;
-  logoutUser: (
-    interviewSlotDispatch: Dispatch<InterviewSlotAction>
-  ) => Promise<void>;
-  login: () => Promise<UserCredential>;
-};
-
-export const AuthContext = createContext<AuthContext>({} as AuthContext);
+export const AuthContext = createContext<AuthContextT>({} as AuthContextT);
 
 const provider = new GithubAuthProvider();
-
-export type UserState = {
-  token: string;
-  user: UserDetails;
-  status: Object;
-};
 
 export const AuthProvider = ({
   children,
@@ -50,7 +32,7 @@ export const AuthProvider = ({
 }: {
   children: ReactNode;
   token: string;
-  userId: any;
+  userId: string;
 }) => {
   const router = useRouter();
 
@@ -80,7 +62,7 @@ export const AuthProvider = ({
   }, []);
 
   useEffect(() => {
-    loadUserData(token, userId, authDispatch);
+    loadUserData({ token, userId, authDispatch });
   }, [token]);
 
   const login = () => {

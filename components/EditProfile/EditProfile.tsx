@@ -5,8 +5,15 @@ import formStyles from "../../styles/Form.module.css";
 import { editUserDetails } from "../../serviceCalls";
 import Image from "next/image";
 
+// NEED TO FIX THIS
+export type EditUserDetails = {
+  username: string;
+  portfolio: string;
+  interviewDone: number;
+};
+
 export const EditProfile = ({ userDetail, setEditProfile }) => {
-  const [details, setDetails] = useState({
+  const [details, setDetails] = useState<EditUserDetails>({
     username: userDetail.username,
     portfolio: userDetail.portfolio,
     interviewDone: userDetail.interviewDone,
@@ -15,67 +22,67 @@ export const EditProfile = ({ userDetail, setEditProfile }) => {
   const { authState, authDispatch } = useAuth();
 
   return (
-    <div className={ editProfileStyles.editProfile }>
+    <div className={editProfileStyles.editProfile}>
       <form
-        onSubmit={ (e) =>
-          editUserDetails(
-            e,
+        onSubmit={(event) =>
+          editUserDetails({
+            event,
             authState,
             authDispatch,
-            details.username,
-            details.portfolio,
-            details.interviewDone,
-            setEditProfile
-          )
+            username: details.username,
+            portfolio: details.portfolio,
+            interviewDone: details.interviewDone,
+            setEditProfile,
+          })
         }
-        className={ editProfileStyles.editProfileForm }
+        className={editProfileStyles.editProfileForm}
       >
         <button
-          onClick={ () => setEditProfile(false) }
-          className={ editProfileStyles.closeBtn }
+          onClick={() => setEditProfile(false)}
+          className={editProfileStyles.closeBtn}
         >
           <Image src='/images/close.png' width='38px' height='38px' />
         </button>
-        <div className={ formStyles.inputBox }>
+        <div className={formStyles.inputBox}>
           <input
             type='text'
-            value={ details.username }
-            className={ formStyles.input }
-            pattern={ "^.{3,32}#[0-9]{4}$" }
-            title="Example: john#6765"
+            value={details.username}
+            className={formStyles.input}
+            pattern={"^.{3,32}#[0-9]{4}$"}
+            title='Example: john#6765'
             placeholder='Enter your username eg. Name#0000'
-            onChange={ (e) =>
+            onChange={(e) =>
               setDetails((state) => ({ ...state, username: e.target.value }))
             }
           />
-          <span className={ formStyles.focusBorder }></span>
+          <span className={formStyles.focusBorder}></span>
         </div>
-        <div className={ formStyles.inputBox }>
+        <div className={formStyles.inputBox}>
           <input
             type='text'
-            value={ details.portfolio }
+            value={details.portfolio}
             placeholder='Enter your Portfolio link'
-            className={ formStyles.input }
-            onChange={ (e) =>
+            className={formStyles.input}
+            onChange={(e) =>
               setDetails((state) => ({ ...state, portfolio: e.target.value }))
             }
           />
-          <span className={ formStyles.focusBorder }></span>
+          <span className={formStyles.focusBorder}></span>
         </div>
-        <div className={ formStyles.inputBox }>
+        <div className={formStyles.inputBox}>
           <input
             type='number'
-            value={ details.interviewDone }
+            value={details.interviewDone}
             placeholder='Interviews Done'
-            className={ formStyles.input }
-            onChange={ (e) =>
+            className={formStyles.input}
+            onChange={(e) =>
               setDetails((state) => ({
                 ...state,
-                interviewDone: e.target.value,
+                interviewDone: +e.target.value,
               }))
             }
           />
-          <span className={ formStyles.focusBorder }></span>
+          <span className={formStyles.focusBorder}></span>
         </div>
         <button className='btnPrimary' type='submit'>
           Save

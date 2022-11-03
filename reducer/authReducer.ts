@@ -1,4 +1,4 @@
-import { UserState } from "../context/AuthProvider";
+import { AuthAction, UserState } from "../context/Auth.types";
 
 export const authReducer = (state: UserState, action: AuthAction) => {
   switch (action.type) {
@@ -35,15 +35,4 @@ export const authReducer = (state: UserState, action: AuthAction) => {
       return state;
       break;
   }
-};
-
-export type AuthAction = {
-  type:
-    | "LOGIN_USER"
-    | "LOAD_USER_DETAILS"
-    | "UPDATE_USER"
-    | "ADD_TOKEN"
-    | "SET_STATUS"
-    | "LOGOUT";
-  payload?: any;
 };

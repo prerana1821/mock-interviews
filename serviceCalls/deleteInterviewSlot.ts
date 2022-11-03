@@ -1,8 +1,18 @@
-export const deleteInterviewSlot = async (
+import { Dispatch } from "react";
+import { UserState } from "../context/Auth.types";
+import { InterviewSlotAction } from "../context/Interview.types";
+
+type DeleteInterviewSlotParams = {
+  slotId: string;
+  authState: UserState;
+  interviewSlotDispatch: Dispatch<InterviewSlotAction>;
+};
+
+export const deleteInterviewSlot = async ({
   slotId,
   authState,
-  interviewSlotDispatch
-) => {
+  interviewSlotDispatch,
+}: DeleteInterviewSlotParams): Promise<void> => {
   try {
     interviewSlotDispatch({
       type: "SET_STATUS",

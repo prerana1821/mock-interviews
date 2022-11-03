@@ -1,4 +1,17 @@
-export const loadUserData = async (token, userId, authDispatch) => {
+import { Dispatch } from "react";
+import { AuthAction } from "../context/Auth.types";
+
+type LoadUserDataParams = {
+  token: string;
+  userId: string;
+  authDispatch: Dispatch<AuthAction>;
+};
+
+export const loadUserData = async ({
+  token,
+  userId,
+  authDispatch,
+}: LoadUserDataParams): Promise<void> => {
   if (token && userId !== null) {
     try {
       authDispatch({

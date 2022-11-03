@@ -1,7 +1,7 @@
 .interviewSlots {
   display: flex;
   justify-content: flex-start;
-  gap: 5.9rem;
+  gap: 4rem;
   margin: 2rem 0;
   flex-wrap: wrap;
   align-items: center;
@@ -46,10 +46,6 @@
   border-radius: 13px;
   background: #ffffff;
   box-shadow: 6px 6px 12px #ebebeb, -6px -6px 12px #ffffff;
-  -webkit-border-radius: 13px;
-  -moz-border-radius: 13px;
-  -ms-border-radius: 13px;
-  -o-border-radius: 13px;
 }
 
 .redInterviewSlotHR {

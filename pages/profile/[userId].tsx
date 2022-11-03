@@ -3,15 +3,14 @@ import { useEffect, useState } from "react";
 import { useAuth, useInterviewSlot } from "../../context";
 import { EditProfile, ScheduledInterviewSlot } from "../../components";
 import { AddInterviewSlot } from "../../components";
-import { UserInterviewSlot } from "../../components";
+import { UserInterviewSlot, Alert } from "../../components";
 import { ProfileCard } from "../../components";
 import PrivateRoute from "../../components/PrivateRoute/PrivateRoute";
 import profileStyles from "../../styles/Profile.module.css";
 import React from "react";
 import { scheduledSlots } from "../../utils";
-import { UsernameAlert } from "../../components/UsernameAlert/UsernameAlert";
 import { GetServerSideProps } from "next";
-import { Slots } from "../../types";
+import { Slots } from "../../context/Interview.types";
 
 const UserProfile = ({ slots }: { slots: Slots }) => {
   const [editProfile, setEditProfile] = useState(false);
@@ -50,7 +49,18 @@ const UserProfile = ({ slots }: { slots: Slots }) => {
   return (
     <section style={{ margin: "0 15%" }}>
       {showUsernameAlert && (
-        <UsernameAlert setShowUsernameAlert={setShowUsernameAlert} />
+        <Alert
+          title='Ohh No!'
+          description='Hey, you need to fill your discord id before scheduling interviews!'
+          actions={
+            <button
+              className='btnSecondary'
+              onClick={() => setShowUsernameAlert(false)}
+            >
+              Cancel
+            </button>
+          }
+        />
       )}
       <div className={profileStyles.profile}>
         <div className={profileStyles.profileCard}>

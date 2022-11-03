@@ -1,4 +1,9 @@
-export const scheduledSlots = (interviewSlots, userId) => {
+import { InterviewsSlots } from "../../context/Interview.types";
+
+export const scheduledSlots = (
+  interviewSlots: InterviewsSlots[],
+  userId: string
+): InterviewsSlots[] => {
   const slots = interviewSlots.filter((interviewSlot) => {
     return interviewSlot?.userId?._id !== userId;
   });

@@ -1,3 +1,17 @@
+import { NextRouter } from "next/router";
+import { Dispatch } from "react";
+import { AuthAction } from "../context/Auth.types";
+import { SetUserAuthParams } from "../utils/clientUtils/setUserAuth";
+
+type LoginUserParams = {
+  email: string;
+  fullName: string;
+  uid: string;
+  authDispatch: Dispatch<AuthAction>;
+  setUserAuth: ({ authDispatch, user, token }: SetUserAuthParams) => void;
+  router: NextRouter;
+};
+
 export const loginUser = async ({
   email,
   fullName,
@@ -5,7 +19,7 @@ export const loginUser = async ({
   authDispatch,
   setUserAuth,
   router,
-}) => {
+}: LoginUserParams): Promise<void> => {
   try {
     authDispatch({
       type: "SET_STATUS",
@@ -17,11 +31,13 @@ export const loginUser = async ({
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        email, fullName, uid,
+        email,
+        fullName,
+        uid,
       }),
     });
     const data = await response.json();
-    console.log('LOGINN', { data });
+    console.log("LOGINN", { data });
     if (data.success) {
       setUserAuth({
         authDispatch,

@@ -1,10 +1,22 @@
-export const addInterviewSlot = async (
+import { Dispatch, FormEvent, SetStateAction } from "react";
+import { UserState } from "../context/Auth.types";
+import { InterviewSlotAction } from "../context/Interview.types";
+
+type AddInterviewSlotParams = {
+  event: FormEvent<HTMLFormElement>;
+  authState: UserState;
+  dateAndTime: Date;
+  setDateAndTime: Dispatch<SetStateAction<Date>>;
+  interviewSlotDispatch: Dispatch<InterviewSlotAction>;
+};
+
+export const addInterviewSlot = async ({
   event,
   authState,
   dateAndTime,
   setDateAndTime,
-  interviewSlotDispatch
-) => {
+  interviewSlotDispatch,
+}: AddInterviewSlotParams): Promise<void> => {
   event.preventDefault();
   try {
     interviewSlotDispatch({

@@ -1,4 +1,4 @@
-.UsernameAlert {
+.Alert {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -10,7 +10,7 @@
   z-index: 1;
 }
 
-.UsernameAlertActions {
+.AlertActions {
   display: flex;
   gap: 1rem;
   justify-content: flex-end;

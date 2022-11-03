@@ -1,12 +1,25 @@
-export const editUserDetails = async (
+import { Dispatch, FormEvent, SetStateAction } from "react";
+import { AuthAction, UserState } from "../context/Auth.types";
+
+type EditUserDetailsParams = {
+  event: FormEvent<HTMLFormElement>;
+  authState: UserState;
+  authDispatch: Dispatch<AuthAction>;
+  username: string;
+  portfolio: string;
+  interviewDone: number;
+  setEditProfile: Dispatch<SetStateAction<boolean>>;
+};
+
+export const editUserDetails = async ({
   event,
   authState,
   authDispatch,
   username,
   portfolio,
   interviewDone,
-  setEditProfile
-) => {
+  setEditProfile,
+}: EditUserDetailsParams): Promise<void> => {
   event.preventDefault();
   console.log({
     username,

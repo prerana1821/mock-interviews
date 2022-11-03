@@ -1,4 +1,7 @@
-import { InterviewSlotState } from "../context/InterviewSlot";
+import {
+  InterviewSlotAction,
+  InterviewSlotState,
+} from "../context/Interview.types";
 
 export const interviewSlotReducer = (
   state: InterviewSlotState,
@@ -61,16 +64,4 @@ export const interviewSlotReducer = (
       return state;
       break;
   }
-};
-
-export type InterviewSlotAction = {
-  type:
-    | "LOAD_INTERVIEW_SLOTS"
-    | "UPDATE_INTERVIEW_SLOTS"
-    | "LOAD_USER_INTERVIEW_SLOT"
-    | "ADD_USER_INTERVIEW_SLOT"
-    | "DELETE_USER_INTERVIEW_SLOT"
-    | "REMOVE_USER_INTERVIEW_SLOTS"
-    | "SET_STATUS";
-  payload: any;
 };

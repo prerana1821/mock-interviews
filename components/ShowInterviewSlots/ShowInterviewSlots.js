@@ -23,20 +23,22 @@ export const ShowInterviewSlots = ({ slots, setShowLoginAlert }) => {
           return (
             !slot.partner && (
               <div
-                key={slot._id}
-                className={interviewSlotStyles.interviewSlotCard}
+                key={ slot._id }
+                className={ interviewSlotStyles.interviewSlotCard }
               >
-                <h3>{interviewSlot.userId.fullName}</h3>
-                <h4>@{interviewSlot.userId.username}</h4>
-                <p>{formatTime(slot.slot)}</p>
-                <p>{formatDate(slot.slot)}</p>
+                <h3>{ interviewSlot.userId.fullName }</h3>
+                <h4>@{ interviewSlot.userId.username }</h4>
+                <p>{ formatTime(slot.slot) }</p>
+                <p>{ formatDate(slot.slot) }</p>
                 <button
-                  onClick={() =>
+                  onClick={ () =>
                     connectWithUser(
-                      slot._id,
-                      authState,
-                      interviewSlotDispatch,
-                      setShowLoginAlert
+                      {
+                        interviewId: slot._id,
+                        authState,
+                        interviewSlotDispatch,
+                        setShowLoginAlert
+                      }
                     )
                   }
                   className='btnPrimary'

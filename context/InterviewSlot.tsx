@@ -7,22 +7,10 @@ import {
   useReducer,
 } from "react";
 import { interviewSlotReducer } from "../reducer";
-import { InterviewSlotAction } from "../reducer/interviewSlotReducer";
 import { loadInterviewSlotsData } from "../serviceCalls";
-import { InterviewsSlots, Slots } from "../types";
+import { InterviewSlotContextT, InterviewSlotState } from "./Interview.types";
 
-type InterviewSlotContext = {
-  interviewSlotState: InterviewSlotState;
-  interviewSlotDispatch: Dispatch<InterviewSlotAction>;
-};
-
-export const InterviewSlotContext = createContext({} as InterviewSlotContext);
-
-export type InterviewSlotState = {
-  interviewSlots: InterviewsSlots[];
-  userInterViewSlots: { slots: Slots[] };
-  status: Object;
-};
+export const InterviewSlotContext = createContext({} as InterviewSlotContextT);
 
 export const InterviewSlotProvider = ({
   children,
@@ -42,7 +30,11 @@ export const InterviewSlotProvider = ({
   );
 
   useEffect(() => {
-    loadInterviewSlotsData(token, interviewSlotState, interviewSlotDispatch);
+    loadInterviewSlotsData({
+      token,
+      interviewSlotState,
+      interviewSlotDispatch,
+    });
   }, [token]);
 
   console.log({ interviewSlotState });

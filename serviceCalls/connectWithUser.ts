@@ -1,9 +1,20 @@
-export const connectWithUser = async (
+import { Dispatch, SetStateAction } from "react";
+import { UserState } from "../context/Auth.types";
+import { InterviewSlotAction } from "../context/Interview.types";
+
+type ConnectWithUserParams = {
+  interviewId: string;
+  authState: UserState;
+  interviewSlotDispatch: Dispatch<InterviewSlotAction>;
+  setShowLoginAlert: Dispatch<SetStateAction<boolean>>;
+};
+
+export const connectWithUser = async ({
   interviewId,
   authState,
   interviewSlotDispatch,
-  setShowLoginAlert
-) => {
+  setShowLoginAlert,
+}: ConnectWithUserParams): Promise<void> => {
   if (authState.token) {
     try {
       interviewSlotDispatch({

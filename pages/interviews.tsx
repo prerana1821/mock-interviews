@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
 import interviewSlotStyles from "../styles/Interviews.module.css";
-import { LoginAlert, ShowInterviewSlots, SideNav } from "../components";
+import AlertStyles from "../components/Alert/Alert.module.css";
+import { ShowInterviewSlots, SideNav, Alert } from "../components";
 import { useAuth, useInterviewSlot } from "../context";
 import Image from "next/image";
 import React from "react";
-import { GetServerSideProps, NextPage } from "next";
+import { GetServerSideProps } from "next";
 
 const Interviews = ({ interviewSlots }) => {
   console.log({ interviewSlots });
-  const { authState } = useAuth();
+  const { authState, login } = useAuth();
   const [showLoginAlert, setShowLoginAlert] = useState(false);
   const { interviewSlotState, interviewSlotDispatch } = useInterviewSlot();
 
@@ -58,10 +59,29 @@ const Interviews = ({ interviewSlots }) => {
       </div>
 
       <div className='interviewPageRight'>
-        {showLoginAlert && <LoginAlert setShowLoginAlert={setShowLoginAlert} />}
+        {/* {showLoginAlert && <LoginAlert setShowLoginAlert={setShowLoginAlert} />} */}
+        {showLoginAlert && (
+          <Alert
+            title='Ohh No!'
+            description='Hey, you need to fill your discord id before scheduling interviews!'
+            actions={
+              <div className={AlertStyles.AlertActions}>
+                <button
+                  className='btnSecondary'
+                  onClick={() => setShowLoginAlert(false)}
+                >
+                  Cancel
+                </button>
+                <button className='btnPrimary' onClick={() => login()}>
+                  Login
+                </button>
+              </div>
+            }
+          />
+        )}
         <h1 className='textCenter'>Open Interview Slots</h1>
         <p className='textCenter'>
-          Use these available slots to schedule your mock interview
+          Use these available slots to schedule your mock interview.
         </p>
         {interviewSlotState.status?.loading?.loadingType && (
           <div className='loading'>

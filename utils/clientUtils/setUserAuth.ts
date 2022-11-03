@@ -1,6 +1,14 @@
 import cookies from "js-cookie";
+import { Dispatch } from "react";
+import { AuthAction, UserDetails, UserState } from "../../context/Auth.types";
 
-export const setUserAuth = ({ authDispatch, user, token }) => {
+export type SetUserAuthParams = {
+  authDispatch: Dispatch<AuthAction>;
+  user: UserDetails;
+  token: string;
+};
+
+export const setUserAuth = ({ authDispatch, user, token }): void => {
   localStorage?.setItem("token", JSON.stringify({ token }));
   localStorage?.setItem(
     "user",

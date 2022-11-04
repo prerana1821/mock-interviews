@@ -35,20 +35,20 @@ export const connectWithUser = async ({
           },
         },
       });
-      // const response = await fetch(
-      //   `${process.env.API_URL}api/interviewSlot/${authState.user._id}/${interviewId}`,
-      //   {
-      //     method: "POST",
-      //     headers: {
-      //       "Content-Type": "application/json",
-      //       Authorization: authState.token,
-      //     },
-      //     body: JSON.stringify({ partner: authState.user._id }),
-      //   }
-      // );
-      // const data = await response.json();
+      const response = await fetch(
+        `${process.env.API_URL}api/interviewSlot/${authState.user._id}/${interviewId}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: authState.token,
+          },
+          body: JSON.stringify({ partner: authState.user._id }),
+        }
+      );
+      const data = await response.json();
 
-      // console.log({ data });
+      console.log({ data });
 
       console.log(1, { window });
 
@@ -112,18 +112,18 @@ export const connectWithUser = async ({
 
             request.execute((reqEvent: any) => {
               console.log(reqEvent);
-              window.open(reqEvent.htmlLink);
+              if (data.success && reqEvent.htmlLink) {
+                console.log("Nice");
+                interviewSlotDispatch({
+                  type: "UPDATE_INTERVIEW_SLOTS",
+                  payload: { interviewSlot: data.data },
+                });
+              }
+              // window.open(reqEvent.htmlLink);
             });
           });
       });
       // };
-
-      // if (data.success) {
-      //   interviewSlotDispatch({
-      //     type: "UPDATE_INTERVIEW_SLOTS",
-      //     payload: { interviewSlot: data.data },
-      //   });
-      // }
     } catch (error) {
       console.log({ error });
       interviewSlotDispatch({

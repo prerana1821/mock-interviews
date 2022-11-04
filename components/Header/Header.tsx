@@ -9,19 +9,15 @@ export const Header = (): JSX.Element => {
 
   return (
     <nav className={headerStyles.nav}>
-      <div>
-        <Link href='/'>
-          {/* <a> */}
-          <Image
-            priority
-            src='/images/logo.svg'
-            width='150'
-            height='50'
-            alt='neogcamo logo'
-          />
-          {/* </a> */}
-        </Link>
-      </div>
+      <Link href='/'>
+        <Image
+          priority
+          src='/images/logo.svg'
+          width='150'
+          height='50'
+          alt='neogcamo logo'
+        />
+      </Link>
       <ul className={headerStyles.navLinks}>
         <Link href='/interviews'>
           <li>Available slots</li>

@@ -37,7 +37,7 @@ export const EditProfile = ({ userDetail, setEditProfile }) => {
           onClick={() => setEditProfile(false)}
           className={editProfileStyles.closeBtn}
         >
-          <Image src='/images/close.png' width='38px' height='38px' />
+          <Image src='/images/close.png' width='38s' height='38s' alt='' />
         </button>
         <div className={formStyles.inputBox}>
           <input

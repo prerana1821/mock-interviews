@@ -47,21 +47,21 @@ export const Toast = ({
 
   return (
     <>
-      {checkUndefined && (
-        <div className={styles.status}>
+      { checkUndefined && (
+        <div className={ styles.status }>
           <div className='tl-content-error'>
             <p>
-              <Image src='/images/status.svg' width='30px' height='30px' />
-              {authStateLoading ||
+              <Image src='/images/status.svg' width='30' height='30' alt='' />
+              { authStateLoading ||
                 authStateError ||
                 authStateSuccess ||
                 interviewSlotLoading ||
                 interviewSlotError ||
-                interviewSlotSuccess}
+                interviewSlotSuccess }
             </p>
           </div>
         </div>
-      )}
+      ) }
     </>
   );
 };

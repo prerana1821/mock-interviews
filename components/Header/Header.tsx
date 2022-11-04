@@ -11,15 +11,13 @@ export const Header = (): JSX.Element => {
     <nav className={headerStyles.nav}>
       <div>
         <Link href='/'>
-          <a>
-            <Image
-              priority
-              src='/images/logo.svg'
-              width='150px'
-              height='50px'
-              alt='neogcamo logo'
-            />
-          </a>
+          <Image
+            priority
+            src='/images/logo.svg'
+            width='150'
+            height='50'
+            alt='neogcamo logo'
+          />
         </Link>
       </div>
       <ul className={headerStyles.navLinks}>

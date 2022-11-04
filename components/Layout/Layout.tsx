@@ -9,7 +9,7 @@ export const Layout = ({ children }: { children: ReactNode }): JSX.Element => {
   const { interviewSlotState } = useInterviewSlot();
 
   return (
-    <div>
+    <>
       <Header />
       <main className='mainLayout'>{children}</main>
       <Toast
@@ -21,6 +21,6 @@ export const Layout = ({ children }: { children: ReactNode }): JSX.Element => {
         interviewSlotSuccess={interviewSlotState.status?.success}
       />
       <Footer />
-    </div>
+    </>
   );
 };

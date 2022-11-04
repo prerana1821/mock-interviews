@@ -47,7 +47,7 @@ export const UserInterviewSlot = ({ userDetail }) => {
                     )
                   }
                 >
-                  <Image src='/images/delete.png' width='30px' height='30px' />
+                  <Image src='/images/delete.png' width='30' height='30' alt='delete button' />
                 </button>
                 <div className={ computedClassName({
                   [userInterviewSlot.greenInterviewSlotHR]: item.partner,

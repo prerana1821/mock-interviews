@@ -11,28 +11,24 @@ export const Header = (): JSX.Element => {
     <nav className={headerStyles.nav}>
       <div>
         <Link href='/'>
-          <a>
-            <Image
-              priority
-              src='/images/logo.svg'
-              width='150px'
-              height='50px'
-              alt='neogcamo logo'
-            />
-          </a>
+          {/* <a> */}
+          <Image
+            priority
+            src='/images/logo.svg'
+            width='150'
+            height='50'
+            alt='neogcamo logo'
+          />
+          {/* </a> */}
         </Link>
       </div>
       <ul className={headerStyles.navLinks}>
         <Link href='/interviews'>
-          <li>
-            <a>Available slots</a>
-          </li>
+          <li>Available slots</li>
         </Link>
         {authState.token ? (
           <Link href={`/profile/${authState.user._id}`}>
-            <li>
-              <a>Account</a>
-            </li>
+            <li>Account</li>
           </Link>
         ) : (
           <button

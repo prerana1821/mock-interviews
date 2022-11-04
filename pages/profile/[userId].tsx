@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useAuth, useInterviewSlot } from "../../context";
 import { EditProfile, ScheduledInterviewSlot } from "../../components";

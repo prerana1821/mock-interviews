@@ -8,7 +8,6 @@ import React from "react";
 import { GetServerSideProps } from "next";
 
 const Interviews = ({ interviewSlots }) => {
-  console.log({ interviewSlots });
   const { authState, login } = useAuth();
   const [showLoginAlert, setShowLoginAlert] = useState(false);
   const { interviewSlotState, interviewSlotDispatch } = useInterviewSlot();
@@ -85,7 +84,12 @@ const Interviews = ({ interviewSlots }) => {
         </p>
         {interviewSlotState.status?.loading?.loadingType && (
           <div className='loading'>
-            <Image src='/images/loading.svg' width='200px' height='200px' />
+            <Image
+              src='/images/loading.svg'
+              width='200'
+              height='200'
+              alt='loading'
+            />
           </div>
         )}
         <div className={interviewSlotStyles.interviewSlots}>

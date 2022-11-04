@@ -8,8 +8,8 @@ export const Banner = (): JSX.Element => {
       <Image
         priority
         src='/images/interview.jpg'
-        width='750px'
-        height='500px'
+        width='750'
+        height='500'
         alt=''
       />
     </div>

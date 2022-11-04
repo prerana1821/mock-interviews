@@ -24,7 +24,12 @@ export const ProfileCard = ({
             onClick={() => setEditProfile(!editProfile)}
             className='btnIcon'
           >
-            <Image src='/images/edit.png' width='30px' height='30px' />
+            <Image
+              src='/images/edit.png'
+              width='30'
+              height='30'
+              alt='edit button'
+            />
           </button>
         </div>
       </div>

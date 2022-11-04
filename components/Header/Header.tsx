@@ -3,27 +3,27 @@ import Link from "next/link";
 import { useAuth, useInterviewSlot } from "../../context";
 import Image from "next/image";
 
-export const Header = () => {
+export const Header = (): JSX.Element => {
   const { authState, login, logoutUser } = useAuth();
   const { interviewSlotDispatch } = useInterviewSlot();
 
   return (
     <nav className={headerStyles.nav}>
       <div>
-        <Link href="/">
+        <Link href='/'>
           <a>
             <Image
               priority
-              src="/images/logo.svg"
-              width="150px"
-              height="50px"
-              alt="neogcamo logo"
+              src='/images/logo.svg'
+              width='150px'
+              height='50px'
+              alt='neogcamo logo'
             />
           </a>
         </Link>
       </div>
       <ul className={headerStyles.navLinks}>
-        <Link href="/interviews">
+        <Link href='/interviews'>
           <li>
             <a>Available slots</a>
           </li>
@@ -36,7 +36,7 @@ export const Header = () => {
           </Link>
         ) : (
           <button
-            className="btnPrimary"
+            className='btnPrimary'
             style={{ margin: 0 }}
             onClick={() => login()}
           >
@@ -46,7 +46,7 @@ export const Header = () => {
         {authState.token && (
           <button
             onClick={() => logoutUser(interviewSlotDispatch)}
-            className="btnSecondary"
+            className='btnSecondary'
             style={{ margin: 0 }}
           >
             Logout

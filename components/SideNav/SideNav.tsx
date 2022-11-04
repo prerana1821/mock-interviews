@@ -1,6 +1,11 @@
 import React from "react";
 
-const NavLinks = [
+type SideNavLinks = {
+  name: string;
+  href: string;
+};
+
+const sidenavLinks: SideNavLinks[] = [
   {
     name: "Interview Preparation",
     href: "https://neog.camp/qualifier/camp-interview-tips",
@@ -12,15 +17,15 @@ const NavLinks = [
   //   { name: "Interview D-Day preparation", href: "/interviewDayPrep" },
 ];
 
-export const SideNav = () => {
+export const SideNav = (): JSX.Element => {
   return (
     <div>
-      <ul className="SidenavContainer">
-        <li className="SidenavHeading"> Important Links </li>
-        {NavLinks.map((link) => {
+      <ul className='SidenavContainer'>
+        <li className='SidenavHeading'> Important Links </li>
+        {sidenavLinks.map((link) => {
           return (
-            <li className="SidenavLink" key={link.name}>
-              <a href={link.href} target="_blank">
+            <li className='SidenavLink' key={link.name}>
+              <a href={link.href} target='_blank'>
                 {" "}
                 {link.name}{" "}
               </a>

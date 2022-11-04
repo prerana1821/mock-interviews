@@ -4,13 +4,9 @@ import editProfileStyles from "./EditProfile.module.css";
 import formStyles from "../../styles/Form.module.css";
 import { editUserDetails } from "../../serviceCalls";
 import Image from "next/image";
+import { UserDetails } from "../../context/Auth.types";
 
-// NEED TO FIX THIS
-export type EditUserDetails = {
-  username: string;
-  portfolio: string;
-  interviewDone: number;
-};
+export type EditUserDetails = Omit<UserDetails, "email" | "fullName" | "_id">;
 
 export const EditProfile = ({ userDetail, setEditProfile }) => {
   const [details, setDetails] = useState<EditUserDetails>({

@@ -12,15 +12,18 @@ export type AuthContextT = {
 };
 
 export type UserDetails = {
+  email: string;
   fullName: string;
   username: string;
+  portfolio: string;
+  interviewDone: number;
   _id: string;
 };
 
 export type UserState = {
   token: string;
   user: UserDetails;
-  status: Object;
+  status: any;
 };
 
 export type AuthAction = {

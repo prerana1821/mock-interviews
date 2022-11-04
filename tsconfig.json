@@ -19,7 +19,8 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "utils/serverUtils/addInterviewSlot.js"
+    "utils/serverUtils/addInterviewSlot.js",
+    "components/PrivateRoute/PrivateRoute.js"
   ],
   "exclude": ["node_modules"]
 }

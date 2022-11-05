@@ -31,7 +31,6 @@ export const ShowInterviewSlots = ({ slots, setShowLoginAlert }) => {
     <div>We don't have any scheduled interview slots</div>
   ) : (
     slots.map((interviewSlot) => {
-      console.log({ interviewSlot });
       return interviewSlot.slots
         .filter((slot) => {
           const today = new Date();
@@ -41,7 +40,6 @@ export const ShowInterviewSlots = ({ slots, setShowLoginAlert }) => {
         })
         .sort((a, b) => +new Date(a.slot) - +new Date(b.slot))
         .map((slot) => {
-          console.log({ time: slot.slot });
           return (
             !slot.partner && (
               <div

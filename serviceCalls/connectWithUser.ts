@@ -41,18 +41,6 @@ export const connectWithUser = async ({
           },
         },
       });
-      const response = await fetch(
-        `${process.env.API_URL}api/interviewSlot/${authState.user._id}/${slot._id}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: authState.token,
-          },
-          body: JSON.stringify({ partner: authState.user._id }),
-        }
-      );
-      const data = await response.json();
 
       window.gapi.load("client:auth2", () => {
         console.log("loaded client");
@@ -74,7 +62,6 @@ export const connectWithUser = async ({
               const isAuthorized = user.hasGrantedScopes(SCOPES);
               if (isAuthorized) {
                 createEvent({
-                  data,
                   slot,
                   authState,
                   interviewSlot,
@@ -83,7 +70,6 @@ export const connectWithUser = async ({
               } else {
                 GoogleAuth.signIn().then(() => {
                   createEvent({
-                    data,
                     slot,
                     authState,
                     interviewSlot,
@@ -121,7 +107,6 @@ function updateSigninStatus() {
 }
 
 function createEvent({
-  data,
   slot,
   interviewSlot,
   authState,
@@ -169,11 +154,27 @@ function createEvent({
     conferenceDataVersion: "1",
     sendUpdates: "all",
   });
-  request.execute((reqEvent: any) => {
+  request.execute(async (reqEvent: any) => {
     console.log(reqEvent);
     console.log(reqEvent.hangoutLink);
     console.log("SUCCESSFUL");
-    if (data.success) {
+    const response = await fetch(
+      `${process.env.API_URL}api/interviewSlot/${authState.user._id}/${slot._id}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: authState.token,
+        },
+        body: JSON.stringify({
+          partner: authState.user._id,
+          meetLink: reqEvent.hangoutLink,
+        }),
+      }
+    );
+    const data = await response.json();
+    console.log({ data });
+    if (data.success && reqEvent) {
       interviewSlotDispatch({
         type: "UPDATE_INTERVIEW_SLOTS",
         payload: { interviewSlot: data.data },

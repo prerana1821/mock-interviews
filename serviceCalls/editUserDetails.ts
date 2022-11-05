@@ -30,7 +30,7 @@ export const editUserDetails = async ({
     authDispatch({
       type: "SET_STATUS",
       payload: {
-        status: { loading: { userDetailType: "Updating your profile..." } },
+        status: { loading: { actionType: "Updating your profile..." } },
       },
     });
     const response = await fetch(`/api/userDetail/${authState.user._id}`, {

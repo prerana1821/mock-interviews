@@ -20,7 +20,7 @@
     "**/*.ts",
     "**/*.tsx",
     "utils/serverUtils/addInterviewSlot.js",
-    "components/PrivateRoute/PrivateRoute.js"
+    "components/PrivateRoute/PrivateRoute.tsx"
   ],
   "exclude": ["node_modules"]
 }

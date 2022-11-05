@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import { useAuth } from "../../context";
 import editProfileStyles from "./EditProfile.module.css";
 import formStyles from "../../styles/Form.module.css";
@@ -20,7 +20,7 @@ export const EditProfile = ({ userDetail, setEditProfile }) => {
   return (
     <div className={editProfileStyles.editProfile}>
       <form
-        onSubmit={(event) =>
+        onSubmit={(event: FormEvent<HTMLFormElement>) =>
           editUserDetails({
             event,
             authState,
@@ -47,8 +47,11 @@ export const EditProfile = ({ userDetail, setEditProfile }) => {
             pattern={"^.{3,32}#[0-9]{4}$"}
             title='Example: john#6765'
             placeholder='Enter your username eg. Name#0000'
-            onChange={(e) =>
-              setDetails((state) => ({ ...state, username: e.target.value }))
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              setDetails((state: EditUserDetails) => ({
+                ...state,
+                username: e.target.value,
+              }))
             }
           />
           <span className={formStyles.focusBorder}></span>
@@ -59,8 +62,11 @@ export const EditProfile = ({ userDetail, setEditProfile }) => {
             value={details.portfolio}
             placeholder='Enter your Portfolio link'
             className={formStyles.input}
-            onChange={(e) =>
-              setDetails((state) => ({ ...state, portfolio: e.target.value }))
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              setDetails((state: EditUserDetails) => ({
+                ...state,
+                portfolio: e.target.value,
+              }))
             }
           />
           <span className={formStyles.focusBorder}></span>
@@ -71,8 +77,8 @@ export const EditProfile = ({ userDetail, setEditProfile }) => {
             value={details.interviewDone}
             placeholder='Interviews Done'
             className={formStyles.input}
-            onChange={(e) =>
-              setDetails((state) => ({
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              setDetails((state: EditUserDetails) => ({
                 ...state,
                 interviewDone: +e.target.value,
               }))

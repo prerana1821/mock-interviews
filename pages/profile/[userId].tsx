@@ -1,4 +1,4 @@
-import Image from "next/image";
+import React from "react";
 import { useEffect, useState } from "react";
 import { useAuth, useInterviewSlot } from "../../context";
 import { EditProfile, ScheduledInterviewSlot } from "../../components";
@@ -7,7 +7,6 @@ import { UserInterviewSlot, Alert } from "../../components";
 import { ProfileCard } from "../../components";
 import PrivateRoute from "../../components/PrivateRoute/PrivateRoute";
 import profileStyles from "../../styles/Profile.module.css";
-import React from "react";
 import { scheduledSlots } from "../../utils";
 import { GetServerSideProps } from "next";
 import { Slots } from "../../context/Interview.types";

@@ -1,5 +1,6 @@
 import { UserCredential } from "firebase/auth";
 import { Dispatch } from "react";
+import { Status } from "../types";
 import { InterviewSlotAction } from "./Interview.types";
 
 export type AuthContextT = {
@@ -23,7 +24,7 @@ export type UserDetails = {
 export type UserState = {
   token: string;
   user: UserDetails;
-  status: any;
+  status: Status;
 };
 
 export type AuthAction = {

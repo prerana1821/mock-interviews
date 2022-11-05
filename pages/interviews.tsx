@@ -6,9 +6,12 @@ import { useAuth, useInterviewSlot } from "../context";
 import Image from "next/image";
 import React from "react";
 import { GetServerSideProps } from "next";
+import {
+  InterviewSlotState,
+  InterviewsSlots,
+} from "../context/Interview.types";
 
 const Interviews = ({ interviewSlots }) => {
-  console.log({ interviewSlots });
   const { authState, login } = useAuth();
   const [showLoginAlert, setShowLoginAlert] = useState(false);
   const { interviewSlotState, interviewSlotDispatch } = useInterviewSlot();
@@ -42,7 +45,7 @@ const Interviews = ({ interviewSlots }) => {
     }
   }, [interviewSlots]);
 
-  let filteredSlots;
+  let filteredSlots: InterviewsSlots[];
 
   if (authState.token) {
     filteredSlots = interviewSlotState.interviewSlots.filter(
@@ -83,7 +86,7 @@ const Interviews = ({ interviewSlots }) => {
         <p className='textCenter'>
           Use these available slots to schedule your mock interview.
         </p>
-        {interviewSlotState.status?.loading?.loadingType && (
+        {interviewSlotState.status?.loading?.actionType && (
           <div className='loading'>
             <Image src='/images/loading.svg' width='200' height='200' alt='' />
           </div>

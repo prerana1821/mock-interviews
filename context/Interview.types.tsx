@@ -1,4 +1,5 @@
 import { Dispatch } from "react";
+import { Status } from "../types";
 import { UserDetails } from "./Auth.types";
 
 export type InterviewSlotContextT = {
@@ -9,7 +10,7 @@ export type InterviewSlotContextT = {
 export type InterviewSlotState = {
   interviewSlots: InterviewsSlots[];
   userInterViewSlots: { slots: Slots[] };
-  status: any;
+  status: Status;
 };
 
 export type InterviewSlotAction = {

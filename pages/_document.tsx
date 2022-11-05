@@ -9,7 +9,7 @@ export default function Document() {
         <Main />
         <NextScript />
       </body>
-      <script src='https://apis.google.com/js/platform.js?onload=triggerGoogleLoaded'></script>
+      <script src="https://apis.google.com/js/platform.js?onload=triggerGoogleLoaded;   onreadystatechange=if (this.readyState === 'complete') this.onload()"></script>
       {/* <Script type='text/javascript'>
         {`function triggerGoogleLoaded() {
             console.log("google event loaded");

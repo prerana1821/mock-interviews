@@ -115,12 +115,13 @@ export const connectWithUser = async ({
             GoogleAuth.isSignedIn.listen(updateSigninStatus);
 
             // Handle initial sign-in state. (Determine if user is already signed in.)
-            var user = GoogleAuth.currentUser.get();
+            const user = GoogleAuth.currentUser.get();
             setSigninStatus();
 
             window.gapi.client.load("calendar", "v3", () => {
               console.log("bam!");
-              var isAuthorized = user.hasGrantedScopes(SCOPES);
+              const isAuthorized = user.hasGrantedScopes(SCOPES);
+              console.log({ isAuthorized });
               if (isAuthorized) {
                 const request = window.gapi.client.calendar?.events.insert({
                   calendarId: "primary",
@@ -134,6 +135,30 @@ export const connectWithUser = async ({
                   console.log(reqEvent);
                   console.log("SUCCESSFUL");
                   // window.open(reqEvent.htmlLink);
+                });
+              } else {
+                console.log("NEWS");
+                GoogleAuth.signIn().then(() => {
+                  const user = GoogleAuth.currentUser.get();
+                  console.log({ user });
+
+                  const isAuthorized = user.hasGrantedScopes(SCOPES);
+                  console.log(2, { isAuthorized });
+                  if (isAuthorized) {
+                    const request = window.gapi.client.calendar?.events.insert({
+                      calendarId: "primary",
+                      resource: event,
+                      conferenceDataVersion: "1",
+                    });
+
+                    console.log({ request });
+
+                    request.execute((reqEvent: any) => {
+                      console.log(reqEvent);
+                      console.log("SUCCESSFUL");
+                      // window.open(reqEvent.htmlLink);
+                    });
+                  }
                 });
               }
             });
@@ -237,8 +262,8 @@ function revokeAccess() {
 }
 
 function setSigninStatus() {
-  var user = GoogleAuth.currentUser.get();
-  var isAuthorized = user.hasGrantedScopes(SCOPES);
+  const user = GoogleAuth.currentUser.get();
+  const isAuthorized = user.hasGrantedScopes(SCOPES);
   if (isAuthorized) {
     console.log("Signed In");
     // window.gapi.client.load("calendar", "v3", () => console.log("bam!"));
@@ -248,7 +273,7 @@ function setSigninStatus() {
     //   "You are currently signed in and have granted " + "access to this app."
     // );
   } else {
-    GoogleAuth.signIn();
+    // GoogleAuth.signIn();
     console.log("Signed Out");
 
     // $("#sign-in-or-out-button").html("Sign In/Authorize");

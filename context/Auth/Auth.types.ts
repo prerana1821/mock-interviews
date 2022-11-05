@@ -1,7 +1,7 @@
 import { UserCredential } from "firebase/auth";
 import { Dispatch } from "react";
-import { Status } from "../types";
-import { InterviewSlotAction } from "./Interview.types";
+import { Status } from "../../types";
+import { InterviewSlotAction } from "../InterviewSlot/InterviewSlot.types";
 
 export type AuthContextT = {
   authState: UserState;

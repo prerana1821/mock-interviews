@@ -1,4 +1,4 @@
-import { InterviewsSlots } from "../../context/Interview.types";
+import { InterviewsSlots } from "../../context/InterviewSlot/InterviewSlot.types";
 
 export const scheduledSlots = (
   interviewSlots: InterviewsSlots[],

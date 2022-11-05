@@ -1,6 +1,10 @@
 import cookies from "js-cookie";
 import { Dispatch } from "react";
-import { AuthAction, UserDetails, UserState } from "../../context/Auth.types";
+import {
+  AuthAction,
+  UserDetails,
+  UserState,
+} from "../../context/Auth/Auth.types";
 
 export type SetUserAuthParams = {
   authDispatch: Dispatch<AuthAction>;

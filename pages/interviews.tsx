@@ -9,7 +9,7 @@ import { GetServerSideProps } from "next";
 import {
   InterviewSlotState,
   InterviewsSlots,
-} from "../context/Interview.types";
+} from "../context/InterviewSlot/InterviewSlot.types";
 
 const Interviews = ({ interviewSlots }) => {
   const { authState, login } = useAuth();

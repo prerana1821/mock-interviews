@@ -4,7 +4,10 @@ import { useAuth, useInterviewSlot } from "../../context";
 import interviewSlotStyles from "../../styles/Interviews.module.css";
 import { formatDate } from "../../utils/clientUtils/getFormattedDate";
 import { Dispatch, SetStateAction } from "react";
-import { InterviewsSlots, Slots } from "../../context/Interview.types";
+import {
+  InterviewsSlots,
+  Slots,
+} from "../../context/InterviewSlot/InterviewSlot.types";
 
 type ShowInterviewSlotsProps = {
   slots: InterviewsSlots[];

@@ -1,7 +1,7 @@
 import {
   InterviewSlotAction,
   InterviewSlotState,
-} from "../context/Interview.types";
+} from "../context/InterviewSlot/InterviewSlot.types";
 
 export const interviewSlotReducer = (
   state: InterviewSlotState,

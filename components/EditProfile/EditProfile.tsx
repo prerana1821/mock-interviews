@@ -4,7 +4,7 @@ import editProfileStyles from "./EditProfile.module.css";
 import formStyles from "../../styles/Form.module.css";
 import { editUserDetails } from "../../serviceCalls";
 import Image from "next/image";
-import { UserDetails } from "../../context/Auth.types";
+import { UserDetails } from "../../context/Auth/Auth.types";
 
 export type EditUserDetails = Omit<UserDetails, "email" | "fullName" | "_id">;
 

@@ -1,7 +1,10 @@
 import { useAuth, useInterviewSlot } from "../../context";
 import { formatTime, scheduledSlots } from "../../utils";
 import { formatDate } from "../../utils/clientUtils/getFormattedDate";
-import { InterviewsSlots, Slots } from "../../context/Interview.types";
+import {
+  InterviewsSlots,
+  Slots,
+} from "../../context/InterviewSlot/InterviewSlot.types";
 import styles from "../UserInterviewSlot/UserInterviewSlot.module.css";
 
 export const ScheduledInterviewSlot = () => {

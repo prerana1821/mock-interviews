@@ -1,2 +1,5 @@
-export { useAuth, AuthProvider } from "./AuthProvider";
-export { InterviewSlotProvider, useInterviewSlot } from "./InterviewSlot";
+export { useAuth, AuthProvider } from "./Auth/Auth";
+export {
+  InterviewSlotProvider,
+  useInterviewSlot,
+} from "./InterviewSlot/InterviewSlot";

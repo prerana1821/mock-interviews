@@ -1,5 +1,5 @@
 import { Dispatch, FormEvent, SetStateAction } from "react";
-import { AuthAction, UserState } from "../context/Auth.types";
+import { AuthAction, UserState } from "../context/Auth/Auth.types";
 
 type EditUserDetailsParams = {
   event: FormEvent<HTMLFormElement>;

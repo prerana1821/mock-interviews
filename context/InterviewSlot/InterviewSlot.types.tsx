@@ -1,6 +1,6 @@
 import { Dispatch } from "react";
-import { Status } from "../types";
-import { UserDetails } from "./Auth.types";
+import { Status } from "../../types";
+import { UserDetails } from "../Auth/Auth.types";
 
 export type InterviewSlotContextT = {
   interviewSlotState: InterviewSlotState;

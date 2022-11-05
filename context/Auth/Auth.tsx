@@ -6,9 +6,9 @@ import {
   useEffect,
   useReducer,
 } from "react";
-import { authReducer } from "../reducer";
+import { authReducer } from "../../reducer";
 import cookies from "js-cookie";
-import { loadUserData } from "../serviceCalls";
+import { loadUserData } from "../../serviceCalls";
 import {
   onAuthStateChanged,
   signInWithPopup,
@@ -16,9 +16,9 @@ import {
   GithubAuthProvider,
   UserCredential,
 } from "firebase/auth";
-import { auth } from "../config/firebase";
-import { loginUser } from "../serviceCalls";
-import { setUserAuth } from "../utils";
+import { auth } from "../../config/firebase";
+import { loginUser } from "../../serviceCalls";
+import { setUserAuth } from "../../utils";
 import { AuthContextT, UserState } from "./Auth.types";
 
 export const AuthContext = createContext<AuthContextT>({} as AuthContextT);

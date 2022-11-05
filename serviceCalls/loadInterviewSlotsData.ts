@@ -2,7 +2,7 @@ import { Dispatch } from "react";
 import {
   InterviewSlotAction,
   InterviewSlotState,
-} from "../context/Interview.types";
+} from "../context/InterviewSlot/InterviewSlot.types";
 
 type LoadInterviewSlotsDataParams = {
   token: string;

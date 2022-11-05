@@ -1,6 +1,6 @@
 import { NextRouter } from "next/router";
 import { Dispatch } from "react";
-import { AuthAction } from "../context/Auth.types";
+import { AuthAction } from "../context/Auth/Auth.types";
 import { SetUserAuthParams } from "../utils/clientUtils/setUserAuth";
 
 type LoginUserParams = {

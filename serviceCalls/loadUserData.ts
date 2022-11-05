@@ -1,5 +1,5 @@
 import { Dispatch } from "react";
-import { AuthAction } from "../context/Auth.types";
+import { AuthAction } from "../context/Auth/Auth.types";
 
 type LoadUserDataParams = {
   token: string;

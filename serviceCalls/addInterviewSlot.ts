@@ -1,6 +1,6 @@
 import { Dispatch, FormEvent, SetStateAction } from "react";
-import { UserState } from "../context/Auth.types";
-import { InterviewSlotAction } from "../context/Interview.types";
+import { UserState } from "../context/Auth/Auth.types";
+import { InterviewSlotAction } from "../context/InterviewSlot/InterviewSlot.types";
 
 type AddInterviewSlotParams = {
   event: FormEvent<HTMLFormElement>;

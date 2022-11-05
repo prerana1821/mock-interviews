@@ -5,8 +5,8 @@ import userInterviewSlot from "./UserInterviewSlot.module.css";
 import { deleteInterviewSlot } from "../../serviceCalls";
 import Image from "next/image";
 import { formatDate } from "../../utils/clientUtils/getFormattedDate";
-import { UserDetails } from "../../context/Auth.types";
-import { Slots } from "../../context/Interview.types";
+import { UserDetails } from "../../context/Auth/Auth.types";
+import { Slots } from "../../context/InterviewSlot/InterviewSlot.types";
 
 const pastTime = (item, date) => {
   const today = new Date();

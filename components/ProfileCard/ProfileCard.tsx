@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Dispatch, SetStateAction } from "react";
-import { UserDetails } from "../../context/Auth.types";
+import { UserDetails } from "../../context/Auth/Auth.types";
 import { formatedUrl } from "../../utils";
 import profileCardStyles from "./ProfileCard.module.css";
 

@@ -25,7 +25,7 @@ const Interviews = ({ interviewSlots }) => {
         type: "SET_STATUS",
         payload: {
           // status: { error: interviewSlots?.message },
-          status: { loading: { loadingType: "Loading interview slots" } },
+          status: { loading: { actionType: "Loading interview slots" } },
         },
       });
     } else {

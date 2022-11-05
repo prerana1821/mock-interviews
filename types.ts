@@ -4,9 +4,9 @@ export type ErrorResponse = {
 };
 
 export type Status = {
-  error: string;
-  success: string;
-  loading: {
-    actionType: string;
+  error?: string;
+  success?: string;
+  loading?: {
+    actionType?: string;
   };
 };

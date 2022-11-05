@@ -21,7 +21,7 @@ export const loadInterviewSlotsData = async ({
         type: "SET_STATUS",
         payload: {
           status: {
-            loading: { loadingType: "loading interview slots..." },
+            loading: { actionType: "loading interview slots..." },
           },
         },
       });

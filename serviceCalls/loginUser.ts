@@ -23,7 +23,7 @@ export const loginUser = async ({
   try {
     authDispatch({
       type: "SET_STATUS",
-      payload: { status: { loading: { userType: "Logining user..." } } },
+      payload: { status: { loading: { actionType: "Logining user..." } } },
     });
     const response = await fetch("/api/auth/login", {
       method: "POST",

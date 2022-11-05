@@ -26,7 +26,7 @@ export type InterviewSlotAction = {
 };
 
 export type Slots = {
-  partner?: any;
+  partner?: UserDetails;
   slot: Date;
   _id: string;
 };

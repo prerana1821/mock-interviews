@@ -17,7 +17,7 @@ export const loadUserData = async ({
       authDispatch({
         type: "SET_STATUS",
         payload: {
-          status: { loading: { userType: "Loading user profile..." } },
+          status: { loading: { actionType: "Loading user profile..." } },
         },
       });
       const response = await fetch(`/api/userDetail/${userId}`, {

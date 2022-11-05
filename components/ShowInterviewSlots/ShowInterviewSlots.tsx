@@ -8,6 +8,7 @@ import {
   InterviewsSlots,
   Slots,
 } from "../../context/InterviewSlot/InterviewSlot.types";
+import { useTheme } from "../../context/Theme/Theme";
 
 type ShowInterviewSlotsProps = {
   slots: InterviewsSlots[];
@@ -19,6 +20,7 @@ export const ShowInterviewSlots = ({
   setShowLoginAlert,
 }: ShowInterviewSlotsProps): JSX.Element => {
   const { authState } = useAuth();
+  const { theme } = useTheme();
   const { interviewSlotDispatch } = useInterviewSlot();
   return slots.length === 0 ? (
     <div>We don't have any scheduled interview slots</div>
@@ -42,6 +44,7 @@ export const ShowInterviewSlots = ({
                 <div
                   key={slot._id}
                   className={interviewSlotStyles.interviewSlotCard}
+                  style={{ ...theme, boxShadow: theme.primaryboxShadow }}
                 >
                   <h3>{interviewSlot.userId.fullName}</h3>
                   <h4>@{interviewSlot.userId.username}</h4>

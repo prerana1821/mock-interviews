@@ -9,19 +9,22 @@ export const ThemeProvider = ({ children }) => {
   const lightTheme: Theme = {
     backgroundColor: "#FFFFFF",
     color: "#000",
-    primaryBoxShadow: "0 0 10px 4px rgb(0 0 0 / 5%)",
+    primaryboxShadow: "0 0 10px 4px rgb(0 0 0 / 5%)",
     transition: "background-color 0.6s ease, color 0.6s ease, box-shadow 1s",
-    barBackground: "#000",
+    lightText: "#000",
   };
 
   const darkTheme: Theme = {
-    backgroundColor: "#181A1B",
-    color: "#B1B1AE",
-    primaryBoxShadow:
+    backgroundColor: "#1c1c21",
+    color: "#99cde6",
+    primaryboxShadow:
       "9.91px 9.91px 16px #111313, -9.91px -9.91px 16px #1F2123",
     transition: "background-color 0.6s ease, color 0.6s ease, box-shadow 1s",
-    barBackground: "#fff",
+    lightText: "#bfbfbf",
   };
+
+  // #99cde6
+  // #1c1c21
 
   const [theme, setTheme] = useState<Theme>({} as Theme);
 

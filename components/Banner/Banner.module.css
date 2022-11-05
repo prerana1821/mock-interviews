@@ -1,8 +1,9 @@
 .banner {
   display: flex;
   align-items: center;
-  margin: 2.5rem 2rem;
+  /* margin: 2.5rem 2rem; */
   justify-content: space-around;
+  background-color: #fff;
 }
 
 .title {

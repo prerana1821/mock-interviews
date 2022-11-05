@@ -6,15 +6,14 @@ import { useAuth, useInterviewSlot } from "../context";
 import Image from "next/image";
 import React from "react";
 import { GetServerSideProps } from "next";
-import {
-  InterviewSlotState,
-  InterviewsSlots,
-} from "../context/InterviewSlot/InterviewSlot.types";
+import { InterviewsSlots } from "../context/InterviewSlot/InterviewSlot.types";
+import { useTheme } from "../context/Theme/Theme";
 
 const Interviews = ({ interviewSlots }) => {
   const { authState, login } = useAuth();
   const [showLoginAlert, setShowLoginAlert] = useState(false);
   const { interviewSlotState, interviewSlotDispatch } = useInterviewSlot();
+  const { theme } = useTheme();
 
   useEffect(() => {
     if (
@@ -56,7 +55,7 @@ const Interviews = ({ interviewSlots }) => {
   }
 
   return (
-    <div className='interviewContainer'>
+    <div className='interviewContainer' style={theme}>
       <div className='interviewPageLeft'>
         <SideNav />
       </div>

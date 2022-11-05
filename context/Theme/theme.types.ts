@@ -6,7 +6,7 @@ export type ThemeInitialState = {
 export type Theme = {
   backgroundColor: string;
   color: string;
-  primaryBoxShadow: string;
+  primaryboxShadow: string;
   transition: string;
-  barBackground: string;
+  lightText: string;
 };

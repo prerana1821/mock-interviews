@@ -5,10 +5,12 @@ import formStyles from "../../styles/Form.module.css";
 import { editUserDetails } from "../../serviceCalls";
 import Image from "next/image";
 import { UserDetails } from "../../context/Auth/Auth.types";
+import { useTheme } from "../../context/Theme/Theme";
 
 export type EditUserDetails = Omit<UserDetails, "email" | "fullName" | "_id">;
 
 export const EditProfile = ({ userDetail, setEditProfile }) => {
+  const { theme } = useTheme();
   const [details, setDetails] = useState<EditUserDetails>({
     username: userDetail.username,
     portfolio: userDetail.portfolio,
@@ -18,7 +20,10 @@ export const EditProfile = ({ userDetail, setEditProfile }) => {
   const { authState, authDispatch } = useAuth();
 
   return (
-    <div className={editProfileStyles.editProfile}>
+    <div
+      className={editProfileStyles.editProfile}
+      style={{ boxShadow: theme.primaryboxShadow, ...theme }}
+    >
       <form
         onSubmit={(event: FormEvent<HTMLFormElement>) =>
           editUserDetails({

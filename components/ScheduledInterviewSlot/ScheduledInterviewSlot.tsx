@@ -6,10 +6,12 @@ import {
   Slots,
 } from "../../context/InterviewSlot/InterviewSlot.types";
 import styles from "../UserInterviewSlot/UserInterviewSlot.module.css";
+import { useTheme } from "../../context/Theme/Theme";
 
 export const ScheduledInterviewSlot = () => {
   const { authState } = useAuth();
   const { interviewSlotState } = useInterviewSlot();
+  const { theme } = useTheme();
 
   const scheduledInterviews = scheduledSlots(
     interviewSlotState.interviewSlots,
@@ -41,6 +43,7 @@ export const ScheduledInterviewSlot = () => {
                   <div
                     className={styles.greenInterviewSlot}
                     key={interview._id}
+                    style={{ boxShadow: theme.primaryboxShadow, ...theme }}
                   >
                     <div className={styles.greenInterviewSlotHR}>
                       <h3>@{scheduledInterview.userId.username}</h3>

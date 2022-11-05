@@ -4,17 +4,20 @@ import React from "react";
 import { Layout } from "../components";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
+import { ThemeProvider } from "../context/Theme/Theme";
 
 function MyApp({ Component, pageProps, token, userId }) {
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
-      <AuthProvider token={token} userId={userId}>
-        <InterviewSlotProvider token={token}>
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
-        </InterviewSlotProvider>
-      </AuthProvider>
+      <ThemeProvider>
+        <AuthProvider token={token} userId={userId}>
+          <InterviewSlotProvider token={token}>
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          </InterviewSlotProvider>
+        </AuthProvider>
+      </ThemeProvider>
     </MuiPickersUtilsProvider>
   );
 }

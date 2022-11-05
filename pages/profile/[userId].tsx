@@ -10,10 +10,12 @@ import profileStyles from "../../styles/Profile.module.css";
 import { scheduledSlots } from "../../utils";
 import { GetServerSideProps } from "next";
 import { Slots } from "../../context/InterviewSlot/InterviewSlot.types";
+import { useTheme } from "../../context/Theme/Theme";
 
 const UserProfile = ({ slots }: { slots: Slots }) => {
   const [editProfile, setEditProfile] = useState(false);
   const { authState } = useAuth();
+  const { theme } = useTheme();
   const { interviewSlotState, interviewSlotDispatch } = useInterviewSlot();
   const [showUsernameAlert, setShowUsernameAlert] = useState(false);
 
@@ -46,7 +48,7 @@ const UserProfile = ({ slots }: { slots: Slots }) => {
   }, [slots]);
 
   return (
-    <section style={{ margin: "0 15%" }}>
+    <section style={{ padding: "0 15%", ...theme }}>
       {showUsernameAlert && (
         <Alert
           title='Ohh No!'
@@ -62,7 +64,10 @@ const UserProfile = ({ slots }: { slots: Slots }) => {
         />
       )}
       <div className={profileStyles.profile}>
-        <div className={profileStyles.profileCard}>
+        <div
+          className={profileStyles.profileCard}
+          style={{ boxShadow: theme.primaryboxShadow, ...theme }}
+        >
           {editProfile && (
             <EditProfile
               setEditProfile={setEditProfile}
@@ -76,7 +81,10 @@ const UserProfile = ({ slots }: { slots: Slots }) => {
             setEditProfile={setEditProfile}
           />
         </div>
-        <div className={profileStyles.interviewSlotForm}>
+        <div
+          className={profileStyles.interviewSlotForm}
+          style={{ boxShadow: theme.primaryboxShadow, ...theme }}
+        >
           <AddInterviewSlot setShowUsernameAlert={setShowUsernameAlert} />
         </div>
       </div>

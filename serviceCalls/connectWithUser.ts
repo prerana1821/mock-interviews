@@ -73,18 +73,18 @@ export const connectWithUser = async ({
         },
       });
 
-      // const response = await fetch(
-      //   `${process.env.API_URL}api/interviewSlot/${authState.user._id}/${interviewId}`,
-      //   {
-      //     method: "POST",
-      //     headers: {
-      //       "Content-Type": "application/json",
-      //       Authorization: authState.token,
-      //     },
-      //     body: JSON.stringify({ partner: authState.user._id }),
-      //   }
-      // );
-      // const data = await response.json();
+      const response = await fetch(
+        `${process.env.API_URL}api/interviewSlot/${authState.user._id}/${interviewId}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: authState.token,
+          },
+          body: JSON.stringify({ partner: authState.user._id }),
+        }
+      );
+      const data = await response.json();
 
       window.gapi.load("client:auth2", () => {
         console.log("loaded client");
@@ -105,14 +105,14 @@ export const connectWithUser = async ({
               const user = GoogleAuth.currentUser.get();
               const isAuthorized = user.hasGrantedScopes(SCOPES);
               if (isAuthorized) {
-                createEvent();
+                createEvent({ data, interviewSlotDispatch });
               } else {
                 GoogleAuth.signIn().then(() => {
-                  const user = GoogleAuth.currentUser.get();
-                  const isAuthorized = user.hasGrantedScopes(SCOPES);
-                  if (isAuthorized) {
-                    createEvent();
-                  }
+                  // const user = GoogleAuth.currentUser.get();
+                  // const isAuthorized = user.hasGrantedScopes(SCOPES);
+                  // if (isAuthorized) {
+                  createEvent({ data, interviewSlotDispatch });
+                  // }
                 });
               }
             });
@@ -144,7 +144,7 @@ function updateSigninStatus() {
   setSigninStatus();
 }
 
-function createEvent() {
+function createEvent({ data, interviewSlotDispatch }) {
   const request = window.gapi.client.calendar?.events.insert({
     calendarId: "primary",
     resource: event,
@@ -153,5 +153,11 @@ function createEvent() {
   request.execute((reqEvent: any) => {
     console.log(reqEvent);
     console.log("SUCCESSFUL");
+    if (data.success) {
+      interviewSlotDispatch({
+        type: "UPDATE_INTERVIEW_SLOTS",
+        payload: { interviewSlot: data.data },
+      });
+    }
   });
 }

@@ -1,9 +1,13 @@
+import { v4 } from "uuid";
 import { Dispatch, SetStateAction } from "react";
 import { UserState } from "../context/Auth.types";
 import { InterviewSlotAction } from "../context/Interview.types";
+import { getTimeFormatGMT } from "../utils/clientUtils/getTimeFormatGMT";
+import { getInterviewEndTime } from "../utils/clientUtils/getInterviewEndTime";
 
 type ConnectWithUserParams = {
-  interviewId: string;
+  slot: any;
+  interviewSlot: any;
   authState: UserState;
   interviewSlotDispatch: Dispatch<InterviewSlotAction>;
   setShowLoginAlert: Dispatch<SetStateAction<boolean>>;
@@ -14,46 +18,11 @@ type ConnectWithUserParams = {
 };
 
 let GoogleAuth;
-const CLIENT_ID =
-  "863578440757-fb81u1g8ht6flj68aau1op47k6rj1msl.apps.googleusercontent.com";
-const API_KEY = "AIzaSyADkO_oXckoz7YIjM9BXZQDi69oGruLcsc";
 const SCOPES = "https://www.googleapis.com/auth/calendar.events";
 
-const event = {
-  summary: "Awesome Event 2!",
-  location: "Mumbai, India",
-  description: "Really great refreshments",
-  start: {
-    dateTime: "2022-11-05T09:00:00-07:00",
-    timeZone: "America/Los_Angeles",
-  },
-  end: {
-    dateTime: "2022-11-05T17:00:00-07:00",
-    timeZone: "America/Los_Angeles",
-  },
-  attendees: [
-    { email: "snehalnawar8263@gmail.com" },
-    { email: "prerananawar1@gmail.com" },
-  ],
-  conferenceData: {
-    createRequest: {
-      requestId: "zzz",
-      conferenceSolutionKey: {
-        type: "hangoutsMeet",
-      },
-    },
-  },
-  reminders: {
-    useDefault: false,
-    overrides: [
-      { method: "email", minutes: 24 * 60 },
-      { method: "popup", minutes: 10 },
-    ],
-  },
-};
-
 export const connectWithUser = async ({
-  interviewId,
+  slot,
+  interviewSlot,
   authState,
   interviewSlotDispatch,
   setShowLoginAlert,
@@ -72,9 +41,8 @@ export const connectWithUser = async ({
           },
         },
       });
-
       const response = await fetch(
-        `${process.env.API_URL}api/interviewSlot/${authState.user._id}/${interviewId}`,
+        `${process.env.API_URL}api/interviewSlot/${authState.user._id}/${slot._id}`,
         {
           method: "POST",
           headers: {
@@ -97,7 +65,7 @@ export const connectWithUser = async ({
               "App Name that you used in google developer console API",
           })
           .then(function () {
-            GoogleAuth = gapi.auth2.getAuthInstance();
+            GoogleAuth = window.gapi.auth2.getAuthInstance();
             GoogleAuth.isSignedIn.listen(updateSigninStatus);
             setSigninStatus();
 
@@ -105,14 +73,22 @@ export const connectWithUser = async ({
               const user = GoogleAuth.currentUser.get();
               const isAuthorized = user.hasGrantedScopes(SCOPES);
               if (isAuthorized) {
-                createEvent({ data, interviewSlotDispatch });
+                createEvent({
+                  data,
+                  slot,
+                  authState,
+                  interviewSlot,
+                  interviewSlotDispatch,
+                });
               } else {
                 GoogleAuth.signIn().then(() => {
-                  // const user = GoogleAuth.currentUser.get();
-                  // const isAuthorized = user.hasGrantedScopes(SCOPES);
-                  // if (isAuthorized) {
-                  createEvent({ data, interviewSlotDispatch });
-                  // }
+                  createEvent({
+                    data,
+                    slot,
+                    authState,
+                    interviewSlot,
+                    interviewSlotDispatch,
+                  });
                 });
               }
             });
@@ -144,14 +120,58 @@ function updateSigninStatus() {
   setSigninStatus();
 }
 
-function createEvent({ data, interviewSlotDispatch }) {
+function createEvent({
+  data,
+  slot,
+  interviewSlot,
+  authState,
+  interviewSlotDispatch,
+}) {
+  const event = {
+    summary: `Mock Interview with ${interviewSlot.userId.fullName}`,
+    location: "Google Meet",
+    description: "Need good copy for description",
+    start: {
+      dateTime: getTimeFormatGMT(slot.slot),
+      timeZone: "Asia/Kolkata",
+    },
+    end: {
+      dateTime: getInterviewEndTime(slot.slot),
+      timeZone: "Asia/Kolkata",
+    },
+    attendees: [
+      {
+        email: `${interviewSlot.userId.email}`,
+      },
+      {
+        email: `${authState.user.email}`,
+      },
+    ],
+    conferenceData: {
+      createRequest: {
+        requestId: v4(),
+        conferenceSolutionKey: {
+          type: "hangoutsMeet",
+        },
+      },
+    },
+    reminders: {
+      useDefault: false,
+      overrides: [
+        { method: "email", minutes: 24 * 60 },
+        { method: "popup", minutes: 10 },
+      ],
+    },
+  };
   const request = window.gapi.client.calendar?.events.insert({
     calendarId: "primary",
     resource: event,
     conferenceDataVersion: "1",
+    sendUpdates: "all",
   });
   request.execute((reqEvent: any) => {
     console.log(reqEvent);
+    console.log(reqEvent.hangoutLink);
     console.log("SUCCESSFUL");
     if (data.success) {
       interviewSlotDispatch({

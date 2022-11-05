@@ -20,11 +20,11 @@ export const Header = (): JSX.Element => {
       </Link>
       <ul className={headerStyles.navLinks}>
         <Link href='/interviews'>
-          <li>Available slots</li>
+          <li className={headerStyles.link}>Available slots</li>
         </Link>
         {authState.token ? (
           <Link href={`/profile/${authState.user._id}`}>
-            <li>Account</li>
+            <li className={headerStyles.link}>Account</li>
           </Link>
         ) : (
           <button

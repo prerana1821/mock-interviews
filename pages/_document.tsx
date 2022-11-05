@@ -1,21 +1,20 @@
-import { Html, Head, Main, NextScript } from "next/document";
-import Script from "next/script";
+import Document, { Html, Head, Main, NextScript } from "next/document";
 
-export default function Document() {
-  return (
-    <Html>
-      <Head />
-      <body>
-        <Main />
-        <NextScript />
-      </body>
-      <script src="https://apis.google.com/js/platform.js?onload=triggerGoogleLoaded;   onreadystatechange=if (this.readyState === 'complete') this.onload()"></script>
-      {/* <Script type='text/javascript'>
-        {`function triggerGoogleLoaded() {
-            console.log("google event loaded");
-            window.dispatchEvent(new Event('google-loaded'));
-        }`}
-      </Script> */}
-    </Html>
-  );
+export default class MyDocument extends Document {
+  static async getInitialProps(ctx) {
+    const initialProps = await Document.getInitialProps(ctx);
+    return { ...initialProps };
+  }
+  render() {
+    return (
+      <Html>
+        <Head />
+        <body>
+          <Main />
+          <NextScript />
+        </body>
+        <script src="https://apis.google.com/js/platform.js?onload=triggerGoogleLoaded;   onreadystatechange=if (this.readyState === 'complete') this.onload()"></script>
+      </Html>
+    );
+  }
 }

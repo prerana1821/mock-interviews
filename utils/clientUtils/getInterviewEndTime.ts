@@ -1,6 +1,6 @@
 declare global {
   interface Date {
-    addHours: (h: number) => any;
+    addHours: (h: number) => Date;
   }
 }
 

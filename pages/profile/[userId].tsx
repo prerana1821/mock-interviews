@@ -33,7 +33,7 @@ const UserProfile = ({ slots }: { slots: Slots }) => {
         });
       } else {
         interviewSlotDispatch({
-          type: "LOAD_USER_INTERVIEW_SLOT",
+          type: "LOAD_USER_INTERVIEW_SLOTS",
           payload: { slots },
         });
       }

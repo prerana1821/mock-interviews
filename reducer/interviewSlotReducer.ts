@@ -23,14 +23,14 @@ export const interviewSlotReducer = (
             : interviewSlot;
         }),
       };
-    case "LOAD_USER_INTERVIEW_SLOT":
+    case "LOAD_USER_INTERVIEW_SLOTS":
       return {
         ...state,
         userInterViewSlots: {
           slots: action.payload.slots,
         },
       };
-    case "ADD_USER_INTERVIEW_SLOT":
+    case "ADD_USER_INTERVIEW_SLOTS":
       return {
         ...state,
         userInterViewSlots: {
@@ -38,7 +38,7 @@ export const interviewSlotReducer = (
           slots: state.userInterViewSlots.slots.concat(action.payload.slot),
         },
       };
-    case "DELETE_USER_INTERVIEW_SLOT":
+    case "DELETE_USER_INTERVIEW_SLOTS":
       return {
         ...state,
         userInterViewSlots: {

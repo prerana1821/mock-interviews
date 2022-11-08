@@ -38,7 +38,7 @@ export const addInterviewSlot = async ({
     const data = await response.json();
     if (data.success) {
       interviewSlotDispatch({
-        type: "ADD_USER_INTERVIEW_SLOT",
+        type: "ADD_USER_INTERVIEW_SLOTS",
         payload: { slot: data.data.slot },
       });
       setDateAndTime(null);

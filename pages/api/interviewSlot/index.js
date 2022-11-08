@@ -8,10 +8,33 @@ export default async function handler(req, res) {
   await dbConnect();
   await runCors(req, res, cors);
 
+  // slots: { $gte: new Date(new Date().setDate(new Date().getDate() - 1)) }
+
   switch (method) {
     case "GET":
       try {
-        const interviewSlots = await InterviewSlot.find({})
+        // mongoose query slots.slot based on yesterday's date
+        // $and: [
+        //   ...,
+        //   {
+        //     slots: {
+        //       $elemMatch: {
+        //         start: { $gte: params.start },
+        //         end: { $lte: params.end },
+        //       }
+        //     }
+        //   }
+        // ]
+
+        const interviewSlots = await InterviewSlot.find({
+          // 'slots': {
+          //   $elemMatch: {
+          //     slot: { $gte: new Date(new Date().setDate(new Date().getDate() - 1)) },
+          //     // end: { $lte: params.end },
+          //   }
+          //   // $gte: new Date(new Date().setDate(new Date().getDate() - 1))
+          // }
+        })
           .populate({
             path: "userId",
             select: "username fullName",
@@ -21,6 +44,7 @@ export default async function handler(req, res) {
             select: "username fullName",
           })
           .exec();
+        console.log(1, { slot: interviewSlots.slots });
         return res.status(200).json({
           data: interviewSlots,
           success: true,

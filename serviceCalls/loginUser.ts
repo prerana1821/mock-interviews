@@ -1,16 +1,13 @@
 import { NextRouter } from "next/router";
 import { Dispatch } from "react";
-import { AuthAction } from "../context/Auth/Auth.types";
+import { AuthAction, UserDetails } from "../context/Auth/Auth.types";
 import { SetUserAuthParams } from "../utils/clientUtils/setUserAuth";
 
 type LoginUserParams = {
-  email: string;
-  fullName: string;
-  uid: string;
   authDispatch: Dispatch<AuthAction>;
   setUserAuth: ({ authDispatch, user, token }: SetUserAuthParams) => void;
   router: NextRouter;
-};
+} & Pick<UserDetails, "email" | "fullName" | "uid">;
 
 export const loginUser = async ({
   email,

@@ -1,15 +1,13 @@
 import { Dispatch, FormEvent, SetStateAction } from "react";
+import { EditUserDetails } from "../components/EditProfile/EditProfile";
 import { AuthAction, UserState } from "../context/Auth/Auth.types";
 
 type EditUserDetailsParams = {
   event: FormEvent<HTMLFormElement>;
   authState: UserState;
   authDispatch: Dispatch<AuthAction>;
-  username: string;
-  portfolio: string;
-  interviewDone: number;
   setEditProfile: Dispatch<SetStateAction<boolean>>;
-};
+} & EditUserDetails;
 
 export const editUserDetails = async ({
   event,

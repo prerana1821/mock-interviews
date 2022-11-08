@@ -11,7 +11,6 @@ export const ThemeProvider = ({ children }) => {
     color: "#000",
     primaryBoxShadow: "0 0 10px 4px rgb(0 0 0 / 5%)",
     transition: "background-color 0.6s ease, color 0.6s ease, box-shadow 1s",
-    barBackground: "#000",
   };
 
   const darkTheme: Theme = {
@@ -20,7 +19,6 @@ export const ThemeProvider = ({ children }) => {
     primaryBoxShadow:
       "9.91px 9.91px 16px #111313, -9.91px -9.91px 16px #1F2123",
     transition: "background-color 0.6s ease, color 0.6s ease, box-shadow 1s",
-    barBackground: "#fff",
   };
 
   const [theme, setTheme] = useState<Theme>({} as Theme);

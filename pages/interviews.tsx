@@ -6,10 +6,7 @@ import { useAuth, useInterviewSlot } from "../context";
 import Image from "next/image";
 import React from "react";
 import { GetServerSideProps } from "next";
-import {
-  InterviewSlotState,
-  InterviewsSlots,
-} from "../context/InterviewSlot/InterviewSlot.types";
+import { InterviewsSlots } from "../context/InterviewSlot/InterviewSlot.types";
 
 const Interviews = ({ interviewSlots }) => {
   const { authState, login } = useAuth();
@@ -62,7 +59,6 @@ const Interviews = ({ interviewSlots }) => {
       </div>
 
       <div className='interviewPageRight'>
-        {/* {showLoginAlert && <LoginAlert setShowLoginAlert={setShowLoginAlert} />} */}
         {showLoginAlert && (
           <Alert
             title='Ohh No!'

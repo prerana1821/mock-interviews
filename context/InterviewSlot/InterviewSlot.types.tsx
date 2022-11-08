@@ -13,15 +13,16 @@ export type InterviewSlotState = {
   status: Status;
 };
 
+type InterviewActions =
+  | "LOAD"
+  | "UPDATE"
+  | "LOAD_USER"
+  | "ADD_USER"
+  | "DELETE_USER"
+  | "REMOVE_USER";
+
 export type InterviewSlotAction = {
-  type:
-    | "LOAD_INTERVIEW_SLOTS"
-    | "UPDATE_INTERVIEW_SLOTS"
-    | "LOAD_USER_INTERVIEW_SLOT"
-    | "ADD_USER_INTERVIEW_SLOT"
-    | "DELETE_USER_INTERVIEW_SLOT"
-    | "REMOVE_USER_INTERVIEW_SLOTS"
-    | "SET_STATUS";
+  type: `${InterviewActions}_INTERVIEW_SLOTS` | "SET_STATUS";
   payload: any;
 };
 

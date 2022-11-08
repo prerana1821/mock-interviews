@@ -15,6 +15,7 @@ export type AuthContextT = {
 export type UserDetails = {
   email: string;
   fullName: string;
+  uid?: string;
   username: string;
   portfolio: string;
   interviewDone: number;
@@ -29,7 +30,7 @@ export type UserState = {
 
 export type AuthAction = {
   type:
-    | "LOGIN_USER"
+    | "LOGIN"
     | "LOAD_USER_DETAILS"
     | "UPDATE_USER"
     | "ADD_TOKEN"

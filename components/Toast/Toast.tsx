@@ -3,8 +3,12 @@ import { useAuth, useInterviewSlot } from "../../context";
 import styles from "./Toast.module.css";
 import Image from "next/image";
 
+type Status = "Loading" | "Error" | "Success";
+
 type ToastProps = {
-  [key: string]: string;
+  [key in `authState${Status}`]: string;
+} & {
+  [key in `interviewSlot${Status}`]: string;
 };
 
 export const Toast = ({

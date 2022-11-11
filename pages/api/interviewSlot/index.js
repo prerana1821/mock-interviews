@@ -25,15 +25,23 @@ export default async function handler(req, res) {
         //     }
         //   }
         // ]
-
+        // $elemMatch: {
+        //   slot: { $gte: new Date(new Date().setDate(new Date().getDate() - 1)) },
+        // }
+        // db.employees.find({ "emp_age": { $exists: true, $gte: 30 } }).pretty()
+        // db.employees.find({ $and: [{ "job_role": "Store Associate" }, { "emp_age": { $gte: 20, $lte: 30 } }] }).pretty()
         const interviewSlots = await InterviewSlot.find({
-          // 'slots': {
-          //   $elemMatch: {
-          //     slot: { $gte: new Date(new Date().setDate(new Date().getDate() - 1)) },
-          //     // end: { $lte: params.end },
-          //   }
-          //   // $gte: new Date(new Date().setDate(new Date().getDate() - 1))
-          // }
+          // "slots.slot": { $gte: new Date(new Date().setDate(new Date().getDate() - 1)) },
+          // "slots.partner": { $exists: false }
+          $and: [{
+            "slots.slot": { $gte: new Date(new Date().setDate(new Date().getDate() - 1)) },
+          }, {
+            "slots.partner": { $exists: false }
+          }]
+          // "slots.slot": {
+          //   $gte: new Date(new Date().setDate(new Date().getDate() - 1)),
+          // },
+          // "slots.partner": {},
         })
           .populate({
             path: "userId",
@@ -44,7 +52,20 @@ export default async function handler(req, res) {
             select: "username fullName",
           })
           .exec();
-        console.log(1, { slot: interviewSlots.slots });
+
+        // const newData = interviewSlots.reduce((acc, interviewSlot) => {
+        //   return interviewSlot.slots.reduce((acc1, slot) => {
+        //     return slot.slot >= new Date(new Date().setDate(new Date().getDate() - 1)) && !slot.partner ? {
+        //       slots: { acc1, slot }, ...interviewSlot
+        //     } : acc
+        //   }, [])
+        // }, [])
+        // const newData = interviewSlots.map(interviewSlot => {
+        //   return interviewSlot.slots.map(slot => {
+        //     return slot.slot >= new Date(new Date().setDate(new Date().getDate() - 1)) && !slot.partner && { slots: [...slot], ...interviewSlot }
+        //   })
+        // })
+
         return res.status(200).json({
           data: interviewSlots,
           success: true,

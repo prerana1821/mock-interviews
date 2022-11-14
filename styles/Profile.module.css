@@ -1,13 +1,14 @@
 .profile {
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
-  margin: 2rem;
+  justify-content: space-between;
+  margin: 2rem 0;
 }
 
 .profileCard {
   width: max-content;
   padding: 2rem 3rem;
+  position: relative;
   align-items: flex-start;
   display: flex;
   border-radius: 1rem;

@@ -1,0 +1,112 @@
+/** buttons **/
+.btn {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  border-radius: 0.5rem;
+  border: none;
+  min-width: 15rem;
+  margin: 0.5rem 0;
+  padding: 1rem 2rem;
+  transition: all 0.4s ease;
+  outline: none;
+}
+
+.btn:hover {
+  background-color: var(--primary);
+  border-color: var(--primary);
+  color: var(--white);
+}
+
+.btn-primary {
+  font-weight: 600;
+  background-color: var(--secondary);
+  color: var(--white);
+  border: 2px solid var(--secondary);
+}
+
+.btn-secondary {
+  background-color: var(--white);
+  color: var(--secondary);
+  border: 2px solid var(--secondary);
+}
+
+.btn-square {
+  background-color: var(--secondary-focus);
+  color: var(--white);
+  padding: 0.6rem 3rem;
+  border-radius: 7px;
+  border: none;
+  outline: none;
+  margin: 0.5rem 1rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.btn-square:hover {
+  background-color: var(--primary);
+}
+
+.btn-route {
+  padding: 0.3rem 1rem;
+  margin-bottom: -0.5rem;
+  border-radius: 7px;
+  font-weight: 600;
+  border: none;
+  color: var(--white);
+  background-color: var(--secondary-focus);
+  position: relative;
+}
+
+.btn-icon {
+  width: 2em;
+  margin-right: 0.5rem;
+}
+
+.btn-discord {
+  width: 240px;
+  text-align: center;
+  font-weight: 600;
+  margin: 0;
+  background-color: var(--secondary);
+  color: var(--white);
+  padding: 0.6em 0.8em;
+}
+
+.btn-discord .btn-icon {
+  margin-right: 1rem;
+}
+
+.btn-discord:hover {
+  background-color: var(--secondary-focus);
+}
+
+.btn-discord span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* button tooltip */
+.btn-route-tooltip {
+  visibility: hidden;
+  background-color: var(--primary);
+  text-align: center;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  position: absolute;
+  z-index: 1;
+  width: 500%;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+}
+
+.btn-route:hover .btn-route-tooltip {
+  visibility: visible;
+}
+
+@media screen and (max-width: 800px) {
+  .btn-route-tooltip {
+    width: 300%;
+  }
+}

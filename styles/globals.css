@@ -1,16 +1,39 @@
-@import url("https://fonts.googleapis.com/css2?family=Work+Sans:wght@100;200;300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap");
+
+@import url("./footer.css");
+@import url("./button.css");
+@import url("../components/InfoCards/InfoCards.module.css");
 
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: "Work Sans", sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 :root {
-  --primary-color: #7c3aed;
-  --box-shadow: 8.71px 8.71px 15px rgb(0 0 0 / 5%),
-    -8.71px -8.71px 15px rgb(0 0 0 / 3%);
+  --box-shadow: 6px 6px 12px #ebebeb, -6px -6px 12px #ffffff;
+  /* --box-shadow: 8.71px 8.71px 15px rgb(0 0 0 / 5%),
+    -8.71px -8.71px 15px rgb(0 0 0 / 3%); */
+  --primary: #0d3344;
+  --primary-dark: #052634;
+  --secondary: #49a0eb;
+  --secondary-overlay: #49a0ebb3;
+  --secondary-focus: #285780;
+  --secondary-bg: #49a0eb33;
+  --white: #ffffff;
+  --black: #000000;
+  --off-white: #fcfcfc;
+  --text-color: #767d86;
+  --text-color-dark: #474646;
+  --text-color-secondary: #d9dbe1;
+  --lg-screen: 800px;
+  --shadow: 0 1rem 2rem rgba(180, 180, 180, 0.2);
+  --shadow-s: 0 0.5rem 1rem rgba(180, 180, 180, 0.1);
+  --pale-pink: #f3a39c;
+  --border-grey: #e4e5e7;
 }
 
 a {
@@ -28,7 +51,7 @@ li {
 }
 
 .blueTxt {
-  color: #7c3aed;
+  color: #0366d6;
 }
 
 .blueTxt:hover {
@@ -50,7 +73,7 @@ li {
   outline: none;
   border-radius: 2rem;
   font-size: 1.05rem;
-  background-color: var(--primary-color);
+  background-color: var(--primary);
   color: #fff;
   margin: 1rem 0;
   cursor: pointer;
@@ -60,21 +83,25 @@ li {
   background: none;
   cursor: pointer;
   padding: 0.6rem 1rem;
-  color: var(--primary-color);
-  border: 2px solid var(--primary-color);
+  color: var(--primary);
+  border: 2px solid var(--primary);
   border-radius: 2rem;
   font-size: initial;
   margin: 1rem 0;
 }
 
 .btnIcon {
-  align-self: flex-end;
+  /* align-self: flex-end; */
   border: none;
   background: none;
   outline: #fff;
   cursor: pointer;
   top: 1rem;
   right: 1rem;
+  width: 38px;
+  position: absolute;
+  /* top: 0; */
+  /* right: 0; */
 }
 
 .btnIconShowPassword {
@@ -94,4 +121,61 @@ li {
   position: absolute;
   align-items: center;
   justify-content: center;
+}
+
+.fw {
+  background-color: var(--white);
+}
+
+.shadow {
+  box-shadow: var(--box-shadow);
+}
+
+.header-m {
+  color: var(--primary);
+  font-size: 2rem;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.container {
+  padding: 1rem;
+}
+
+.section {
+  padding: 2rem 1rem;
+}
+
+.section + .ow {
+  background-color: var(--off-white);
+}
+
+.header-s {
+  font-size: 24px;
+  color: var(--primary);
+  line-height: 1.5rem;
+  font-weight: 600;
+}
+
+.sub-header {
+  font-size: 18px;
+  line-height: 2rem;
+  margin-bottom: 1rem;
+}
+
+.interviewContainer {
+  display: flex;
+}
+
+.interviewPageLeft {
+  min-height: 100%;
+  width: 22%;
+  border-right: 1px solid #ddd;
+}
+
+.interviewPageRight {
+  height: 100%;
+  width: 78%;
 }

@@ -1,0 +1,45 @@
+.tabsContainer {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+  color: #6b7280;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.tabsGroup {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: -1px;
+}
+
+.tabItem {
+  width: 50%;
+  text-align: center;
+
+  display: inline-block;
+  padding: 1rem;
+  cursor: pointer;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  border-bottom-width: 2px;
+  border-color: transparent;
+}
+
+.tabItem:hover {
+  color: #4b5563;
+  background-color: #e5e7eb;
+}
+
+.tabItemActive {
+  text-align: center;
+  width: 50%;
+  display: inline-block;
+  font-weight: 600;
+  padding: 1rem;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  border-bottom-width: 6px;
+  border-color: #052634;
+  color: #052634;
+  cursor: pointer;
+}

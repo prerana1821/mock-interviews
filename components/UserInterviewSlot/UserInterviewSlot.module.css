@@ -1,9 +1,8 @@
 .interviewSlots {
   display: flex;
-  justify-content: center;
-  grid-gap: 1rem;
-  gap: 1rem;
-  margin: 2rem 6rem;
+  justify-content: flex-start;
+  gap: 2rem;
+  margin: 2rem 0;
   flex-wrap: wrap;
   align-items: center;
 }
@@ -16,27 +15,47 @@
 }
 
 .greenInterviewSlot {
-  color: green;
-  background-color: #d0ecc7;
+  /* color: green; */
+  position: relative;
+  background: #ffffff;
   width: max-content;
   display: flex;
-  padding: 2rem 4rem;
+  padding: 2rem 3rem;
   align-items: flex-start;
   border-radius: 1rem;
   flex-direction: column;
   box-shadow: var(--box-shadow);
+  border-radius: 13px;
+  background: #ffffff;
+  box-shadow: 6px 6px 12px #ebebeb, -6px -6px 12px #ffffff;
 }
 
 .redInterviewSlot {
-  color: #ff2b2b;
-  background-color: #fbcfe8;
+  /*color: #ff2b2b;
+  */ /*background-color: #fbcfe8;
+  */
+  position: relative;
   width: max-content;
   display: flex;
-  padding: 2rem 4rem;
+  padding: 2rem 3rem;
   align-items: flex-start;
   border-radius: 1rem;
   flex-direction: column;
-  box-shadow: var(--box-shadow);
+  /*box-shadow: var(--box-shadow);
+  */
+  border-radius: 13px;
+  background: #ffffff;
+  box-shadow: 6px 6px 12px #ebebeb, -6px -6px 12px #ffffff;
+}
+
+.redInterviewSlotHR {
+  border-left: 2px solid #ff2b2b;
+  padding-left: 1rem;
+}
+
+.greenInterviewSlotHR {
+  border-left: 2px solid green;
+  padding-left: 1rem;
 }
 
 .greyInterviewSlot {

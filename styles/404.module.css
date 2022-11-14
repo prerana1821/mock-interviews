@@ -17,7 +17,7 @@
 
 .custom404HomeLink {
   padding: 0.5rem 1rem;
-  background-color: #7c3aed;
+  background-color: var(--primary-dark);
   margin: 1rem 0;
   border-radius: 1.5rem;
   font-size: 1.5rem;

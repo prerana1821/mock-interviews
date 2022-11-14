@@ -18,6 +18,7 @@
   margin-top: 4px;
   text-align: center;
   color: #0366d6;
+  cursor: pointer;
 }
 
 .SidenavLink:hover {

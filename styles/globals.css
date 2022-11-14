@@ -5,7 +5,6 @@
 @import url("./footer.css");
 @import url("./button.css");
 @import url("../components/InfoCards/InfoCards.module.css");
-@import url("../components/SideNav/Sidenav.module.css");
 
 html,
 body {

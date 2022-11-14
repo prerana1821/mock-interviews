@@ -10,3 +10,4 @@ export { Toast } from "./Toast/Toast";
 export { InfoCards } from "./InfoCards/InfoCards";
 export { SideNav } from "./SideNav/SideNav";
 export { Alert } from "./Alert/Alert";
+export { Tabs } from "./Tabs/Tabs";

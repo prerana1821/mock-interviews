@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { useAuth, useInterviewSlot } from "../../context";
-import { EditProfile, ScheduledInterviewSlot } from "../../components";
+import { EditProfile, ScheduledInterviewSlot, Tabs } from "../../components";
 import { AddInterviewSlot } from "../../components";
 import { UserInterviewSlot, Alert } from "../../components";
 import { ProfileCard } from "../../components";
@@ -16,6 +16,8 @@ const UserProfile = ({ slots }: { slots: Slots }) => {
   const { authState } = useAuth();
   const { interviewSlotState, interviewSlotDispatch } = useInterviewSlot();
   const [showUsernameAlert, setShowUsernameAlert] = useState(false);
+
+  const [currentTab, setCurrentTab] = useState("Your Open Slots");
 
   const scheduledInterviews = scheduledSlots(
     interviewSlotState.interviewSlots,
@@ -49,11 +51,11 @@ const UserProfile = ({ slots }: { slots: Slots }) => {
     <section style={{ margin: "0 15%" }}>
       {showUsernameAlert && (
         <Alert
-          title='Ohh No!'
-          description='Hey, you need to fill your discord id before scheduling interviews!'
+          title="Ohh No!"
+          description="Hey, you need to fill your discord id before scheduling interviews!"
           actions={
             <button
-              className='btnSecondary'
+              className="btnSecondary"
               onClick={() => setShowUsernameAlert(false)}
             >
               Cancel
@@ -80,22 +82,35 @@ const UserProfile = ({ slots }: { slots: Slots }) => {
           <AddInterviewSlot setShowUsernameAlert={setShowUsernameAlert} />
         </div>
       </div>
-      <div>
-        {interviewSlotState.userInterViewSlots.slots.length === 0 ? (
-          <h1 className='textCenter'>You haven't added any slots yet!</h1>
-        ) : (
-          <UserInterviewSlot userDetail={authState.user} />
-        )}
-      </div>
-      <div>
-        {scheduledInterviews.length === 0 ? (
-          <h1 className='textCenter'>
-            Your interview slots have not matched with anyone yet!
-          </h1>
-        ) : (
-          <ScheduledInterviewSlot />
-        )}
-      </div>
+
+      <Tabs
+        tabsArray={[
+          { name: "Your Open Slots", value: "Your Open Slots" },
+          { name: "Your Scheduled Slots", value: "Your Scheduled Slots" },
+        ]}
+        currentTab={currentTab}
+        setCurrentTab={setCurrentTab}
+      />
+
+      {currentTab === "Your Open Slots" ? (
+        <div style={{ marginTop: "2rem" }}>
+          {interviewSlotState.userInterViewSlots.slots.length === 0 ? (
+            <h1 className="textCenter">You haven't added any slots yet!</h1>
+          ) : (
+            <UserInterviewSlot userDetail={authState.user} />
+          )}
+        </div>
+      ) : (
+        <div style={{ marginTop: "2rem" }}>
+          {scheduledInterviews.length === 0 ? (
+            <h1 className="textCenter">
+              Your interview slots have not matched with anyone yet!
+            </h1>
+          ) : (
+            <ScheduledInterviewSlot />
+          )}
+        </div>
+      )}
     </section>
   );
 };

@@ -1,7 +1,7 @@
 .interviewSlots {
   display: flex;
   justify-content: flex-start;
-  gap: 4rem;
+  gap: 2rem;
   margin: 2rem 0;
   flex-wrap: wrap;
   align-items: center;

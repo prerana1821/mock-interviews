@@ -1,4 +1,6 @@
 import React from "react";
+import Link from "next/link";
+import sideNavStyles from "./Sidenav.module.css";
 
 type SideNavLinks = {
   name: string;
@@ -20,16 +22,15 @@ const sidenavLinks: SideNavLinks[] = [
 export const SideNav = (): JSX.Element => {
   return (
     <div>
-      <ul className='SidenavContainer'>
-        <li className='SidenavHeading'> Important Links </li>
+      <ul className={sideNavStyles.SidenavContainer}>
+        <li className={sideNavStyles.SidenavHeading}> Important Links </li>
         {sidenavLinks.map((link) => {
           return (
-            <li className='SidenavLink' key={link.name}>
-              <a href={link.href} target='_blank'>
-                {" "}
-                {link.name}{" "}
+            <Link href={link.href} key={link.name}>
+              <a target="_blank" className={sideNavStyles.SidenavLink}>
+                {link.name}
               </a>
-            </li>
+            </Link>
           );
         })}
       </ul>

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Dispatch, SetStateAction } from "react";
 import { UserDetails } from "../../context/Auth/Auth.types";
+import { useTheme } from "../../context/Theme/Theme";
 import { formatedUrl } from "../../utils";
 import profileCardStyles from "./ProfileCard.module.css";
 
@@ -15,25 +16,34 @@ export const ProfileCard = ({
   editProfile,
   setEditProfile,
 }: ProfileCardProps): JSX.Element => {
+  const { theme } = useTheme();
+
   return (
     <>
       <div className={profileCardStyles.cardHeader}>
-        <h1>Profile</h1>
+        <h1 style={theme}>Profile</h1>
         <div>
           <button
             onClick={() => setEditProfile(!editProfile)}
             className='btnIcon'
           >
-            <Image src='/images/edit.png' width='30' height='30' alt='' />
+            <Image
+              src='/images/edit.png'
+              width='30'
+              height='30'
+              alt='edit button'
+            />
           </button>
         </div>
       </div>
-      <h3>
+      <h3 style={{ color: theme.lightText }}>
         Name: {userDetail?.fullName ? userDetail.fullName : "You Full Name"}
       </h3>
-      <p>Discord Id: {userDetail?.username}</p>
-      <p>Email: {userDetail?.email}</p>
-      <p>
+      <p style={{ color: theme.lightText }}>
+        Discord Id: {userDetail?.username}
+      </p>
+      <p style={{ color: theme.lightText }}>Email: {userDetail?.email}</p>
+      <p style={{ color: theme.lightText }}>
         Portfolio:{" "}
         {userDetail?.portfolio ? (
           <a
@@ -48,7 +58,9 @@ export const ProfileCard = ({
         )}
       </p>
 
-      <p>Interviews Done: {userDetail?.interviewDone}</p>
+      <p style={{ color: theme.lightText }}>
+        Interviews Done: {userDetail?.interviewDone}
+      </p>
     </>
   );
 };

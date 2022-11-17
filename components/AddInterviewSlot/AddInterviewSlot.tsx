@@ -2,6 +2,7 @@ import React, { Dispatch, SetStateAction, useState } from "react";
 import { useAuth, useInterviewSlot } from "../../context";
 import { addInterviewSlot } from "../../serviceCalls";
 import { KeyboardDateTimePicker } from "@material-ui/pickers";
+import { useTheme } from "../../context/Theme/Theme";
 
 export const AddInterviewSlot = ({
   setShowUsernameAlert,
@@ -11,10 +12,11 @@ export const AddInterviewSlot = ({
   const [dateAndTime, setDateAndTime] = useState(new Date());
   const { authState } = useAuth();
   const { interviewSlotDispatch } = useInterviewSlot();
+  const { theme } = useTheme();
 
   return (
     <div>
-      <h1>Add New Interview Slot</h1>
+      <h1 style={{ color: theme.lightText }}>Add New Interview Slot</h1>
       <form
         onSubmit={(event) => {
           event.preventDefault();
@@ -42,7 +44,7 @@ export const AddInterviewSlot = ({
           value={dateAndTime}
           onChange={setDateAndTime}
           disablePast
-          style={{ width: "300px" }}
+          style={{ width: "300px", color: "#fff" }}
         />
         <br />
         <button className='btnPrimary' type='submit'>

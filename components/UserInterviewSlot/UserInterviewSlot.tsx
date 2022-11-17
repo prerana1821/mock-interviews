@@ -7,6 +7,7 @@ import Image from "next/image";
 import { formatDate } from "../../utils/clientUtils/getFormattedDate";
 import { UserDetails } from "../../context/Auth/Auth.types";
 import { Slots } from "../../context/InterviewSlot/InterviewSlot.types";
+import { useTheme } from "../../context/Theme/Theme";
 
 const pastTime = (item, date) => {
   const today = new Date();
@@ -24,6 +25,7 @@ export const UserInterviewSlot = ({
 }: UserInterviewSlotProps): JSX.Element => {
   const { interviewSlotState, interviewSlotDispatch } = useInterviewSlot();
   const { authState } = useAuth();
+  const { theme } = useTheme();
 
   return (
     <>
@@ -44,6 +46,7 @@ export const UserInterviewSlot = ({
                   // [userInterviewSlot.greyInterviewSlot]:
                   //   item.slot === null || pastTime(item, formatDate(item.slot)),
                 })}
+                style={{ boxShadow: theme.primaryBoxShadow, ...theme }}
               >
                 {/* {!pastTime(item, formatDate(item.slot)) && ( */}
                 <button

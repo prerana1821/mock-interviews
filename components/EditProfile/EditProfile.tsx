@@ -5,10 +5,12 @@ import formStyles from "../../styles/Form.module.css";
 import { editUserDetails } from "../../serviceCalls";
 import Image from "next/image";
 import { UserDetails } from "../../context/Auth/Auth.types";
+import { useTheme } from "../../context/Theme/Theme";
 
 export type EditUserDetails = Omit<UserDetails, "email" | "fullName" | "_id">;
 
 export const EditProfile = ({ userDetail, setEditProfile }) => {
+  const { theme } = useTheme();
   const [details, setDetails] = useState<EditUserDetails>({
     username: userDetail.username,
     portfolio: userDetail.portfolio,
@@ -18,7 +20,10 @@ export const EditProfile = ({ userDetail, setEditProfile }) => {
   const { authState, authDispatch } = useAuth();
 
   return (
-    <div className={editProfileStyles.editProfile}>
+    <div
+      className={editProfileStyles.editProfile}
+      style={{ boxShadow: theme.primaryBoxShadow, ...theme }}
+    >
       <form
         onSubmit={(event: FormEvent<HTMLFormElement>) =>
           editUserDetails({
@@ -37,7 +42,12 @@ export const EditProfile = ({ userDetail, setEditProfile }) => {
           onClick={() => setEditProfile(false)}
           className={editProfileStyles.closeBtn}
         >
-          <Image src='/images/close.png' width='38s' height='38s' alt='' />
+          <Image
+            src='/images/close.png'
+            width='38'
+            height='38'
+            alt='close button'
+          />
         </button>
         <div className={formStyles.inputBox}>
           <input

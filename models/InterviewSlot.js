@@ -6,6 +6,9 @@ const SlotSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: UserCredential,
   },
+  meetLink: {
+    type: String,
+  },
   slot: {
     type: Date,
     required: true,

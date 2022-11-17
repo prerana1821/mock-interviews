@@ -7,11 +7,13 @@ import Image from "next/image";
 import React from "react";
 import { GetServerSideProps } from "next";
 import { InterviewsSlots } from "../context/InterviewSlot/InterviewSlot.types";
+import { useTheme } from "../context/Theme/Theme";
 
 const Interviews = ({ interviewSlots }) => {
   const { authState, login } = useAuth();
   const [showLoginAlert, setShowLoginAlert] = useState(false);
   const { interviewSlotState, interviewSlotDispatch } = useInterviewSlot();
+  const { theme } = useTheme();
 
   useEffect(() => {
     if (
@@ -53,7 +55,7 @@ const Interviews = ({ interviewSlots }) => {
   }
 
   return (
-    <div className='interviewContainer'>
+    <div className='interviewContainer' style={theme}>
       <div className='interviewPageLeft'>
         <SideNav />
       </div>
@@ -84,7 +86,12 @@ const Interviews = ({ interviewSlots }) => {
         </p>
         {interviewSlotState.status?.loading?.actionType && (
           <div className='loading'>
-            <Image src='/images/loading.svg' width='200' height='200' alt='' />
+            <Image
+              src='/images/loading.svg'
+              width='200'
+              height='200'
+              alt='loading'
+            />
           </div>
         )}
         <div className={interviewSlotStyles.interviewSlots}>

@@ -1,4 +1,5 @@
 import React from "react";
+import { useTheme } from "../../context/Theme/Theme";
 
 type SideNavLinks = {
   name: string;
@@ -18,8 +19,10 @@ const sidenavLinks: SideNavLinks[] = [
 ];
 
 export const SideNav = (): JSX.Element => {
+  const { theme } = useTheme();
+
   return (
-    <div>
+    <div style={theme}>
       <ul className='SidenavContainer'>
         <li className='SidenavHeading'> Important Links </li>
         {sidenavLinks.map((link) => {

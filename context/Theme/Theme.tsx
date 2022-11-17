@@ -14,12 +14,16 @@ export const ThemeProvider = ({ children }) => {
   };
 
   const darkTheme: Theme = {
-    backgroundColor: "#181A1B",
-    color: "#B1B1AE",
+    backgroundColor: "#1c1c21",
+    color: "#99cde6",
     primaryBoxShadow:
       "9.91px 9.91px 16px #111313, -9.91px -9.91px 16px #1F2123",
     transition: "background-color 0.6s ease, color 0.6s ease, box-shadow 1s",
+    lightText: "#fff",
   };
+
+  // #99cde6
+  // #1c1c21
 
   const [theme, setTheme] = useState<Theme>({} as Theme);
 

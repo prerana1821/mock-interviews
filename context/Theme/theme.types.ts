@@ -7,4 +7,5 @@ export type ThemeInitialState = {
 
 export type Theme = {
   primaryBoxShadow: string;
+  lightText?: string;
 } & CSSProperties;

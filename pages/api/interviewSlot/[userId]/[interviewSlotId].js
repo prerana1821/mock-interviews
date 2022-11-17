@@ -8,8 +8,9 @@ async function handler(req, res) {
     query: { userId, interviewSlotId },
     method,
   } = req;
-  const { partner } = req.body;
+  const { partner, meetLink } = req.body;
 
+  console.log({ meetLink });
   await dbConnect();
   await runCors(req, res, cors);
 
@@ -25,8 +26,12 @@ async function handler(req, res) {
             message: "Scheduled interview not found",
           });
         } else {
+          console.log({ data: interviewSlot.slots.id(interviewSlotId) });
+          console.log({ data: interviewSlot.slots.id(interviewSlotId).meetLink });
           interviewSlot.slots.id(interviewSlotId).partner = partner;
+          interviewSlot.slots.id(interviewSlotId).meetLink = meetLink;
           const updatedInterviewSlot = await interviewSlot.save();
+          console.log({ slot: updatedInterviewSlot.slots });
           const normalizedData = await updatedInterviewSlot
             .populate({
               path: "userId",
@@ -37,6 +42,7 @@ async function handler(req, res) {
               select: "username fullName",
             })
             .execPopulate();
+          console.log({ normalizedData });
           res.status(200).json({
             success: true,
             data: normalizedData,

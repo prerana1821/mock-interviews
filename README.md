@@ -14,7 +14,9 @@ There are multiple features implemented on Mocky to get you ready for neoG Camp.
 
 > 🖼 **Mocky** demo video:
 
-https://user-images.githubusercontent.com/61601706/185979135-093f5cff-df6e-405b-bb84-b52ca1d5f7d0.mp4
+
+https://user-images.githubusercontent.com/61601706/202381374-2f2f8c52-a7e2-4623-8d84-a5c41a4208ef.mp4
+
 
 ## 🛠️ **Spinning Up Development Environment**
 

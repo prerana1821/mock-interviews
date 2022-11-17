@@ -16,7 +16,7 @@ export const InfoCards = ({ content }): JSX.Element => {
             <div key={index}>
               <div
                 className='card fw shadow'
-                style={{ ...theme, boxShadow: theme.primaryboxShadow }}
+                style={{ ...theme, boxShadow: theme.primaryBoxShadow }}
               >
                 <div className='sub-header'>{level.subTitle}</div>
                 <div className='header-s'>{level.title}</div>

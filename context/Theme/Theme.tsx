@@ -19,6 +19,7 @@ export const ThemeProvider = ({ children }) => {
     primaryBoxShadow:
       "9.91px 9.91px 16px #111313, -9.91px -9.91px 16px #1F2123",
     transition: "background-color 0.6s ease, color 0.6s ease, box-shadow 1s",
+    lightText: "#fff",
   };
 
   // #99cde6

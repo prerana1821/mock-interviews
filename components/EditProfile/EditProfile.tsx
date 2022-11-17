@@ -22,7 +22,7 @@ export const EditProfile = ({ userDetail, setEditProfile }) => {
   return (
     <div
       className={editProfileStyles.editProfile}
-      style={{ boxShadow: theme.primaryboxShadow, ...theme }}
+      style={{ boxShadow: theme.primaryBoxShadow, ...theme }}
     >
       <form
         onSubmit={(event: FormEvent<HTMLFormElement>) =>

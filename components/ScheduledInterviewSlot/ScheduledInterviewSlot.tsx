@@ -44,7 +44,7 @@ export const ScheduledInterviewSlot = () => {
                   <div
                     className={styles.greenInterviewSlot}
                     key={interview._id}
-                    style={{ boxShadow: theme.primaryboxShadow, ...theme }}
+                    style={{ boxShadow: theme.primaryBoxShadow, ...theme }}
                   >
                     <div className={styles.greenInterviewSlotHR}>
                       <h3>@{scheduledInterview.userId.username}</h3>

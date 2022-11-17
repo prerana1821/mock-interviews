@@ -46,7 +46,7 @@ export const UserInterviewSlot = ({
                   // [userInterviewSlot.greyInterviewSlot]:
                   //   item.slot === null || pastTime(item, formatDate(item.slot)),
                 })}
-                style={{ boxShadow: theme.primaryboxShadow, ...theme }}
+                style={{ boxShadow: theme.primaryBoxShadow, ...theme }}
               >
                 {/* {!pastTime(item, formatDate(item.slot)) && ( */}
                 <button

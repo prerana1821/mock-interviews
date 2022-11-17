@@ -1,6 +1,10 @@
 import cookies from "js-cookie";
 import { Dispatch } from "react";
-import { AuthAction, UserDetails, UserState } from "../../context/Auth.types";
+import {
+  AuthAction,
+  UserDetails,
+  UserState,
+} from "../../context/Auth/Auth.types";
 
 export type SetUserAuthParams = {
   authDispatch: Dispatch<AuthAction>;
@@ -20,7 +24,7 @@ export const setUserAuth = ({ authDispatch, user, token }): void => {
   );
   cookies.set("token", token, { expires: 1 });
   cookies.set("userId", user._id, { expires: 1 });
-  authDispatch({ type: "LOGIN_USER", payload: user });
+  authDispatch({ type: "LOGIN", payload: user });
   authDispatch({ type: "ADD_TOKEN", payload: { token } });
   authDispatch({
     type: "SET_STATUS",

@@ -1,6 +1,6 @@
 import { Dispatch } from "react";
-import { UserState } from "../context/Auth.types";
-import { InterviewSlotAction } from "../context/Interview.types";
+import { UserState } from "../context/Auth/Auth.types";
+import { InterviewSlotAction } from "../context/InterviewSlot/InterviewSlot.types";
 
 type DeleteInterviewSlotParams = {
   slotId: string;
@@ -33,7 +33,7 @@ export const deleteInterviewSlot = async ({
     const data = await response.json();
     if (data.success) {
       interviewSlotDispatch({
-        type: "DELETE_USER_INTERVIEW_SLOT",
+        type: "DELETE_USER_INTERVIEW_SLOTS",
         payload: { interviewSlotId: data.data },
       });
     }

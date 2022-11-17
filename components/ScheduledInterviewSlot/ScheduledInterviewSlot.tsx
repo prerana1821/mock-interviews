@@ -2,6 +2,10 @@ import Link from "next/link";
 import { useAuth, useInterviewSlot } from "../../context";
 import { formatTime, scheduledSlots } from "../../utils";
 import { formatDate } from "../../utils/clientUtils/getFormattedDate";
+import {
+  InterviewsSlots,
+  Slots,
+} from "../../context/InterviewSlot/InterviewSlot.types";
 import styles from "../UserInterviewSlot/UserInterviewSlot.module.css";
 
 export const ScheduledInterviewSlot = () => {
@@ -20,9 +24,8 @@ export const ScheduledInterviewSlot = () => {
         Interview will take place on #teamtanay discord. Connect with the person
         using discord id.
       </p>
-      <div className={ styles.interviewSlots }>
-        { scheduledInterviews.map((scheduledInterview) => {
-          console.log({ scheduledInterview });
+      <div className={styles.interviewSlots}>
+        {scheduledInterviews.map((scheduledInterview: InterviewsSlots) => {
           return (
             scheduledInterview.slots
               // .filter((slot) => {
@@ -31,25 +34,34 @@ export const ScheduledInterviewSlot = () => {
               //   yesterday.setDate(yesterday.getDate() - 1);
               //   return new Date(formatDate(slot.slot)) > new Date(yesterday);
               // })
-              .sort((a, b) => new Date(a.slot) - new Date(b.slot))
-              .map((interview) => {
+              .sort(
+                (a: Slots, b: Slots) => +new Date(a.slot) - +new Date(b.slot)
+              )
+              .map((interview: Slots) => {
                 return (
                   <div
-                    className={ styles.greenInterviewSlot }
-                    key={ interview._id }
+                    className={styles.greenInterviewSlot}
+                    key={interview._id}
                   >
-                    <div className={ styles.greenInterviewSlotHR } >
-                      <h3>@{ scheduledInterview.userId.username }</h3>
-                      <p>{ formatTime(interview.slot) }</p>
-                      <p>{ formatDate(interview.slot) }</p>
-                      { interview?.meetLink && <a href={ `${interview?.meetLink}` }
-                        target="_blank" className='blueTxt'>Interview Meet Link</a> }
+                    <div className={styles.greenInterviewSlotHR}>
+                      <h3>@{scheduledInterview.userId.username}</h3>
+                      <p>{formatTime(interview.slot)}</p>
+                      <p>{formatDate(interview.slot)}</p>
+                      {interview?.meetLink && (
+                        <a
+                          href={`${interview?.meetLink}`}
+                          target='_blank'
+                          className='blueTxt'
+                        >
+                          Interview Meet Link
+                        </a>
+                      )}
                     </div>
                   </div>
                 );
               })
           );
-        }) }
+        })}
       </div>
     </div>
   );

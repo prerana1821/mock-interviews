@@ -1,5 +1,6 @@
 import { Dispatch } from "react";
-import { UserDetails } from "./Auth.types";
+import { Status } from "../../types";
+import { UserDetails } from "../Auth/Auth.types";
 
 export type InterviewSlotContextT = {
   interviewSlotState: InterviewSlotState;
@@ -9,23 +10,24 @@ export type InterviewSlotContextT = {
 export type InterviewSlotState = {
   interviewSlots: InterviewsSlots[];
   userInterViewSlots: { slots: Slots[] };
-  status: any;
+  status: Status;
 };
 
+type InterviewActions =
+  | "LOAD"
+  | "UPDATE"
+  | "LOAD_USER"
+  | "ADD_USER"
+  | "DELETE_USER"
+  | "REMOVE_USER";
+
 export type InterviewSlotAction = {
-  type:
-    | "LOAD_INTERVIEW_SLOTS"
-    | "UPDATE_INTERVIEW_SLOTS"
-    | "LOAD_USER_INTERVIEW_SLOT"
-    | "ADD_USER_INTERVIEW_SLOT"
-    | "DELETE_USER_INTERVIEW_SLOT"
-    | "REMOVE_USER_INTERVIEW_SLOTS"
-    | "SET_STATUS";
+  type: `${InterviewActions}_INTERVIEW_SLOTS` | "SET_STATUS";
   payload: any;
 };
 
 export type Slots = {
-  partner?: any;
+  partner?: UserDetails;
   slot: Date;
   _id: string;
 };

@@ -1,9 +1,9 @@
 import { v4 } from "uuid";
 import { Dispatch, SetStateAction } from "react";
-import { UserState } from "../context/Auth.types";
-import { InterviewSlotAction } from "../context/Interview.types";
 import { getTimeFormatGMT } from "../utils/clientUtils/getTimeFormatGMT";
 import { getInterviewEndTime } from "../utils/clientUtils/getInterviewEndTime";
+import { UserState } from "../context/Auth/Auth.types";
+import { InterviewSlotAction } from "../context/InterviewSlot/InterviewSlot.types";
 
 type ConnectWithUserParams = {
   slot: any;

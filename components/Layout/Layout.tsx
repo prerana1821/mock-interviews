@@ -13,7 +13,7 @@ export const Layout = ({ children }: { children: ReactNode }): JSX.Element => {
       <Header />
       <main className='mainLayout'>{children}</main>
       <Toast
-        authStateLoading={authState.status?.loading?.userDetailType}
+        authStateLoading={authState.status?.loading?.actionType}
         authStateError={authState.status?.error}
         authStateSuccess={authState.status?.success}
         interviewSlotLoading={interviewSlotState.status?.loading?.actionType}

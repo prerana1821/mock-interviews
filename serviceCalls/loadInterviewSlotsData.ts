@@ -2,7 +2,7 @@ import { Dispatch } from "react";
 import {
   InterviewSlotAction,
   InterviewSlotState,
-} from "../context/Interview.types";
+} from "../context/InterviewSlot/InterviewSlot.types";
 
 type LoadInterviewSlotsDataParams = {
   token: string;
@@ -21,7 +21,7 @@ export const loadInterviewSlotsData = async ({
         type: "SET_STATUS",
         payload: {
           status: {
-            loading: { loadingType: "loading interview slots..." },
+            loading: { actionType: "loading interview slots..." },
           },
         },
       });

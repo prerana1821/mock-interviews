@@ -2,6 +2,13 @@ import { useEffect } from "react";
 import { useAuth, useInterviewSlot } from "../../context";
 import styles from "./Toast.module.css";
 import Image from "next/image";
+import { Status } from "../../types";
+
+type ToastProps = {
+  [key in `authState${Capitalize<keyof Status>}`]: string;
+} & {
+  [key in `interviewSlot${Capitalize<keyof Status>}`]: string;
+};
 
 export const Toast = ({
   authStateLoading,
@@ -10,9 +17,17 @@ export const Toast = ({
   interviewSlotLoading,
   interviewSlotError,
   interviewSlotSuccess,
-}) => {
+}: ToastProps): JSX.Element => {
   const { authDispatch } = useAuth();
   const { interviewSlotDispatch } = useInterviewSlot();
+
+  const statusCheck =
+    authStateLoading ||
+    authStateError ||
+    authStateSuccess ||
+    interviewSlotLoading ||
+    interviewSlotError ||
+    interviewSlotSuccess;
 
   useEffect(() => {
     let timerid = setTimeout(() => {
@@ -26,42 +41,20 @@ export const Toast = ({
     return () => {
       clearTimeout(timerid);
     };
-  }, [
-    authDispatch,
-    interviewSlotDispatch,
-    authStateLoading,
-    authStateError,
-    authStateSuccess,
-    interviewSlotLoading,
-    interviewSlotError,
-    interviewSlotSuccess,
-  ]);
-
-  const checkUndefined =
-    authStateLoading ||
-    authStateError ||
-    authStateSuccess ||
-    interviewSlotLoading ||
-    interviewSlotError ||
-    interviewSlotSuccess;
+  }, [authDispatch, interviewSlotDispatch, statusCheck]);
 
   return (
     <>
-      { checkUndefined && (
-        <div className={ styles.status }>
+      {statusCheck && (
+        <div className={styles.status}>
           <div className='tl-content-error'>
             <p>
-              <Image src='/images/status.svg' width='30' height='30' alt='status' />
-              { authStateLoading ||
-                authStateError ||
-                authStateSuccess ||
-                interviewSlotLoading ||
-                interviewSlotError ||
-                interviewSlotSuccess }
+              <Image src='/images/status.svg' width='30' height='30' alt='' />
+              {statusCheck}
             </p>
           </div>
         </div>
-      ) }
+      )}
     </>
   );
 };

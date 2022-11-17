@@ -6,10 +6,9 @@ import { UserInterviewSlot, Alert } from "../../components";
 import { ProfileCard } from "../../components";
 import PrivateRoute from "../../components/PrivateRoute/PrivateRoute";
 import profileStyles from "../../styles/Profile.module.css";
-import React from "react";
 import { scheduledSlots } from "../../utils";
 import { GetServerSideProps } from "next";
-import { Slots } from "../../context/Interview.types";
+import { Slots } from "../../context/InterviewSlot/InterviewSlot.types";
 
 const UserProfile = ({ slots }: { slots: Slots }) => {
   const [editProfile, setEditProfile] = useState(false);
@@ -33,7 +32,7 @@ const UserProfile = ({ slots }: { slots: Slots }) => {
         });
       } else {
         interviewSlotDispatch({
-          type: "LOAD_USER_INTERVIEW_SLOT",
+          type: "LOAD_USER_INTERVIEW_SLOTS",
           payload: { slots },
         });
       }

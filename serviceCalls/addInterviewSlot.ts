@@ -1,6 +1,6 @@
 import { Dispatch, FormEvent, SetStateAction } from "react";
-import { UserState } from "../context/Auth.types";
-import { InterviewSlotAction } from "../context/Interview.types";
+import { UserState } from "../context/Auth/Auth.types";
+import { InterviewSlotAction } from "../context/InterviewSlot/InterviewSlot.types";
 
 type AddInterviewSlotParams = {
   event: FormEvent<HTMLFormElement>;
@@ -38,7 +38,7 @@ export const addInterviewSlot = async ({
     const data = await response.json();
     if (data.success) {
       interviewSlotDispatch({
-        type: "ADD_USER_INTERVIEW_SLOT",
+        type: "ADD_USER_INTERVIEW_SLOTS",
         payload: { slot: data.data.slot },
       });
       setDateAndTime(null);

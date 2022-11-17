@@ -1,7 +1,8 @@
 import { useRouter } from "next/router";
+import { ComponentType } from "react";
 
-const PrivateRoute = (WrappedComponent) => {
-  return (props) => {
+const PrivateRoute = (WrappedComponent: ComponentType) => {
+  return (props: JSX.Element) => {
     // checks whether we are on client / browser or server.
     if (typeof window !== "undefined") {
       const router = useRouter();

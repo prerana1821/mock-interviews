@@ -3,7 +3,6 @@ import { connectWithUser } from "../../serviceCalls";
 import { useAuth, useInterviewSlot } from "../../context";
 import interviewSlotStyles from "../../styles/Interviews.module.css";
 import { formatDate } from "../../utils/clientUtils/getFormattedDate";
-import { useEffect } from "react";
 
 declare global {
   interface Window {

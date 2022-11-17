@@ -1,15 +1,13 @@
 import { Dispatch, FormEvent, SetStateAction } from "react";
-import { AuthAction, UserState } from "../context/Auth.types";
+import { EditUserDetails } from "../components/EditProfile/EditProfile";
+import { AuthAction, UserState } from "../context/Auth/Auth.types";
 
 type EditUserDetailsParams = {
   event: FormEvent<HTMLFormElement>;
   authState: UserState;
   authDispatch: Dispatch<AuthAction>;
-  username: string;
-  portfolio: string;
-  interviewDone: number;
   setEditProfile: Dispatch<SetStateAction<boolean>>;
-};
+} & EditUserDetails;
 
 export const editUserDetails = async ({
   event,
@@ -30,7 +28,7 @@ export const editUserDetails = async ({
     authDispatch({
       type: "SET_STATUS",
       payload: {
-        status: { loading: { userDetailType: "Updating your profile..." } },
+        status: { loading: { actionType: "Updating your profile..." } },
       },
     });
     const response = await fetch(`/api/userDetail/${authState.user._id}`, {

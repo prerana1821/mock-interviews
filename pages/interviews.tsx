@@ -6,6 +6,7 @@ import { useAuth, useInterviewSlot } from "../context";
 import Image from "next/image";
 import React from "react";
 import { GetServerSideProps } from "next";
+import { InterviewsSlots } from "../context/InterviewSlot/InterviewSlot.types";
 
 const Interviews = ({ interviewSlots }) => {
   const { authState, login } = useAuth();
@@ -21,7 +22,7 @@ const Interviews = ({ interviewSlots }) => {
         type: "SET_STATUS",
         payload: {
           // status: { error: interviewSlots?.message },
-          status: { loading: { loadingType: "Loading interview slots" } },
+          status: { loading: { actionType: "Loading interview slots" } },
         },
       });
     } else {
@@ -41,7 +42,7 @@ const Interviews = ({ interviewSlots }) => {
     }
   }, [interviewSlots]);
 
-  let filteredSlots;
+  let filteredSlots: InterviewsSlots[];
 
   if (authState.token) {
     filteredSlots = interviewSlotState.interviewSlots.filter(
@@ -58,7 +59,6 @@ const Interviews = ({ interviewSlots }) => {
       </div>
 
       <div className='interviewPageRight'>
-        {/* {showLoginAlert && <LoginAlert setShowLoginAlert={setShowLoginAlert} />} */}
         {showLoginAlert && (
           <Alert
             title='Ohh No!'
@@ -82,7 +82,7 @@ const Interviews = ({ interviewSlots }) => {
         <p className='textCenter'>
           Use these available slots to schedule your mock interview.
         </p>
-        {interviewSlotState.status?.loading?.loadingType && (
+        {interviewSlotState.status?.loading?.actionType && (
           <div className='loading'>
             <Image
               src='/images/loading.svg'

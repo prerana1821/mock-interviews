@@ -6,9 +6,12 @@ import {
   useEffect,
   useReducer,
 } from "react";
-import { interviewSlotReducer } from "../reducer";
-import { loadInterviewSlotsData } from "../serviceCalls";
-import { InterviewSlotContextT, InterviewSlotState } from "./Interview.types";
+import { interviewSlotReducer } from "../../reducer";
+import { loadInterviewSlotsData } from "../../serviceCalls";
+import {
+  InterviewSlotContextT,
+  InterviewSlotState,
+} from "./InterviewSlot.types";
 
 export const InterviewSlotContext = createContext({} as InterviewSlotContextT);
 

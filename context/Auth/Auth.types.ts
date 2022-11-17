@@ -1,6 +1,7 @@
 import { UserCredential } from "firebase/auth";
 import { Dispatch } from "react";
-import { InterviewSlotAction } from "./Interview.types";
+import { Status } from "../../types";
+import { InterviewSlotAction } from "../InterviewSlot/InterviewSlot.types";
 
 export type AuthContextT = {
   authState: UserState;
@@ -14,6 +15,7 @@ export type AuthContextT = {
 export type UserDetails = {
   email: string;
   fullName: string;
+  uid?: string;
   username: string;
   portfolio: string;
   interviewDone: number;
@@ -23,12 +25,12 @@ export type UserDetails = {
 export type UserState = {
   token: string;
   user: UserDetails;
-  status: any;
+  status: Status;
 };
 
 export type AuthAction = {
   type:
-    | "LOGIN_USER"
+    | "LOGIN"
     | "LOAD_USER_DETAILS"
     | "UPDATE_USER"
     | "ADD_TOKEN"

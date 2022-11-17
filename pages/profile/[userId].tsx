@@ -1,4 +1,3 @@
-import React from "react";
 import { useEffect, useState } from "react";
 import { useAuth, useInterviewSlot } from "../../context";
 import { EditProfile, ScheduledInterviewSlot } from "../../components";
@@ -66,7 +65,7 @@ const UserProfile = ({ slots }: { slots: Slots }) => {
       <div className={profileStyles.profile}>
         <div
           className={profileStyles.profileCard}
-          style={{ boxShadow: theme.primaryboxShadow, ...theme }}
+          style={{ boxShadow: theme.primaryBoxShadow, ...theme }}
         >
           {editProfile && (
             <EditProfile
@@ -83,7 +82,7 @@ const UserProfile = ({ slots }: { slots: Slots }) => {
         </div>
         <div
           className={profileStyles.interviewSlotForm}
-          style={{ boxShadow: theme.primaryboxShadow, ...theme }}
+          style={{ boxShadow: theme.primaryBoxShadow, ...theme }}
         >
           <AddInterviewSlot setShowUsernameAlert={setShowUsernameAlert} />
         </div>

@@ -51,15 +51,11 @@ export const Header = (): JSX.Element => {
           )}
         </li>
         <Link href='/interviews'>
-          <li>
-            <a>Available slots</a>
-          </li>
+          <li className={headerStyles.link}>Available slots</li>
         </Link>
         {authState.token ? (
           <Link href={`/profile/${authState.user._id}`}>
-            <li>
-              <a>Account</a>
-            </li>
+            <li className={headerStyles.link}>Account</li>
           </Link>
         ) : (
           <button

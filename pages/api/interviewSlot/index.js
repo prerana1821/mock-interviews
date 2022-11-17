@@ -14,11 +14,11 @@ export default async function handler(req, res) {
         const interviewSlots = await InterviewSlot.find({})
           .populate({
             path: "userId",
-            select: "username fullName",
+            select: "username fullName email",
           })
           .populate({
             path: "slots.partner",
-            select: "username fullName",
+            select: "username fullName email",
           })
           .exec();
         return res.status(200).json({

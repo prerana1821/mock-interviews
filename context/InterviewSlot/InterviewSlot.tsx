@@ -40,8 +40,6 @@ export const InterviewSlotProvider = ({
     });
   }, [token]);
 
-  console.log({ interviewSlotState });
-
   return (
     <InterviewSlotContext.Provider
       value={{ interviewSlotState, interviewSlotDispatch }}

@@ -28,6 +28,7 @@ export type InterviewSlotAction = {
 
 export type Slots = {
   partner?: UserDetails;
+  meetLink?: string;
   slot: Date;
   _id: string;
 };

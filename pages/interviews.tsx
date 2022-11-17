@@ -86,7 +86,12 @@ const Interviews = ({ interviewSlots }) => {
         </p>
         {interviewSlotState.status?.loading?.actionType && (
           <div className='loading'>
-            <Image src='/images/loading.svg' width='200' height='200' alt='' />
+            <Image
+              src='/images/loading.svg'
+              width='200'
+              height='200'
+              alt='loading'
+            />
           </div>
         )}
         <div className={interviewSlotStyles.interviewSlots}>

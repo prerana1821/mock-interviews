@@ -61,7 +61,6 @@ const Interviews = ({ interviewSlots }) => {
       </div>
 
       <div className='interviewPageRight'>
-        {/* {showLoginAlert && <LoginAlert setShowLoginAlert={setShowLoginAlert} />} */}
         {showLoginAlert && (
           <Alert
             title='Ohh No!'

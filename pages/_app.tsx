@@ -1,12 +1,19 @@
 import "../styles/globals.css";
 import { InterviewSlotProvider, AuthProvider } from "../context";
-import React from "react";
+import React, { ReactComponentElement, ReactNode } from "react";
 import { Layout } from "../components";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
 import { ThemeProvider } from "../context/Theme/Theme";
 
-function MyApp({ Component, pageProps, token, userId }) {
+type MyAppProps = {
+  Component: any;
+  pageProps: any;
+  token: string;
+  userId: string;
+};
+
+function MyApp({ Component, pageProps, token, userId }: MyAppProps) {
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <ThemeProvider>

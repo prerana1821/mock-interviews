@@ -33,7 +33,7 @@ export const deleteInterviewSlot = async ({
     const data = await response.json();
     if (data.success) {
       interviewSlotDispatch({
-        type: "DELETE_USER_INTERVIEW_SLOT",
+        type: "DELETE_USER_INTERVIEW_SLOTS",
         payload: { interviewSlotId: data.data },
       });
     }

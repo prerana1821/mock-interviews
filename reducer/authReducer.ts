@@ -2,7 +2,7 @@ import { AuthAction, UserState } from "../context/Auth/Auth.types";
 
 export const authReducer = (state: UserState, action: AuthAction) => {
   switch (action.type) {
-    case "LOGIN_USER":
+    case "LOGIN":
       return { ...state, user: action.payload };
     case "LOAD_USER_DETAILS":
       return {

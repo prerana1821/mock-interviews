@@ -2,9 +2,12 @@ import { useEffect } from "react";
 import { useAuth, useInterviewSlot } from "../../context";
 import styles from "./Toast.module.css";
 import Image from "next/image";
+import { Status } from "../../types";
 
 type ToastProps = {
-  [key: string]: string;
+  [key in `authState${Capitalize<keyof Status>}`]: string;
+} & {
+  [key in `interviewSlot${Capitalize<keyof Status>}`]: string;
 };
 
 export const Toast = ({

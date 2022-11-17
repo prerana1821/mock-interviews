@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import {
   createContext,
+  Dispatch,
   ReactNode,
   useContext,
   useEffect,
@@ -14,12 +15,12 @@ import {
   signInWithPopup,
   signOut,
   GithubAuthProvider,
-  UserCredential,
 } from "firebase/auth";
 import { auth } from "../../config/firebase";
 import { loginUser } from "../../serviceCalls";
 import { setUserAuth } from "../../utils";
-import { AuthContextT, UserState } from "./Auth.types";
+import { AuthAction, AuthContextT, UserState } from "./Auth.types";
+import { InterviewSlotAction } from "../InterviewSlot/InterviewSlot.types";
 
 export const AuthContext = createContext<AuthContextT>({} as AuthContextT);
 
@@ -69,9 +70,11 @@ export const AuthProvider = ({
     return signInWithPopup(auth, provider);
   };
 
-  const logoutUser = async (interviewSlotDispatch) => {
+  const logoutUser = async (
+    interviewSlotDispatch: Dispatch<InterviewSlotAction>
+  ) => {
     authDispatch({ type: "LOGOUT" });
-    interviewSlotDispatch({ type: "REMOVE_USER_INTERVIEW_SLOTS" });
+    interviewSlotDispatch({ type: "REMOVE_USER_INTERVIEW_SLOTS", payload: {} });
     localStorage?.removeItem("token");
     localStorage?.removeItem("user");
     cookies.remove("token");

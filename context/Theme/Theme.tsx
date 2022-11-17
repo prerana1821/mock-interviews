@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from "react";
-import { Theme, ThemeInitialState } from "./Theme.types";
+import { Theme, ThemeInitialState } from "./theme.types";
 
 export const ThemeContext = createContext<ThemeInitialState>(
   {} as ThemeInitialState

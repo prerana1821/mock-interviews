@@ -14,6 +14,7 @@ export const interviewSlotReducer = (
         interviewSlots: action.payload.interviewSlots,
       };
     case "UPDATE_INTERVIEW_SLOTS":
+      console.log({ state, action });
       return {
         ...state,
         interviewSlots: state.interviewSlots.map((interviewSlot) => {

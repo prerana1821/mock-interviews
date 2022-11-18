@@ -39,46 +39,69 @@ export const connectWithUser = async ({
         },
       });
 
-      window.gapi.load("client:auth2", () => {
-        console.log("loaded client");
-        window.gapi.client
-          .init({
-            apiKey: process.env.NEXT_PUBLIC_API_KEY,
-            clientId: process.env.NEXT_PUBLIC_CLIENT_ID,
-            scope: process.env.NEXT_PUBLIC_SCOPES,
-            plugin_name:
-              "App Name that you used in google developer console API",
-          })
-          .then(function () {
-            GoogleAuth = window.gapi.auth2.getAuthInstance();
-            GoogleAuth.isSignedIn.listen(updateSigninStatus);
-            setSigninStatus();
+      const response = await fetch(
+        `${process.env.API_URL}api/interviewSlot/${authState.user._id}/${slot._id}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: authState.token,
+          },
+          body: JSON.stringify({
+            partner: authState.user._id,
+            // meetLink: reqEvent.hangoutLink,
+          }),
+        }
+      );
+      const data = await response.json();
+      console.log({ data });
+      if (data.success) {
+        interviewSlotDispatch({
+          type: "UPDATE_INTERVIEW_SLOTS",
+          payload: { interviewSlot: data.data },
+        });
+      }
 
-            window.gapi.client.load("calendar", "v3", () => {
-              const user = GoogleAuth.currentUser.get();
-              const isAuthorized = user.hasGrantedScopes(
-                process.env.NEXT_PUBLIC_SCOPES
-              );
-              if (isAuthorized) {
-                createEvent({
-                  slot,
-                  authState,
-                  interviewSlot,
-                  interviewSlotDispatch,
-                });
-              } else {
-                GoogleAuth.signIn().then(() => {
-                  createEvent({
-                    slot,
-                    authState,
-                    interviewSlot,
-                    interviewSlotDispatch,
-                  });
-                });
-              }
-            });
-          });
-      });
+      // window.gapi.load("client:auth2", () => {
+      //   console.log("loaded client");
+      //   window.gapi.client
+      //     .init({
+      //       apiKey: process.env.NEXT_PUBLIC_API_KEY,
+      //       clientId: process.env.NEXT_PUBLIC_CLIENT_ID,
+      //       scope: process.env.NEXT_PUBLIC_SCOPES,
+      //       plugin_name:
+      //         "App Name that you used in google developer console API",
+      //     })
+      //     .then(function () {
+      //       GoogleAuth = window.gapi.auth2.getAuthInstance();
+      //       GoogleAuth.isSignedIn.listen(updateSigninStatus);
+      //       setSigninStatus();
+
+      //       window.gapi.client.load("calendar", "v3", () => {
+      //         const user = GoogleAuth.currentUser.get();
+      //         const isAuthorized = user.hasGrantedScopes(
+      //           process.env.NEXT_PUBLIC_SCOPES
+      //         );
+      //         if (isAuthorized) {
+      //           createEvent({
+      //             slot,
+      //             authState,
+      //             interviewSlot,
+      //             interviewSlotDispatch,
+      //           });
+      //         } else {
+      //           GoogleAuth.signIn().then(() => {
+      //             createEvent({
+      //               slot,
+      //               authState,
+      //               interviewSlot,
+      //               interviewSlotDispatch,
+      //             });
+      //           });
+      //         }
+      //       });
+      //     });
+      // });
     } catch (error) {
       console.log({ error });
       interviewSlotDispatch({

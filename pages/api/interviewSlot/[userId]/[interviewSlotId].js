@@ -26,12 +26,9 @@ async function handler(req, res) {
             message: "Scheduled interview not found",
           });
         } else {
-          console.log({ data: interviewSlot.slots.id(interviewSlotId) });
-          console.log({ data: interviewSlot.slots.id(interviewSlotId).meetLink });
           interviewSlot.slots.id(interviewSlotId).partner = partner;
-          interviewSlot.slots.id(interviewSlotId).meetLink = meetLink;
+          interviewSlot.slots.id(interviewSlotId).meetLink = meetLink ? meetLink : null;
           const updatedInterviewSlot = await interviewSlot.save();
-          console.log({ slot: updatedInterviewSlot.slots });
           const normalizedData = await updatedInterviewSlot
             .populate({
               path: "userId",
@@ -42,7 +39,6 @@ async function handler(req, res) {
               select: "username fullName",
             })
             .execPopulate();
-          console.log({ normalizedData });
           res.status(200).json({
             success: true,
             data: normalizedData,

@@ -3,22 +3,22 @@ import { Dispatch, SetStateAction } from "react";
 import { getTimeFormatGMT } from "../utils/clientUtils/getTimeFormatGMT";
 import { getInterviewEndTime } from "../utils/clientUtils/getInterviewEndTime";
 import { UserState } from "../context/Auth/Auth.types";
-import { InterviewSlotAction } from "../context/InterviewSlot/InterviewSlot.types";
+import {
+  InterviewSlotAction,
+  InterviewsSlots,
+  Slots,
+} from "../context/InterviewSlot/InterviewSlot.types";
 
 type ConnectWithUserParams = {
-  slot: any;
-  interviewSlot: any;
+  slot: Slots;
+  interviewSlot: InterviewsSlots;
   authState: UserState;
   interviewSlotDispatch: Dispatch<InterviewSlotAction>;
   setShowLoginAlert: Dispatch<SetStateAction<boolean>>;
   gapi: any;
-  // CLIENT_ID: string;
-  // API_KEY: string;
-  // SCOPES: string;
 };
 
 let GoogleAuth;
-// const SCOPES = "https://www.googleapis.com/auth/calendar.events";
 
 export const connectWithUser = async ({
   slot,
@@ -27,10 +27,7 @@ export const connectWithUser = async ({
   interviewSlotDispatch,
   setShowLoginAlert,
   gapi,
-}: // CLIENT_ID,
-// API_KEY,
-// SCOPES,
-ConnectWithUserParams): Promise<void> => {
+}: ConnectWithUserParams): Promise<void> => {
   if (authState.token) {
     try {
       interviewSlotDispatch({

@@ -5,6 +5,7 @@ import userInterviewSlot from "./UserInterviewSlot.module.css";
 import { deleteInterviewSlot } from "../../serviceCalls";
 import Image from "next/image";
 import { formatDate } from "../../utils/clientUtils/getFormattedDate";
+import { useTheme } from "../../context/Theme/Theme";
 
 const pastTime = (item, date) => {
   const today = new Date();
@@ -16,6 +17,7 @@ const pastTime = (item, date) => {
 export const UserInterviewSlot = ({ userDetail }) => {
   const { interviewSlotState, interviewSlotDispatch } = useInterviewSlot();
   const { authState } = useAuth();
+  const { theme } = useTheme();
 
   return (
     <>
@@ -33,6 +35,7 @@ export const UserInterviewSlot = ({ userDetail }) => {
                   // [userInterviewSlot.greyInterviewSlot]:
                   //   item.slot === null || pastTime(item, formatDate(item.slot)),
                 }) }
+                style={ { ...theme, boxShadow: theme.primaryBoxShadow } }
               >
                 {/* {!pastTime(item, formatDate(item.slot)) && ( */ }
                 <button

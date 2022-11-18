@@ -19,10 +19,10 @@ if (typeof window !== "undefined") {
   gapi = window.gapi;
 }
 
-const CLIENT_ID =
-  "863578440757-fb81u1g8ht6flj68aau1op47k6rj1msl.apps.googleusercontent.com";
-const API_KEY = "AIzaSyADkO_oXckoz7YIjM9BXZQDi69oGruLcsc";
-const SCOPES = "https://www.googleapis.com/auth/calendar.events";
+// const CLIENT_ID =
+//   "863578440757-fb81u1g8ht6flj68aau1op47k6rj1msl.apps.googleusercontent.com";
+// const API_KEY = "AIzaSyADkO_oXckoz7YIjM9BXZQDi69oGruLcsc";
+// const SCOPES = "https://www.googleapis.com/auth/calendar.events";
 
 export const ShowInterviewSlots = ({ slots, setShowLoginAlert }) => {
   const { authState } = useAuth();
@@ -64,9 +64,9 @@ export const ShowInterviewSlots = ({ slots, setShowLoginAlert }) => {
                       interviewSlotDispatch,
                       setShowLoginAlert,
                       gapi,
-                      CLIENT_ID,
-                      API_KEY,
-                      SCOPES,
+                      // CLIENT_ID,
+                      // API_KEY,
+                      // SCOPES,
                     })
                   }
                   className='btnPrimary'

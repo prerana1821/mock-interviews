@@ -12,13 +12,13 @@ type ConnectWithUserParams = {
   interviewSlotDispatch: Dispatch<InterviewSlotAction>;
   setShowLoginAlert: Dispatch<SetStateAction<boolean>>;
   gapi: any;
-  CLIENT_ID: string;
-  API_KEY: string;
-  SCOPES: string;
+  // CLIENT_ID: string;
+  // API_KEY: string;
+  // SCOPES: string;
 };
 
 let GoogleAuth;
-const SCOPES = "https://www.googleapis.com/auth/calendar.events";
+// const SCOPES = "https://www.googleapis.com/auth/calendar.events";
 
 export const connectWithUser = async ({
   slot,
@@ -27,10 +27,10 @@ export const connectWithUser = async ({
   interviewSlotDispatch,
   setShowLoginAlert,
   gapi,
-  CLIENT_ID,
-  API_KEY,
-  SCOPES,
-}: ConnectWithUserParams): Promise<void> => {
+}: // CLIENT_ID,
+// API_KEY,
+// SCOPES,
+ConnectWithUserParams): Promise<void> => {
   if (authState.token) {
     try {
       interviewSlotDispatch({
@@ -46,9 +46,9 @@ export const connectWithUser = async ({
         console.log("loaded client");
         window.gapi.client
           .init({
-            apiKey: API_KEY,
-            clientId: CLIENT_ID,
-            scope: SCOPES,
+            apiKey: process.env.NEXT_PUBLIC_API_KEY,
+            clientId: process.env.NEXT_PUBLIC_CLIENT_ID,
+            scope: process.env.NEXT_PUBLIC_SCOPES,
             plugin_name:
               "App Name that you used in google developer console API",
           })
@@ -59,7 +59,9 @@ export const connectWithUser = async ({
 
             window.gapi.client.load("calendar", "v3", () => {
               const user = GoogleAuth.currentUser.get();
-              const isAuthorized = user.hasGrantedScopes(SCOPES);
+              const isAuthorized = user.hasGrantedScopes(
+                process.env.NEXT_PUBLIC_SCOPES
+              );
               if (isAuthorized) {
                 createEvent({
                   slot,
@@ -94,7 +96,7 @@ export const connectWithUser = async ({
 
 function setSigninStatus() {
   const user = GoogleAuth.currentUser.get();
-  const isAuthorized = user.hasGrantedScopes(SCOPES);
+  const isAuthorized = user.hasGrantedScopes(process.env.NEXT_PUBLIC_SCOPES);
   if (isAuthorized) {
     console.log("Signed In");
   } else {

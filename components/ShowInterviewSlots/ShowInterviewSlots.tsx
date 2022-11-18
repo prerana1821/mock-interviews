@@ -23,15 +23,7 @@ if (typeof window !== "undefined") {
   gapi = window.gapi;
 }
 
-type ShowInterviewSlotsProps = {
-  slots: InterviewsSlots[];
-  setShowLoginAlert: Dispatch<SetStateAction<boolean>>;
-};
-
-export const ShowInterviewSlots = ({
-  slots,
-  setShowLoginAlert,
-}: ShowInterviewSlotsProps) => {
+export const ShowInterviewSlots = ({ slots, setShowLoginAlert }) => {
   const { authState } = useAuth();
   const { theme } = useTheme();
   const { interviewSlotDispatch } = useInterviewSlot();
@@ -39,51 +31,48 @@ export const ShowInterviewSlots = ({
   return slots.length === 0 ? (
     <div>We don't have any scheduled interview slots</div>
   ) : (
-    <div>
-      {slots.map((interviewSlot) => {
-        return interviewSlot.slots
-          .filter((slot: Slots): boolean => {
-            const today = new Date();
-            let yesterday = new Date(today);
-            yesterday.setDate(yesterday.getDate() - 1);
-            return new Date(formatDate(slot.slot)) > new Date(yesterday);
-          })
-          .sort(
-            (a: Slots, b: Slots): number =>
-              +new Date(a.slot) - +new Date(b.slot)
-          )
-          .map((slot: Slots): JSX.Element => {
-            return (
-              !slot.partner && (
-                <div
-                  key={slot._id}
-                  className={interviewSlotStyles.interviewSlotCard}
-                  style={{ ...theme, boxShadow: theme.primaryBoxShadow }}
+    slots.map((interviewSlot) => {
+      return interviewSlot.slots
+        .filter((slot: Slots): boolean => {
+          const today = new Date();
+          let yesterday = new Date(today);
+          yesterday.setDate(yesterday.getDate() - 1);
+          return new Date(formatDate(slot.slot)) > new Date(yesterday);
+        })
+        .sort(
+          (a: Slots, b: Slots): number => +new Date(a.slot) - +new Date(b.slot)
+        )
+        .map((slot: Slots): JSX.Element => {
+          return (
+            !slot.partner && (
+              <div
+                key={slot._id}
+                className={interviewSlotStyles.interviewSlotCard}
+                style={{ ...theme, boxShadow: theme.primaryBoxShadow }}
+              >
+                <h3>{interviewSlot.userId.fullName}</h3>
+                <h4>@{interviewSlot.userId.username}</h4>
+                <p>{formatTime(slot.slot)}</p>
+                <p>{formatDate(slot.slot)}</p>
+                <button
+                  onClick={() =>
+                    connectWithUser({
+                      slot,
+                      interviewSlot,
+                      authState,
+                      interviewSlotDispatch,
+                      setShowLoginAlert,
+                      gapi,
+                    })
+                  }
+                  className='btnPrimary'
                 >
-                  <h3>{interviewSlot.userId.fullName}</h3>
-                  <h4>@{interviewSlot.userId.username}</h4>
-                  <p>{formatTime(slot.slot)}</p>
-                  <p>{formatDate(slot.slot)}</p>
-                  <button
-                    onClick={() =>
-                      connectWithUser({
-                        slot,
-                        interviewSlot,
-                        authState,
-                        interviewSlotDispatch,
-                        setShowLoginAlert,
-                        gapi,
-                      })
-                    }
-                    className='btnPrimary'
-                  >
-                    Schedule Interview
-                  </button>
-                </div>
-              )
-            );
-          });
-      })}
-    </div>
+                  Schedule Interview
+                </button>
+              </div>
+            )
+          );
+        });
+    })
   );
 };
